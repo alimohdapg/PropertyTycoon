@@ -5,6 +5,8 @@
 public class Dice {
     
     private int dice;
+    private static final int dice_min = 1;
+    private static final int dice_max = 7;
 
     /**
      * Constructor
