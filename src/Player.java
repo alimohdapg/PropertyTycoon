@@ -2,11 +2,16 @@ import java.util.ArrayList;
 
 public abstract class Player {
 
+    private Token token;
     private int money;
     private ArrayList<Property> properties;
-    private int location;
-    private boolean inJail;
-    private boolean passedGo;
+
+    public Player(Token token, int money, ArrayList<Property> properties)
+    {
+        this.token = token;
+        this.money = money;
+        this.properties = properties;
+    }
 
     public int getMoney() {
         return money;
@@ -24,27 +29,13 @@ public abstract class Player {
 
     }
 
-    public int getLocation() {
-        return location;
+    public Token getToken()
+    {
+        return token;
     }
 
-    public void setLocation(int location) {
-        this.location = location;
-    }
-
-    public boolean isInJail() {
-        return inJail;
-    }
-
-    public void setInJail(boolean inJail) {
-        this.inJail = inJail;
-    }
-
-    public boolean isPassedGo() {
-        return passedGo;
-    }
-
-    public void setPassedGo(boolean passedGo) {
-        this.passedGo = passedGo;
+    public void setToken(Token token)
+    {
+        this.token = token;
     }
 }
