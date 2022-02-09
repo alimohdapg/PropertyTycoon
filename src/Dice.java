@@ -2,7 +2,8 @@
  *
  * @author Leon
  */
-public class Dice {
+public class Dice
+{
     
     private int dice;
     private static final int dice_min = 1;
@@ -13,7 +14,7 @@ public class Dice {
      *
      * @param dice the value of dice
      */
-    public Dice(int dice) {
+    public Dice(int dice   ) {
         this.dice = dice;
     }
 

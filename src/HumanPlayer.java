@@ -1,4 +1,4 @@
-public class HumanPlayer implements Player
+public class HumanPlayer extends Player
 {
 
 }
