@@ -1,4 +1,3 @@
-public class OpportunityKnock implements BoardSpace
-{
+public class OpportunityKnock implements BoardSpace {
 
 }

@@ -1,4 +1,3 @@
-public class FreePark implements BoardSpace
-{
+public class FreePark implements BoardSpace {
 
 }

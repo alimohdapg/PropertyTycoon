@@ -1,4 +1,3 @@
-public class PotLuck implements BoardSpace
-{
+public class PotLuck implements BoardSpace {
 
 }

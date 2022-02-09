@@ -1,4 +1,3 @@
-public class VisitingSpace implements BoardSpace
-{
+public class VisitingSpace implements BoardSpace {
 
 }

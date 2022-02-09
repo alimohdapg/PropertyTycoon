@@ -1,4 +1,3 @@
-public class Property implements BoardSpace
-{
+public class Property implements BoardSpace {
 
 }

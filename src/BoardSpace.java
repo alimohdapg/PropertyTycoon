@@ -1,4 +1,3 @@
-public interface BoardSpace
-{
+public interface BoardSpace {
 
 }

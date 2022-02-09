@@ -1,4 +1,3 @@
-public class Jail implements BoardSpace
-{
+public class Jail implements BoardSpace {
 
 }

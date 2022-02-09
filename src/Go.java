@@ -1,4 +1,3 @@
-public class Go implements BoardSpace
-{
+public class Go implements BoardSpace {
 
 }

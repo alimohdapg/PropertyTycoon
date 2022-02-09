@@ -6,9 +6,9 @@ public class HumanPlayer extends Player {
     private boolean inJail;
     private boolean passedGo;
 
-    public HumanPlayer(Token t, int money, ArrayList<Property> properties){
-        super(t, 1500, properties);
-        location =  0;
+    public HumanPlayer(Token token, int money, ArrayList<Property> properties) {
+        super(token, 1500, properties);
+        location = 0;
         inJail = false;
         passedGo = false;
     }
