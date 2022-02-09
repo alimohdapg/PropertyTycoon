@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="javafx-src">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar:///Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home/javafx-src.zip!/" />
+    </SOURCES>
+  </library>
+</component>

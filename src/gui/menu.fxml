@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="720.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
+      <ImageView fitHeight="153.0" fitWidth="969.0" layoutX="241.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="playButton" layoutX="547.0" layoutY="319.0" mnemonicParsing="false" onAction="#playButtonClicked" prefHeight="58.0" prefWidth="186.0" styleClass="menuButton" stylesheets="@style.css" text="Play" />
+      <Button fx:id="settingsButton" layoutX="547.0" layoutY="425.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="186.0" styleClass="menuButton" stylesheets="@style.css" text="Settings" />
+      <Button fx:id="exitButton" layoutX="547.0" layoutY="531.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="58.0" prefWidth="186.0" styleClass="exitButton" stylesheets="@style.css" text="Exit" />
+   </children>
+</AnchorPane>
