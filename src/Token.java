@@ -4,8 +4,7 @@
  *
  * @author Hanzhen Gong
  */
-public enum Token
-{
+public enum Token {
     BOOT("boot"),
     SMARTPHONE("smartphone"),
     SHIP("ship"),
@@ -15,14 +14,12 @@ public enum Token
 
     private final String representation;
 
-    Token(String representation)
-    {
+    Token(String representation) {
         this.representation = representation;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return representation;
     }
 }

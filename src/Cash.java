@@ -12,7 +12,7 @@ public class Cash {
      *
      * @param amount The amount of cash used to construct the object.
      */
-    public Cash(int amount){
+    public Cash(int amount) {
         this.amount = amount;
     }
 
