@@ -1,16 +1,15 @@
-package gui;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 
 public class Controller {
 
@@ -18,17 +17,23 @@ public class Controller {
     private final int HEIGHT = 720;
 
     private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     @FXML
-    private Button exitButton, playButton, backButton, fullButton;
+    private Button exitButton, playButton, backButton, fullButton, testButton;
 
     @FXML
-    private ImageView gameBoard;
+    private Circle playerOneToken;
 
     @FXML
     private AnchorPane menuPane;
+
+    @FXML
+    private Circle p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
+        p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39;
+
+    public void testButtonClicked() throws IOException {
+
+    }
 
     public void exitGame(ActionEvent event) {
         stage = (Stage) menuPane.getScene().getWindow();
@@ -37,26 +42,21 @@ public class Controller {
     }
 
     public void playButtonClicked() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("play.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gui/play.fxml"));
         Stage window = (Stage) playButton.getScene().getWindow();
         window.setScene(new Scene(root, WIDTH, HEIGHT));
     }
 
     public void backButtonClicked() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gui/menu.fxml"));
         Stage window = (Stage) backButton.getScene().getWindow();
         window.setScene(new Scene(root, WIDTH, HEIGHT));
     }
 
     public void fullGameButtonClicked() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gui/game.fxml"));
         Stage window = (Stage) fullButton.getScene().getWindow();
         window.setScene(new Scene(root, WIDTH, HEIGHT));
     }
-
-    public void rotateGameBoard() {
-        gameBoard.setRotate(gameBoard.getRotate() + 90);
-    }
-
 
 }

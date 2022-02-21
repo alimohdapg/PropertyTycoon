@@ -3,7 +3,7 @@
     <CLASSES />
     <JAVADOC />
     <SOURCES>
-      <root url="jar:///Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home/javafx-src.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Program Files/Java/jdk1.8.0_231/javafx-src.zip!/" />
     </SOURCES>
   </library>
 </component>
