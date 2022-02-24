@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public class FileIO {
     public static void main(String[] arg){
 
-//        Test
         ArrayList<ArrayList<String>> myFile = FileIO.readFile("PropertyTycoonCardData.csv");
         System.out.println("----\n" + myFile.get(4).get(3) + "\n----");
 
     }
+    
     /**
      *
      * @param filename
