@@ -14,7 +14,15 @@ public class FileIO {
         System.out.println("----\n" + myFile.get(4).get(3) + "\n----");
 
     }
-
+    /**
+     *
+     * @param filename
+     *
+     * Read csv file from the path "src\\resource\\" to get the
+     * PropertyTycoonBoardData & PropertyTycoonCardData, return these data
+     * as the form of ArrayList<ArrayList<String>>, each line for an outer
+     * ArrayList and each block for an inner ArrayList
+     */
     public static ArrayList readFile(String filename){
         String file = "src\\resource\\" + filename;
         BufferedReader reader = null;
@@ -26,7 +34,6 @@ public class FileIO {
             while( (line = reader.readLine()) != null ) {
 
                 ArrayList<String> file_row = new ArrayList<>();
-//                String[] row = line.split(",");
 
                 for (String index : line.split(",")){
                     System.out.println(index);
