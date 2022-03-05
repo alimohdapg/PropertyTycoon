@@ -1,3 +1,8 @@
+/**
+ * An enum class representing different property colors.
+ *
+ * @author Ali Ahmed
+ */
 public enum Color {
 
     BROWN("brown"),

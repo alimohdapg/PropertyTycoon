@@ -1,3 +1,8 @@
+/**
+ * A class representing properties on the board.
+ *
+ * @author Ali Ahmed
+ */
 public class Property extends BoardSpace {
 
     private final Color color;
@@ -9,8 +14,25 @@ public class Property extends BoardSpace {
     private final int rent4House;
     private final int rentHotel;
     private int houseCount;
+
+
+
     private boolean hasHotel;
 
+    /**
+     * Constructs a new property object.
+     *
+     * @param name        The property's name.
+     * @param location    The property's location on the board.
+     * @param color       The property's color.
+     * @param cost        The cost of buying the property.
+     * @param rentDefault The default rent when the property has no houses or hotels built.
+     * @param rent1House  The rent when the property has one house.
+     * @param rent2House  The rent when the property has two houses.
+     * @param rent3House  The rent when the property has three houses.
+     * @param rent4House  The rent when the property has four houses.
+     * @param rentHotel   The rent when the property has a hotel.
+     */
     public Property(String name, int location, Color color, int cost, int rentDefault, int rent1House, int rent2House,
                     int rent3House, int rent4House, int rentHotel) {
         super(name, location);
@@ -26,14 +48,29 @@ public class Property extends BoardSpace {
         hasHotel = false;
     }
 
+    /**
+     * Returns the color of the property.
+     *
+     * @return Color of the property.
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Returns the cost of buying the property.
+     *
+     * @return Cost of buying the property.
+     */
     public int getCost() {
         return cost;
     }
 
+    /**
+     * Computes the cost of buying a house depending on the color of the property and returns it.
+     *
+     * @return Cost of buying a house.
+     */
     public int getHouseCost() {
         if (color == Color.BROWN || color == Color.BLUE) {
             return 50;
@@ -47,18 +84,31 @@ public class Property extends BoardSpace {
         return -1;
     }
 
+    /**
+     * If the number of houses is less than 4, this function buys a house by increasing the houseCount field by 1.
+     */
     public void buyHouse() {
         if (houseCount < 4) {
             houseCount++;
         }
     }
 
+    /**
+     * Buys a hotel by setting the hasHotel field to true.
+     */
     public void buyHotel() {
         hasHotel = true;
     }
 
+    /**
+     * Computes the rent of the property depending on how many houses it has or if it has a hotel.
+     *
+     * @return Rent associated with the property.
+     */
     public int getRent() {
-        if (houseCount == 1) {
+        if (hasHotel) {
+            return rentHotel;
+        } else if (houseCount == 1) {
             return rent1House;
         } else if (houseCount == 2) {
             return rent2House;
@@ -66,9 +116,34 @@ public class Property extends BoardSpace {
             return rent3House;
         } else if (houseCount == 4) {
             return rent4House;
-        } else if (hasHotel) {
-            return rentHotel;
         }
         return rentDefault;
+    }
+
+    /**
+     * Sets the houseCount field to the given variable.
+     *
+     * @param houseCount Number of houses to set the houseCount variable to.
+     */
+    public void setHouseCount(int houseCount) {
+        this.houseCount = houseCount;
+    }
+
+    /**
+     * Returns the number of houses the property currently has.
+     *
+     * @return The number of houses the property currently has.
+     */
+    public int getHouseCount() {
+        return houseCount;
+    }
+
+    /**
+     * Returns whether this property has a hotel.
+     *
+     * @return Value of the hasHotel field.
+     */
+    public boolean doesHaveHotel() {
+        return hasHotel;
     }
 }

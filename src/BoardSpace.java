@@ -1,5 +1,5 @@
-public abstract class BoardSpace
-{
+public abstract class BoardSpace {
+
     private String name;
     private int location;
 
