@@ -6,5 +6,4 @@ public class Bank extends Player {
         super(token, 50000, properties);
     }
 
-
 }
