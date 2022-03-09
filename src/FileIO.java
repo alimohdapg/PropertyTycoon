@@ -7,9 +7,9 @@ import java.util.ArrayList;
  */
 
 public class FileIO {
-    ArrayList<ArrayList<String>> BoardData = new ArrayList<ArrayList<String>>();
-    ArrayList<ArrayList<String>> PotLuckCardData = new ArrayList<ArrayList<String>>();
-    ArrayList<ArrayList<String>> OpKnocksCardData = new ArrayList<ArrayList<String>>();
+    ArrayList<ArrayList<String>> BoardData;
+    ArrayList<ArrayList<String>> PotLuckCardData;
+    ArrayList<ArrayList<String>> OpKnocksCardData;
 
     public FileIO(){
         this.BoardData = readFile("PropertyTycoonBoardData.csv", 4, 43);
@@ -24,9 +24,11 @@ public class FileIO {
      * as the form of ArrayList<ArrayList<String>>, each line for an outer
      * ArrayList and each block for an inner ArrayList
      *
-     * @param filename
+     * @param filename the name of file
+     * @param start start reading from this line
+     * @param end stop reading at this line
      */
-    public static ArrayList readFile(String filename, int start, int end){
+    public static ArrayList<ArrayList<String>> readFile(String filename, int start, int end){
         String file = "src\\resource\\" + filename;
         BufferedReader reader = null;
         ArrayList<ArrayList<String>> file_whole = new ArrayList<>();
