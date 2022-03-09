@@ -1,11 +1,14 @@
+import java.util.ArrayList;
+
 /**
  * A gameboard class representing and tracking the game's state.
  *
- * @author Ali Ahmed
+ * @author Ali Ahmed & Hanzhen Gong
  */
 public class GameBoard {
 
     private final Player[] players;
+    private final ArrayList<BoardSpace> boardSpaces;
     private int currentPlayerTurn;
     private final Dice dice1;
     private final Dice dice2;
@@ -15,23 +18,43 @@ public class GameBoard {
      *
      * @param players An array consisting of the players who will be playing the game.
      */
-    public GameBoard(Player[] players){
+    public GameBoard(Player[] players, ArrayList<BoardSpace> boardSpaces)
+    {
         this.players = players;
+        this.boardSpaces = boardSpaces;
         currentPlayerTurn = -1;
         dice1 = new Dice();
         dice2 = new Dice();
     }
 
     /**
-     * Updates the current game state.
+     * The next player will throw the dice and go to the corresponding location;
+     * however, if the player ends up with three doubles in a row, the player will be sent to the jail.
+     *
+     * Updated by Hanzhen Gong
      */
     public void update(){
         goToNextTurn();
-        dice1.rollDice();
-        dice2.rollDice();
-        ((HumanPlayer) players[currentPlayerTurn]).setLocation(
-                (((HumanPlayer) players[currentPlayerTurn]).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
-        );
+        Player currentPlayer = players[currentPlayerTurn];
+
+        //TODO: Check if the current player is in the jail
+
+        int round  = 0;
+        while (round < 3)
+        {
+            int num1 = dice1.rollDice();
+            int num2 = dice2.rollDice();
+            if (num1 != num2)
+            {
+                ((HumanPlayer) currentPlayer).setLocation(
+                        (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
+                );
+                return;
+            }
+            round++;
+        }
+
+        ((HumanPlayer) players[currentPlayerTurn]).setLocation(40);
     }
 
     private void goToNextTurn(){
@@ -85,5 +108,13 @@ public class GameBoard {
      */
     public Player[] getPlayers() {
         return players;
+    }
+
+    public ArrayList<BoardSpace> getBoardSpaces() {
+        return boardSpaces;
+    }
+
+    public void setCurrentPlayerTurn(int currentPlayerTurn) {
+        this.currentPlayerTurn = currentPlayerTurn;
     }
 }
