@@ -7,11 +7,14 @@ import java.util.ArrayList;
  */
 
 public class FileIO {
-    public static void main(String[] arg){
+    ArrayList<ArrayList<String>> BoardData = new ArrayList<ArrayList<String>>();
+    ArrayList<ArrayList<String>> PotLuckCardData = new ArrayList<ArrayList<String>>();
+    ArrayList<ArrayList<String>> OpKnocksCardData = new ArrayList<ArrayList<String>>();
 
-        ArrayList<ArrayList<String>> myFile = FileIO.readFile("PropertyTycoonCardData.csv");
-        System.out.println("----\n" + myFile.get(4).get(3) + "\n----");
-
+    public FileIO(){
+        this.BoardData = readFile("PropertyTycoonBoardData.csv", 4, 43);
+        this.PotLuckCardData = readFile("PropertyTycoonCardData.csv", 5, 21);
+        this.OpKnocksCardData = readFile("PropertyTycoonCardData.csv", 26, 41);
     }
     
     /**
@@ -23,7 +26,7 @@ public class FileIO {
      *
      * @param filename
      */
-    public static ArrayList readFile(String filename){
+    public static ArrayList readFile(String filename, int start, int end){
         String file = "src\\resource\\" + filename;
         BufferedReader reader = null;
         ArrayList<ArrayList<String>> file_whole = new ArrayList<>();
@@ -31,16 +34,20 @@ public class FileIO {
 
         try{
             reader = new BufferedReader(new FileReader(file));
+
+            int i = 0;
             while( (line = reader.readLine()) != null ) {
+                if (i >= start && i <= end) {
+                    ArrayList<String> file_row = new ArrayList<>();
 
-                ArrayList<String> file_row = new ArrayList<>();
-
-                for (String index : line.split(",")){
-                    System.out.println(index);
-                    file_row.add(index);
+                    for (String index : line.split(",")){
+                        file_row.add(index);
+                        // System.out.println(index);
+                    }
+                    file_whole.add(file_row);
+                    // System.out.println();
                 }
-                file_whole.add(file_row);
-                System.out.println();
+                i++;
             }
 
         } catch (Exception e){
@@ -54,5 +61,17 @@ public class FileIO {
             }
         }
         return file_whole;
+    }
+
+    public static void main(String[] arg){
+
+        ArrayList<ArrayList<String>> Board = readFile("PropertyTycoonBoardData.csv", 4, 43);
+        ArrayList<ArrayList<String>> PotLuck = readFile("PropertyTycoonCardData.csv", 5, 21);
+        ArrayList<ArrayList<String>> OpKnocks = readFile("PropertyTycoonCardData.csv", 26, 41);
+
+        System.out.println("----\n" + Board.get(5)+ "\n----"); // should be "Brighton Station"
+        System.out.println("----\n" + PotLuck.get(5)+ "\n----"); // should be "Pay bill for text books of £100"
+        System.out.println("----\n" + OpKnocks.get(5)+ "\n----"); // should be "Pay university fees of £150"
+
     }
 }
