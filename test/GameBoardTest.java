@@ -10,9 +10,9 @@ class GameBoardTest {
     @BeforeEach
     void setUp(){
         gameBoard = new GameBoard(new Player[]{
-                new HumanPlayer(Token.BOOT, 1500, new ArrayList<>()),
-                new HumanPlayer(Token.CAT, 1500, new ArrayList<>()),
-                new HumanPlayer(Token.HATSTAND, 1500, new ArrayList<>())}
+                new HumanPlayer(Token.BOOT, new ArrayList<>()),
+                new HumanPlayer(Token.CAT, new ArrayList<>()),
+                new HumanPlayer(Token.HATSTAND, new ArrayList<>())}
         );
     }
 

@@ -10,15 +10,16 @@ public class HumanPlayer extends Player {
      * Constructs a new HumanPlayer Object
      *
      * @param token Player's icon
-     * @param  money The money player currently have
      * @param properties The property player currently have
      */
-    public HumanPlayer(Token token, int money, ArrayList<Property> properties) {
+    public HumanPlayer(Token token, ArrayList<Property> properties) {
         super(token, 1500, properties);
         location = 0;
         inJail = false;
         passedGo = false;
     }
+
+
 
     /**
      * Retrieve player's current location on the game board
