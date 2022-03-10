@@ -2,8 +2,6 @@
   <library name="javafx-src">
     <CLASSES />
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../../Program Files/Java/jdk1.8.0_231/javafx-src.zip!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

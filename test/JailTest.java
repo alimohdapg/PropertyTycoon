@@ -12,7 +12,7 @@ class JailTest
     public void setup()
     {
         jail = new Jail("Jail", 40);
-        player1 = new HumanPlayer(Token.IRON, 100, null);
+        player1 = new HumanPlayer(Token.IRON, null);
     }
 
     @Test

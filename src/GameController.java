@@ -57,7 +57,7 @@ public class GameController {
         players[0] = player1;
         current_pos = 0;
         player1_money.setText("£"+Integer.toString(player1.getMoney()));
-        gameBoard = new GameBoard(players);
+        gameBoard = new GameBoard(players, new ArrayList<>());
     }
 
     /**
