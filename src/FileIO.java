@@ -11,6 +11,10 @@ public class FileIO {
     ArrayList<ArrayList<String>> PotLuckCardData;
     ArrayList<ArrayList<String>> OpKnocksCardData;
 
+    /**
+     * Constructor for FileIO, which stores Board Data and Card data
+     *
+     */
     public FileIO(){
         this.BoardData = readFile("PropertyTycoonBoardData.csv", 4, 43);
         this.PotLuckCardData = readFile("PropertyTycoonCardData.csv", 5, 21);
