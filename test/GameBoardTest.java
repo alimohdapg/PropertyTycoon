@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameBoardTest {
@@ -12,7 +14,8 @@ class GameBoardTest {
         gameBoard = new GameBoard(new Player[]{
                 new HumanPlayer(Token.BOOT, new ArrayList<>()),
                 new HumanPlayer(Token.CAT, new ArrayList<>()),
-                new HumanPlayer(Token.HATSTAND, new ArrayList<>())}
+                new HumanPlayer(Token.HATSTAND, new ArrayList<>())},
+                new ArrayList<>()
         );
     }
 
