@@ -90,7 +90,7 @@
       <Text fx:id="a10_text3" layoutX="-18.0" layoutY="667.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Just" textAlignment="CENTER" wrappingWidth="58.0" />
       <Text fx:id="a10_text4" layoutX="25.0" layoutY="711.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Visiting" textAlignment="CENTER" wrappingWidth="58.0" />
       <Circle fx:id="p10" fill="DODGERBLUE" layoutX="13.0" layoutY="708.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-      <Circle fx:id="p10_2" fill="DODGERBLUE" layoutX="57.0" layoutY="660.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+      <Circle fx:id="p40" fill="DODGERBLUE" layoutX="57.0" layoutY="660.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Rectangle fx:id="a11_bg" arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="58.0" layoutY="564.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
       <Rectangle fx:id="a11_color" arcHeight="5.0" arcWidth="5.0" fill="#ed3878" height="16.0" layoutX="60.0" layoutY="585.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
       <Text fx:id="a11_text" layoutX="40.0" layoutY="592.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Skywalker Drive" textAlignment="CENTER" wrappingWidth="58.0" />

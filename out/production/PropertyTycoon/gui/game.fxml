@@ -90,7 +90,7 @@
       <Text fx:id="a10_text3" layoutX="-18.0" layoutY="667.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Just" textAlignment="CENTER" wrappingWidth="58.0" />
       <Text fx:id="a10_text4" layoutX="25.0" layoutY="711.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Visiting" textAlignment="CENTER" wrappingWidth="58.0" />
       <Circle fx:id="p10" fill="DODGERBLUE" layoutX="13.0" layoutY="708.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-      <Circle fx:id="p10_2" fill="DODGERBLUE" layoutX="57.0" layoutY="660.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+      <Circle fx:id="p40" fill="DODGERBLUE" layoutX="57.0" layoutY="660.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Rectangle fx:id="a11_bg" arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="58.0" layoutY="564.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
       <Rectangle fx:id="a11_color" arcHeight="5.0" arcWidth="5.0" fill="#ed3878" height="16.0" layoutX="60.0" layoutY="585.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
       <Text fx:id="a11_text" layoutX="40.0" layoutY="592.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Skywalker Drive" textAlignment="CENTER" wrappingWidth="58.0" />
@@ -282,7 +282,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£100.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="player1_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£100.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
       <Pane fx:id="player_2" layoutX="717.0" layoutY="52.0" prefHeight="79.0" prefWidth="200.0">
@@ -314,7 +314,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£10.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="player2_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£10.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
       <Pane fx:id="player_3" layoutX="717.0" layoutY="104.0" prefHeight="79.0" prefWidth="200.0">
@@ -346,7 +346,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="player3_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
       <Pane fx:id="player_4" layoutX="717.0" layoutY="156.0" prefHeight="79.0" prefWidth="200.0">
@@ -378,7 +378,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="player4_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
       <Pane fx:id="player_5" layoutX="717.0" layoutY="208.0" prefHeight="79.0" prefWidth="200.0">
@@ -410,7 +410,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£250.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="player5_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£250.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
       <Button fx:id="testButton" layoutX="719.0" layoutY="622.0" mnemonicParsing="false" onAction="#testButtonClicked" prefHeight="79.0" prefWidth="98.0" text="go">
