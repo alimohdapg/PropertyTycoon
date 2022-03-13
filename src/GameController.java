@@ -65,8 +65,10 @@ public class GameController {
      */
     public void testButtonClicked() {
         gameBoard.update();
+        //Updates current_pos with the new player position
         current_pos = gameBoard.getCurrentPlayerPosition();
 
+        //Sets the player token on the GUI to the new location
         playerOneToken.setLayoutX(pos_array.get(current_pos).getLayoutX());
         playerOneToken.setLayoutY(pos_array.get(current_pos).getLayoutY());
     }
