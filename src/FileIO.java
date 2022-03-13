@@ -33,7 +33,7 @@ public class FileIO {
      * @param end stop reading at this line
      */
     public static ArrayList<ArrayList<String>> readFile(String filename, int start, int end){
-        String file = "src\\resource\\" + filename;
+        String file = "src//resource//" + filename;
         BufferedReader reader = null;
         ArrayList<ArrayList<String>> file_whole = new ArrayList<>();
         String line = "";
