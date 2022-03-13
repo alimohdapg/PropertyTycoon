@@ -11,13 +11,13 @@ class PropertyTest {
 
     @BeforeEach
     void setUp(){
-        property1 = new Property("Test Property 1", 1, Color.RED, 20, 10, 20,
+        property1 = new Property("Test Property 1", Color.RED, 20, 10, 20,
                 30, 40, 50, 100);
-        property2 = new Property("Test Property 2", 2, Color.GREEN, 50, 25, 50,
+        property2 = new Property("Test Property 2", Color.GREEN, 50, 25, 50,
                 75, 100, 125, 250);
-        property3 = new Property("Test Property 3", 3, Color.BLUE, 100, 50, 100,
+        property3 = new Property("Test Property 3", Color.BLUE, 100, 50, 100,
                 150, 200, 250, 500);
-        property4 = new Property("Test Property 4", 3, Color.PURPLE, 200, 100, 200,
+        property4 = new Property("Test Property 4", Color.PURPLE, 200, 100, 200,
                 400, 600, 800, 1600);
     }
 

@@ -14,9 +14,20 @@ class GameBoardTest {
         gameBoard = new GameBoard(new Player[]{
                 new HumanPlayer(Token.BOOT, new ArrayList<>()),
                 new HumanPlayer(Token.CAT, new ArrayList<>()),
-                new HumanPlayer(Token.HATSTAND, new ArrayList<>())},
-                new ArrayList<>()
+                new HumanPlayer(Token.HATSTAND, new ArrayList<>())}
         );
+    }
+
+    @Test
+    void testFillBoardSpaces(){
+        assertTrue(gameBoard.getBoardSpaces().get(0) instanceof Default);
+        assertTrue(gameBoard.getBoardSpaces().get(2) instanceof Default);
+        assertTrue(gameBoard.getBoardSpaces().get(7) instanceof Default);
+        assertTrue(gameBoard.getBoardSpaces().get(5) instanceof StationAndUtility);
+        assertTrue(gameBoard.getBoardSpaces().get(12) instanceof StationAndUtility);
+        assertTrue(gameBoard.getBoardSpaces().get(3) instanceof Property);
+        assertTrue(gameBoard.getBoardSpaces().get(8) instanceof Property);
+        assertTrue(gameBoard.getBoardSpaces().get(40) instanceof Jail);
     }
 
     @Test

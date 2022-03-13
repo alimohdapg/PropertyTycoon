@@ -12,40 +12,66 @@ public class GameBoard {
     private int currentPlayerTurn;
     private final Dice dice1;
     private final Dice dice2;
+    private final FileIO fileIO;
 
     /**
      * Constructs a new Gameboard object.
      *
      * @param players An array consisting of the players who will be playing the game.
      */
-    public GameBoard(Player[] players, ArrayList<BoardSpace> boardSpaces)
-    {
+    public GameBoard(Player[] players) {
         this.players = players;
-        this.boardSpaces = boardSpaces;
+        this.boardSpaces = new ArrayList<>();
         currentPlayerTurn = -1;
         dice1 = new Dice();
         dice2 = new Dice();
+        fileIO = new FileIO();
+        fillBoardSpaces();
+    }
+
+    /**
+     * Fills the boardSpaces ArrayList with default board-spaces, stations, utilities, properties, and jail.
+     **/
+    private void fillBoardSpaces() {
+        for (int i = 0; i < fileIO.BoardData.size(); i++) {
+            if (fileIO.BoardData.get(i).get(5).equals("No")) {
+                boardSpaces.add(new Default(fileIO.BoardData.get(i).get(2)));
+            } else if (fileIO.BoardData.get(i).get(3).equals("Station") || fileIO.BoardData.get(i).get(3).equals("Utilities")) {
+                boardSpaces.add(new StationAndUtility(fileIO.BoardData.get(i).get(1),
+                        Integer.parseInt(fileIO.BoardData.get(i).get(7))));
+            } else {
+                boardSpaces.add(new Property(fileIO.BoardData.get(i).get(1),
+                        Color.findAndCreateColor(fileIO.BoardData.get(i).get(2)),
+                        Integer.parseInt(fileIO.BoardData.get(i).get(7)),
+                        Integer.parseInt(fileIO.BoardData.get(i).get(8)),
+                        Integer.parseInt(fileIO.BoardData.get(i).get(10)),
+                        Integer.parseInt(fileIO.BoardData.get(i).get(11)),
+                        Integer.parseInt(fileIO.BoardData.get(i).get(12)),
+                        Integer.parseInt(fileIO.BoardData.get(i).get(13)),
+                        Integer.parseInt(fileIO.BoardData.get(i).get(14))
+                ));
+            }
+        }
+        boardSpaces.add(new Jail("Jail"));
     }
 
     /**
      * The next player will throw the dice and go to the corresponding location;
      * however, if the player ends up with three doubles in a row, the player will be sent to the jail.
-     *
+     * <p>
      * Updated by Hanzhen Gong
      */
-    public void update(){
+    public void update() {
         goToNextTurn();
         Player currentPlayer = players[currentPlayerTurn];
 
         //TODO: Check if the current player is in the jail
 
-        int round  = 0;
-        while (round < 3)
-        {
+        int round = 0;
+        while (round < 3) {
             int num1 = dice1.rollDice();
             int num2 = dice2.rollDice();
-            if (num1 != num2)
-            {
+            if (num1 != num2) {
                 ((HumanPlayer) currentPlayer).setLocation(
                         (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
                 );
@@ -57,8 +83,8 @@ public class GameBoard {
         ((HumanPlayer) players[currentPlayerTurn]).setLocation(40);
     }
 
-    private void goToNextTurn(){
-        if (currentPlayerTurn == players.length - 1){
+    private void goToNextTurn() {
+        if (currentPlayerTurn == players.length - 1) {
             currentPlayerTurn = 0;
         } else {
             currentPlayerTurn++;
@@ -88,7 +114,7 @@ public class GameBoard {
      *
      * @return Current player's position on the board.
      */
-    public int getCurrentPlayerPosition(){
+    public int getCurrentPlayerPosition() {
         return ((HumanPlayer) players[currentPlayerTurn]).getLocation();
     }
 
@@ -97,7 +123,7 @@ public class GameBoard {
      *
      * @return Current player.
      */
-    public Player getCurrentPlayer(){
+    public Player getCurrentPlayer() {
         return players[currentPlayerTurn];
     }
 

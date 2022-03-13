@@ -10,9 +10,9 @@ public class Jail extends BoardSpace {
 
     private ArrayList<Player> playersInJail;
 
-    public Jail(String name, int location)
+    public Jail(String name)
     {
-        super(name, location);
+        super(name);
         playersInJail = new ArrayList<>();
     }
 

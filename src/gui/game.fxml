@@ -57,7 +57,7 @@
             <Image url="@../img/station.png" />
          </image>
       </ImageView>
-      <Text fx:id="a5_text" layoutX="331.0" layoutY="633.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Brighton Station" textAlignment="CENTER" wrappingWidth="57.5" />
+      <Text fx:id="a5_text" layoutX="331.0" layoutY="633.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Brighton StationAndUtility" textAlignment="CENTER" wrappingWidth="57.5" />
       <Circle fx:id="p5" fill="DODGERBLUE" layoutX="360.0" layoutY="671.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Rectangle fx:id="a6_bg" arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="98.0" layoutX="272.0" layoutY="622.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
       <Rectangle fx:id="a6_color" arcHeight="5.0" arcWidth="5.0" fill="#87a5d6" height="16.0" layoutX="272.0" layoutY="622.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
@@ -117,7 +117,7 @@
             <Image url="@../img/station.png" />
          </image>
       </ImageView>
-      <Text fx:id="a15_text" layoutX="55.0" layoutY="360.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Hove Station" textAlignment="CENTER" wrappingWidth="57.5" />
+      <Text fx:id="a15_text" layoutX="55.0" layoutY="360.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Hove StationAndUtility" textAlignment="CENTER" wrappingWidth="57.5" />
       <Circle fx:id="p15" fill="DODGERBLUE" layoutX="49.0" layoutY="362.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Rectangle fx:id="a16_bg" arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="58.0" layoutY="274.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
       <Rectangle fx:id="a16_color" arcHeight="5.0" arcWidth="5.0" fill="#f57f22" height="16.0" layoutX="60.0" layoutY="295.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
@@ -174,7 +174,7 @@
             <Image url="@../img/station.png" />
          </image>
       </ImageView>
-      <Text fx:id="a25_text" layoutX="332.0" layoutY="83.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Falmer Station" textAlignment="CENTER" wrappingWidth="57.5" />
+      <Text fx:id="a25_text" layoutX="332.0" layoutY="83.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Falmer StationAndUtility" textAlignment="CENTER" wrappingWidth="57.5" />
       <Circle fx:id="p25" fill="DODGERBLUE" layoutX="358.0" layoutY="50.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Rectangle fx:id="a26_bg" arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="98.0" layoutX="388.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
       <Rectangle fx:id="a26_color" arcHeight="5.0" arcWidth="5.0" fill="#fde701" height="16.0" layoutX="388.0" layoutY="82.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
@@ -231,7 +231,7 @@
             <Image url="@../img/station.png" />
          </image>
       </ImageView>
-      <Text fx:id="a35_text" layoutX="606.0" layoutY="360.0" rotate="270.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Portslade Station" textAlignment="CENTER" wrappingWidth="57.5" />
+      <Text fx:id="a35_text" layoutX="606.0" layoutY="360.0" rotate="270.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" text="Portslade StationAndUtility" textAlignment="CENTER" wrappingWidth="57.5" />
       <Circle fx:id="p35" fill="DODGERBLUE" layoutX="669.0" layoutY="362.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Rectangle fx:id="a36_bg" arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="58.0" layoutX="620.0" layoutY="390.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
       <ImageView fx:id="a36_img" fitHeight="89.0" fitWidth="36.0" layoutX="663.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
