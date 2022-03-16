@@ -3,6 +3,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class GameController {
     private Circle playerOneToken;
 
     @FXML
-    private AnchorPane menuPane;
+    private AnchorPane dialogue_pane;
 
     @FXML
     private Circle p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
@@ -40,11 +41,16 @@ public class GameController {
     @FXML
     private Text player1_money;
 
+    @FXML
+    private Text roll1, roll2, roll3, roll4, roll5, roll6;
+
     private int current_pos;
 
     private Player player1;
     private Player[] players;
     private GameBoard gameBoard;
+
+    private boolean turnInProgress;
 
     /**
      * Default function, runs on launch. Initialises the array of positional elements
@@ -52,6 +58,8 @@ public class GameController {
     public void initialize() {
         pos_array = new ArrayList<>();
         text_array = new ArrayList<>();
+
+        dialogue_pane.setVisible(false);
 
         Collections.addAll(pos_array, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
                 p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40);
@@ -67,6 +75,7 @@ public class GameController {
         current_pos = 0;
         player1_money.setText("£"+Integer.toString(player1.getMoney().getAmount()));
         gameBoard = new GameBoard(players);
+        turnInProgress = false;
 
         getTileNames();
     }
@@ -77,13 +86,46 @@ public class GameController {
      * @throws IOException
      */
     public void testButtonClicked() {
-        gameBoard.update();
-        //Updates current_pos with the new player position
-        current_pos = gameBoard.getCurrentPlayerPosition();
+        if(!turnInProgress) {
+            turnInProgress = true;
+            gameBoard.update();
+            //Updates current_pos with the new player position
+            current_pos = gameBoard.getCurrentPlayerPosition();
+            Integer[][] dice_rolls = gameBoard.getDiceRolls();
+            displayDice(dice_rolls);
+            dialogue_pane.setVisible(true);
 
-        //Sets the player token on the GUI to the new location
+            //Sets the player token on the GUI to the new location
+
+        }
+    }
+
+    public void confirm_rollClicked() {
         playerOneToken.setLayoutX(pos_array.get(current_pos).getLayoutX());
         playerOneToken.setLayoutY(pos_array.get(current_pos).getLayoutY());
+        turnInProgress = false;
+        dialogue_pane.setVisible(false);
+    }
+
+    public void displayDice(Integer[][] rolls) {
+        if(rolls[0][0] != null) {
+            roll1.setText(Integer.toString(rolls[0][0]));
+        } else { roll1.setText(""); }
+        if(rolls[0][1] != null) {
+            roll2.setText(Integer.toString(rolls[0][1]));
+        } else { roll2.setText(""); }
+        if(rolls[1][0] != null) {
+            roll3.setText(Integer.toString(rolls[1][0]));
+        } else { roll3.setText(""); }
+        if(rolls[1][1] != null) {
+            roll4.setText(Integer.toString(rolls[1][1]));
+        } else { roll4.setText(""); }
+        if(rolls[2][0] != null) {
+            roll5.setText(Integer.toString(rolls[2][0]));
+        } else { roll5.setText(""); }
+        if(rolls[2][1] != null) {
+            roll6.setText(Integer.toString(rolls[2][1]));
+        } else { roll6.setText(""); }
     }
 
     /**

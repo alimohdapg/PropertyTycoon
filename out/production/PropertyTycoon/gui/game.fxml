@@ -417,5 +417,50 @@
          <font>
             <Font size="26.0" />
          </font></Button>
+      <AnchorPane fx:id="dialogue_pane" layoutX="738.0" layoutY="275.0" prefHeight="341.0" prefWidth="523.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" stroke="BLACK" strokeType="INSIDE" width="523.0" />
+            <Text layoutX="182.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You rolled:" wrappingWidth="159.23675537109375">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Text>
+            <Button fx:id="confirm_roll" layoutX="218.0" layoutY="295.0" mnemonicParsing="false" onAction="#confirm_rollClicked" prefHeight="43.0" prefWidth="87.0" text="Confirm">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Text fx:id="roll1" layoutX="184.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fx:id="roll2" layoutX="284.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fx:id="roll3" layoutX="184.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fx:id="roll4" layoutX="284.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fx:id="roll5" layoutX="184.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fx:id="roll6" layoutX="284.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
