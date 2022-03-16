@@ -27,7 +27,16 @@ public class GameController {
         p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40;
 
     @FXML
+    private Text a0_text, a1_text, a2_text, a3_text, a4_text, a5_text, a6_text, a7_text, a8_text, a9_text, a10_text,
+        a11_text, a12_text, a13_text, a14_text, a15_text, a16_text, a17_text, a18_text, a19_text, a20_text, a21_text,
+        a22_text, a23_text, a24_text, a25_text, a26_text, a27_text, a28_text, a29_text, a30_text, a31_text, a32_text,
+        a33_text, a34_text, a35_text, a36_text, a37_text, a38_text, a39_text;
+
+    @FXML
     private ArrayList<Circle> pos_array;
+
+    @FXML
+    private ArrayList<Text> text_array;
 
     @FXML
     private Text player1_money;
@@ -71,6 +80,13 @@ public class GameController {
         //Sets the player token on the GUI to the new location
         playerOneToken.setLayoutX(pos_array.get(current_pos).getLayoutX());
         playerOneToken.setLayoutY(pos_array.get(current_pos).getLayoutY());
+    }
+
+    /**
+     * Updates the board tile names using data from the gameboard
+     */
+    public void getTileNames() {
+
     }
 
 }
