@@ -66,6 +66,7 @@ public class GameBoard {
      */
     public void update() {
         goToNextTurn();
+        clearDiceRolls();
         Player currentPlayer = players[currentPlayerTurn];
 
         //TODO: Check if the current player is in the jail
@@ -80,16 +81,17 @@ public class GameBoard {
                 ((HumanPlayer) currentPlayer).setLocation(
                         (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
                 );
-                System.out.println(Arrays.deepToString(getDiceRolls()));
                 return;
             }
             diceRolls[round][0] = dice1.getNumber();
             diceRolls[round][1] = dice2.getNumber();
+            ((HumanPlayer) currentPlayer).setLocation(
+                    (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
+            );
             round++;
         }
 
         ((HumanPlayer) players[currentPlayerTurn]).setLocation(40);
-        System.out.println(Arrays.deepToString(getDiceRolls()));
     }
 
     private void goToNextTurn() {
@@ -97,6 +99,12 @@ public class GameBoard {
             currentPlayerTurn = 0;
         } else {
             currentPlayerTurn++;
+        }
+    }
+
+    private void clearDiceRolls() {
+        for (Integer[] diceRoll : diceRolls){
+            Arrays.fill(diceRoll, null);
         }
     }
 
