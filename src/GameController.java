@@ -2,8 +2,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -19,7 +17,7 @@ public class GameController {
     private Circle playerOneToken;
 
     @FXML
-    private AnchorPane menuPane;
+    private AnchorPane dialogue_pane;
 
     @FXML
     private Circle p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
@@ -40,11 +38,16 @@ public class GameController {
     @FXML
     private Text player1_money;
 
+    @FXML
+    private Text roll1, roll2, roll3, roll4, roll5, roll6;
+
     private int current_pos;
 
     private Player player1;
     private Player[] players;
     private GameBoard gameBoard;
+
+    private boolean turnInProgress;
 
     /**
      * Default function, runs on launch. Initialises the array of positional elements
@@ -52,6 +55,8 @@ public class GameController {
     public void initialize() {
         pos_array = new ArrayList<>();
         text_array = new ArrayList<>();
+
+        dialogue_pane.setVisible(false);
 
         Collections.addAll(pos_array, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
                 p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40);
@@ -67,23 +72,64 @@ public class GameController {
         current_pos = 0;
         player1_money.setText("£"+Integer.toString(player1.getMoney().getAmount()));
         gameBoard = new GameBoard(players);
+        turnInProgress = false;
 
         getTileNames();
     }
 
     /**
-     * Testing feature, moves the player around the board
+     * Testing feature, takes turn
      *
-     * @throws IOException
      */
     public void testButtonClicked() {
-        gameBoard.update();
-        //Updates current_pos with the new player position
-        current_pos = gameBoard.getCurrentPlayerPosition();
+        if(!turnInProgress) {
+            turnInProgress = true;
+            gameBoard.update();
+            //Updates current_pos with the new player position
+            current_pos = gameBoard.getCurrentPlayerPosition();
+            Integer[][] dice_rolls = gameBoard.getDiceRolls();
+            displayDice(dice_rolls);
+            dialogue_pane.setVisible(true);
 
-        //Sets the player token on the GUI to the new location
+            //Sets the player token on the GUI to the new location
+
+        }
+    }
+
+    /**
+     * Confirms the dice roll, updates position
+     */
+    public void confirm_rollClicked() {
         playerOneToken.setLayoutX(pos_array.get(current_pos).getLayoutX());
         playerOneToken.setLayoutY(pos_array.get(current_pos).getLayoutY());
+        turnInProgress = false;
+        dialogue_pane.setVisible(false);
+    }
+
+    /**
+     * Updates the visual UI of the dice roll
+     *
+     * @param rolls, the array containing the dice rolls for this turn
+     */
+    public void displayDice(Integer[][] rolls) {
+        if(rolls[0][0] != null) {
+            roll1.setText(Integer.toString(rolls[0][0]));
+        } else { roll1.setText(""); }
+        if(rolls[0][1] != null) {
+            roll2.setText(Integer.toString(rolls[0][1]));
+        } else { roll2.setText(""); }
+        if(rolls[1][0] != null) {
+            roll3.setText(Integer.toString(rolls[1][0]));
+        } else { roll3.setText(""); }
+        if(rolls[1][1] != null) {
+            roll4.setText(Integer.toString(rolls[1][1]));
+        } else { roll4.setText(""); }
+        if(rolls[2][0] != null) {
+            roll5.setText(Integer.toString(rolls[2][0]));
+        } else { roll5.setText(""); }
+        if(rolls[2][1] != null) {
+            roll6.setText(Integer.toString(rolls[2][1]));
+        } else { roll6.setText(""); }
     }
 
     /**
@@ -93,9 +139,8 @@ public class GameController {
         int[] property_indexes = new int[]{1,3,6,8,9,11,13,14,16,18,19,21,23,24,26,27,29,31,32,34,37,39};
         int iter = 0;
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-        for(int i = 0; i < board_spaces.size(); i++) {
-            BoardSpace current = board_spaces.get(i);
-            if( current instanceof Property) {
+        for (BoardSpace current : board_spaces) {
+            if (current instanceof Property) {
                 System.out.println(text_array.get(property_indexes[iter]).getText());
                 text_array.get(property_indexes[iter]).setText(current.getName());
                 iter++;
