@@ -2,9 +2,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-
-import javax.swing.text.html.ImageView;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -81,9 +78,8 @@ public class GameController {
     }
 
     /**
-     * Testing feature, moves the player around the board
+     * Testing feature, takes turn
      *
-     * @throws IOException
      */
     public void testButtonClicked() {
         if(!turnInProgress) {
@@ -100,6 +96,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Confirms the dice roll, updates position
+     */
     public void confirm_rollClicked() {
         playerOneToken.setLayoutX(pos_array.get(current_pos).getLayoutX());
         playerOneToken.setLayoutY(pos_array.get(current_pos).getLayoutY());
@@ -107,6 +106,11 @@ public class GameController {
         dialogue_pane.setVisible(false);
     }
 
+    /**
+     * Updates the visual UI of the dice roll
+     *
+     * @param rolls, the array containing the dice rolls for this turn
+     */
     public void displayDice(Integer[][] rolls) {
         if(rolls[0][0] != null) {
             roll1.setText(Integer.toString(rolls[0][0]));
@@ -135,9 +139,8 @@ public class GameController {
         int[] property_indexes = new int[]{1,3,6,8,9,11,13,14,16,18,19,21,23,24,26,27,29,31,32,34,37,39};
         int iter = 0;
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-        for(int i = 0; i < board_spaces.size(); i++) {
-            BoardSpace current = board_spaces.get(i);
-            if( current instanceof Property) {
+        for (BoardSpace current : board_spaces) {
+            if (current instanceof Property) {
                 System.out.println(text_array.get(property_indexes[iter]).getText());
                 text_array.get(property_indexes[iter]).setText(current.getName());
                 iter++;
