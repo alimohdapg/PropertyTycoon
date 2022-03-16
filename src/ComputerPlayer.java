@@ -6,7 +6,7 @@ public class ComputerPlayer extends Player {
     private boolean inJail;
     private boolean passGo;
 
-    public ComputerPlayer(Token token, int money, ArrayList<Property> properties) {
+    public ComputerPlayer(Token token, Cash money, ArrayList<Property> properties) {
         super(token, money, properties);
         location = 0;
         inJail = false;

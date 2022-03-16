@@ -13,7 +13,7 @@ public class HumanPlayer extends Player {
      * @param properties The property player currently have
      */
     public HumanPlayer(Token token, ArrayList<Property> properties) {
-        super(token, 1500, properties);
+        super(token, new Cash(1500), properties);
         location = 0;
         inJail = false;
         passedGo = false;
@@ -33,7 +33,7 @@ public class HumanPlayer extends Player {
     /**
      * Sets the location value to the new value passed into
      *
-     * @param location
+     * @param location location as int type (0 to 39)
      */
     public void setLocation(int location) {
         this.location = location;
