@@ -13,6 +13,7 @@ public class GameBoard {
     private final Dice dice1;
     private final Dice dice2;
     private final FileIO fileIO;
+    private ArrayList<Integer> diceRolls;
 
     /**
      * Constructs a new Gameboard object.
