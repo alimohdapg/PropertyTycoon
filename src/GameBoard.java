@@ -94,12 +94,41 @@ public class GameBoard {
         ((HumanPlayer) players[currentPlayerTurn]).setLocation(40);
     }
 
+    /**
+     * Go to next turn at the beginning of each "update"
+     *
+     * Calls the checkInJail function inside to know if the current player is in jail
+     * If yes, then decrease his/her prison term, and then go to next player
+     */
     private void goToNextTurn() {
         if (currentPlayerTurn == players.length - 1) {
             currentPlayerTurn = 0;
         } else {
             currentPlayerTurn++;
         }
+
+        if (checkInJail(currentPlayerTurn)) {
+            // update prison term
+            Jail jail = (Jail)boardSpaces.get(boardSpaces.size()-1);
+            jail.minusPrisonTerm(players[currentPlayerTurn]);
+
+            // then go to next player
+            currentPlayerTurn++;
+        }
+    }
+    
+    /**
+     * @param cur_turn get current player turn
+     * @return if the player is in Jail or not
+     */
+    private Boolean checkInJail (int cur_turn) {
+
+        Player cur_player = players[cur_turn];
+        Jail jail = (Jail)boardSpaces.get(boardSpaces.size()-1);
+        Set<Player> p_inJail = jail.getPlayersInJail();
+
+        if (p_inJail.contains(cur_player)) return true;
+        return false;
     }
 
     private void clearDiceRolls() {
