@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.TreeMap;
 
 /**
  * A gameboard class representing and tracking the game's state.
@@ -11,10 +12,11 @@ public class GameBoard {
     private final Player[] players;
     private final ArrayList<BoardSpace> boardSpaces;
     private int currentPlayerTurn;
+    private boolean currentPlayerInJail;
     private final Dice dice1;
     private final Dice dice2;
     private final FileIO fileIO;
-    private Integer[][] diceRolls;
+    private final Integer[][] diceRolls;
 
     /**
      * Constructs a new Gameboard object.
@@ -25,6 +27,7 @@ public class GameBoard {
         this.players = players;
         this.boardSpaces = new ArrayList<>();
         currentPlayerTurn = -1;
+        currentPlayerInJail = false;
         dice1 = new Dice();
         dice2 = new Dice();
         fileIO = new FileIO();
@@ -91,6 +94,14 @@ public class GameBoard {
             round++;
         }
 
+        currentPlayerInJail = true;
+
+    }
+
+
+    public void updateJail(){
+        // TODO
+        
         ((HumanPlayer) players[currentPlayerTurn]).setLocation(40);
     }
 
