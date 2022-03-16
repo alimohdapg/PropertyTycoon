@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A gameboard class representing and tracking the game's state.
@@ -13,7 +14,7 @@ public class GameBoard {
     private final Dice dice1;
     private final Dice dice2;
     private final FileIO fileIO;
-    private ArrayList<Integer> diceRolls;
+    private Integer[][] diceRolls;
 
     /**
      * Constructs a new Gameboard object.
@@ -27,6 +28,7 @@ public class GameBoard {
         dice1 = new Dice();
         dice2 = new Dice();
         fileIO = new FileIO();
+        diceRolls = new Integer[3][2];
         fillBoardSpaces();
     }
 
@@ -73,15 +75,21 @@ public class GameBoard {
             int num1 = dice1.rollDice();
             int num2 = dice2.rollDice();
             if (num1 != num2) {
+                diceRolls[round][0] = dice1.getNumber();
+                diceRolls[round][1] = dice2.getNumber();
                 ((HumanPlayer) currentPlayer).setLocation(
                         (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
                 );
+                System.out.println(Arrays.deepToString(getDiceRolls()));
                 return;
             }
+            diceRolls[round][0] = dice1.getNumber();
+            diceRolls[round][1] = dice2.getNumber();
             round++;
         }
 
         ((HumanPlayer) players[currentPlayerTurn]).setLocation(40);
+        System.out.println(Arrays.deepToString(getDiceRolls()));
     }
 
     private void goToNextTurn() {
@@ -90,6 +98,10 @@ public class GameBoard {
         } else {
             currentPlayerTurn++;
         }
+    }
+
+    public Integer[][] getDiceRolls(){
+        return diceRolls;
     }
 
     /**
