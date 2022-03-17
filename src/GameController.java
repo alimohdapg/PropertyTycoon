@@ -85,8 +85,7 @@ public class GameController {
         //Set default position
         current_pos = 0;
 
-        //Create players
-        player1 = new HumanPlayer(Token.CAT, new ArrayList<Property>());
+        player1 = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>());
         players = new Player[1];
         players[0] = player1;
 
