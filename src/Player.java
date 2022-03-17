@@ -2,14 +2,20 @@ import java.util.ArrayList;
 
 public abstract class Player {
 
+    private String name;
     private Token token;
     private Cash money;
     private ArrayList<Property> properties;
 
-    public Player(Token token, Cash money, ArrayList<Property> properties) {
+    public Player(String name, Token token, Cash money, ArrayList<Property> properties) {
+        this.name = name;
         this.token = token;
         this.money = money;
         this.properties = properties;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Cash getMoney() {
@@ -47,6 +53,10 @@ public abstract class Player {
 
     public Token getToken() {
         return token;
+    }
+
+    public ArrayList<Property> getProperties() {
+        return properties;
     }
 
     public void setToken(Token token) {

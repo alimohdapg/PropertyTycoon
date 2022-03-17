@@ -152,6 +152,18 @@ public class GameBoard {
         return diceRolls;
     }
 
+    public int getDiceRollsSum(){
+        int sum = 0;
+        for (Integer[] twoDiceRolls: getDiceRolls()){
+            for (Integer diceRoll: twoDiceRolls){
+                if (diceRoll != null) {
+                    sum += diceRoll;
+                }
+            }
+        }
+        return sum;
+    }
+
     /**
      * Retrieves the current number on dice 1.
      *

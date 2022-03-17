@@ -66,7 +66,7 @@ public class GameController {
                 a33_text, a34_text, a35_text, a36_text, a37_text, a38_text, a39_text);
         current_pos = 0;
 
-        player1 = new HumanPlayer(Token.CAT, new ArrayList<Property>());
+        player1 = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>());
         players = new Player[1];
         players[0] = player1;
         current_pos = 0;
