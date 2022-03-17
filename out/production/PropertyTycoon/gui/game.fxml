@@ -413,59 +413,53 @@
             <Text fx:id="player5_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£250.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Button fx:id="testButton" layoutX="983.0" layoutY="623.0" mnemonicParsing="false" onAction="#testButtonClicked" prefHeight="79.0" prefWidth="259.0" text="Take turn">
+      <Button fx:id="testButton" layoutX="983.0" layoutY="623.0" mnemonicParsing="false" onAction="#testButtonClicked" prefHeight="79.0" prefWidth="259.0" styleClass="menuButton" text="Take turn">
          <font>
             <Font size="26.0" />
          </font></Button>
       <AnchorPane fx:id="dialogue_pane" layoutX="738.0" layoutY="275.0" prefHeight="341.0" prefWidth="523.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" stroke="BLACK" strokeType="INSIDE" width="523.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
             <Text layoutX="182.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You rolled:" wrappingWidth="159.23675537109375">
                <font>
                   <Font size="31.0" />
                </font>
             </Text>
-            <Button fx:id="confirm_roll" layoutX="197.0" layoutY="284.0" mnemonicParsing="false" onAction="#confirm_rollClicked" prefHeight="43.0" prefWidth="129.0" text="Confirm">
+            <Button fx:id="confirm_roll" layoutX="162.0" layoutY="277.0" mnemonicParsing="false" onAction="#confirm_rollClicked" prefHeight="58.0" prefWidth="200.0" styleClass="menuButton" text="Confirm">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="68.0" layoutX="185.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="68.0" layoutX="284.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="68.0" layoutX="185.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="68.0" layoutX="284.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="68.0" layoutX="185.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="68.0" layoutX="284.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
-            <Text fx:id="roll1" layoutX="211.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Text>
-            <Text fx:id="roll2" layoutX="310.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Text>
-            <Text fx:id="roll3" layoutX="210.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Text>
-            <Text fx:id="roll4" layoutX="310.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Text>
-            <Text fx:id="roll5" layoutX="211.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Text>
-            <Text fx:id="roll6" layoutX="310.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Text>
+            <ImageView fx:id="dice1" fitHeight="68.0" fitWidth="67.0" layoutX="186.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/dice_faces/d1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice2" fitHeight="68.0" fitWidth="67.0" layoutX="284.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/dice_faces/d1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice3" fitHeight="68.0" fitWidth="67.0" layoutX="186.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/dice_faces/d1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice4" fitHeight="68.0" fitWidth="67.0" layoutX="284.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/dice_faces/d1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice5" fitHeight="68.0" fitWidth="67.0" layoutX="185.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/dice_faces/d1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice6" fitHeight="68.0" fitWidth="67.0" layoutX="284.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/dice_faces/d1.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>
