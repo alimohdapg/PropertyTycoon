@@ -5,8 +5,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
+
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -22,7 +27,7 @@ public class GameController {
     private Circle playerOneToken;
 
     @FXML
-    private AnchorPane dialogue_pane;
+    private AnchorPane dialogue_pane, property_info;
 
     @FXML
     private Circle p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
@@ -41,13 +46,16 @@ public class GameController {
     private ArrayList<Text> text_array;
 
     @FXML
-    private Text player1_money;
+    private Text player1_money, property_info_name;
 
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
 
     @FXML
     private ImageView dice1, dice2, dice3, dice4, dice5, dice6;
+
+    @FXML
+    private Rectangle property_info_color;
 
     private int current_pos;
 
@@ -187,6 +195,7 @@ public class GameController {
                 return diceimg6;
             default:
                 return null;
+
         }
     }
 
@@ -205,6 +214,78 @@ public class GameController {
             }
 
         }
+    }
+
+    public void displayProperty1() { loadProperty(1); }
+    public void displayProperty2() { loadProperty(3); }
+    public void displayProperty3() { loadProperty(6); }
+    public void displayProperty4() { loadProperty(8); }
+    public void displayProperty5() { loadProperty(9); }
+    public void displayProperty6() { loadProperty(11); }
+    public void displayProperty7() { loadProperty(13); }
+    public void displayProperty8() { loadProperty(14); }
+    public void displayProperty9() { loadProperty(16); }
+    public void displayProperty10() { loadProperty(18); }
+    public void displayProperty11() { loadProperty(19); }
+    public void displayProperty12() { loadProperty(21); }
+    public void displayProperty13() { loadProperty(23); }
+    public void displayProperty14() { loadProperty(24); }
+    public void displayProperty15() { loadProperty(26); }
+    public void displayProperty16() { loadProperty(27); }
+    public void displayProperty17() { loadProperty(29); }
+    public void displayProperty18() { loadProperty(31); }
+    public void displayProperty19() { loadProperty(32); }
+    public void displayProperty20() { loadProperty(34); }
+    public void displayProperty21() { loadProperty(37); }
+    public void displayProperty22() { loadProperty(39); }
+
+    public void loadProperty(int i) {
+        property_info.setVisible(true);
+        ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
+        property_info_name.setText(board_spaces.get(i).getName());
+        Color c = Color.web(getHex(i));
+        property_info_color.setFill(c);
+    }
+
+    public void closeProperty() {
+        property_info.setVisible(false);
+    }
+
+    public String getHex(int i){
+        switch(i) {
+            case 1:
+            case 3:
+                return "#915336";
+            case 6:
+            case 8:
+            case 9:
+                return "#87a5d6";
+            case 11:
+            case 13:
+            case 14:
+                return "#ed3878";
+            case 16:
+            case 18:
+            case 19:
+                return "#f57f22";
+            case 21:
+            case 23:
+            case 24:
+                return "#ef3823";
+            case 26:
+            case 27:
+            case 29:
+                return "#fde701";
+            case 31:
+            case 32:
+            case 34:
+                return "#10a55b";
+            case 37:
+            case 39:
+                return "#264da1";
+        }
+        //If fails
+        return "#264da1";
     }
 
 }
