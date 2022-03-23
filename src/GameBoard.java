@@ -218,4 +218,8 @@ public class GameBoard {
     public void setCurrentPlayerTurn(int currentPlayerTurn) {
         this.currentPlayerTurn = currentPlayerTurn;
     }
+
+    public void auction (Player player) {
+
+    }
 }
