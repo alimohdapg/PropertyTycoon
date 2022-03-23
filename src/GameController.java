@@ -46,7 +46,7 @@ public class GameController {
     private ArrayList<Text> text_array;
 
     @FXML
-    private Text property_info_name;
+    private Text property_info_name, currentTurnText;
 
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
@@ -94,7 +94,7 @@ public class GameController {
         current_pos = 0;
 
         playerOne = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>(), playerOneToken, playerOneName, playerOneMoney);
-        playerTwo = new HumanPlayer("田一名", Token.IRON, new ArrayList<Property>(), playerTwoToken, playerTwoName, playerTwoMoney);
+        playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), playerTwoToken, playerTwoName, playerTwoMoney);
 
         //Create gameBoard instance
         gameBoard = new GameBoard(new Player[]{playerOne, playerTwo});
