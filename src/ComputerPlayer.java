@@ -1,3 +1,6 @@
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+
 import java.util.ArrayList;
 
 public class ComputerPlayer extends Player {
@@ -5,8 +8,8 @@ public class ComputerPlayer extends Player {
     private boolean inJail;
     private boolean passGo;
 
-    public ComputerPlayer(String name, Token token, Cash money, ArrayList<Property> properties) {
-        super(name, token, money, properties);
+    public ComputerPlayer(String name, Token token, Cash money, ArrayList<Property> properties, Circle playerToken, Text playerName, Text playerMoney) {
+        super(name, token, money, properties, playerToken, playerName, playerMoney);
         inJail = false;
         passGo = false;
     }

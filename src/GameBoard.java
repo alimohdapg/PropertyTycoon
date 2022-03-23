@@ -185,4 +185,51 @@ public class GameBoard {
     public ArrayList<BoardSpace> getBoardSpaces() {
         return boardSpaces;
     }
+
+    public void setCurrentPlayerTurn(int currentPlayerTurn) {
+        this.currentPlayerTurn = currentPlayerTurn;
+    }
+
+
+
+
+
+    public void potLuckPlayerReceivesMoney(Player player, int amountOfMoney)
+    {
+        Cash currentCash = player.getMoney();
+        currentCash.addAmount(amountOfMoney);
+        player.setMoney(currentCash);
+    }
+
+    //TODO: Set player to a specific location
+    public void potLuckPlayerSetLocation(Player player, int location)
+    {
+
+    }
+
+    public void potLuckReceiveMoneyFromOthers(Player player, int amountOfMoney)
+    {
+        int total = 0;
+        for (Player current : players)
+        {
+            if (current != player)
+            {
+                Cash currentMoney = current.getMoney();
+                currentMoney.subtractAmount(amountOfMoney);
+                player.setMoney(currentMoney);
+
+                total += amountOfMoney;
+            }
+        }
+
+        Cash playerMoney = player.getMoney();
+        playerMoney.addAmount(total);
+        player.setMoney(playerMoney);
+    }
+
+    // TODO: Remove a player form jail for free
+    public void potLuckGetOutOfJail(Player player)
+    {
+
+    }
 }
