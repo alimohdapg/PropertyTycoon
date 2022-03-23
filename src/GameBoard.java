@@ -235,4 +235,30 @@ public class GameBoard {
     {
 
     }
+
+    public void potLuckReceiveMoneyFromOthers(Player player, int amountOfMoney)
+    {
+        int total = 0;
+        for (Player current : players)
+        {
+            if (current != player)
+            {
+                Cash currentMoney = current.getMoney();
+                currentMoney.subtractAmount(amountOfMoney);
+                player.setMoney(currentMoney);
+
+                total += amountOfMoney;
+            }
+        }
+
+        Cash playerMoney = player.getMoney();
+        playerMoney.addAmount(total);
+        player.setMoney(playerMoney);
+    }
+
+    // TODO: Remove a player form jail for free
+    public void potLuckGetOutOfJail(Player player)
+    {
+
+    }
 }
