@@ -5,13 +5,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -24,7 +22,9 @@ import java.util.Collections;
 public class GameController {
 
     @FXML
-    private Circle playerOneToken;
+    private Circle playerOneToken, playerTwoToken;
+
+    @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney;
 
     @FXML
     private AnchorPane dialogue_pane, property_info;
@@ -46,7 +46,7 @@ public class GameController {
     private ArrayList<Text> text_array;
 
     @FXML
-    private Text player1_money, property_info_name;
+    private Text property_info_name;
 
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
@@ -59,8 +59,8 @@ public class GameController {
 
     private int current_pos;
 
-    private Player player1;
-    private Player[] players;
+    private Player playerOne, playerTwo, currentPlayer;
+
     private GameBoard gameBoard;
 
     private boolean turnInProgress;
@@ -93,15 +93,11 @@ public class GameController {
         //Set default position
         current_pos = 0;
 
-        player1 = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>());
-        players = new Player[1];
-        players[0] = player1;
-
-        //Setup money
-        player1_money.setText("£"+Integer.toString(player1.getMoney().getAmount()));
+        playerOne = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>(), playerOneToken, playerOneName, playerOneMoney);
+        playerTwo = new HumanPlayer("田一名", Token.IRON, new ArrayList<Property>(), playerTwoToken, playerTwoName, playerTwoMoney);
 
         //Create gameBoard instance
-        gameBoard = new GameBoard(players);
+        gameBoard = new GameBoard(new Player[]{playerOne, playerTwo});
         turnInProgress = false;
 
         //Load board data
@@ -116,6 +112,7 @@ public class GameController {
         if(!turnInProgress) {
             turnInProgress = true;
             gameBoard.update();
+            currentPlayer = gameBoard.getCurrentPlayer();
             //Updates current_pos with the new player position
             current_pos = gameBoard.getCurrentPlayerPosition();
             Integer[][] dice_rolls = gameBoard.getDiceRolls();
@@ -136,8 +133,10 @@ public class GameController {
      * Confirms the dice roll, updates position
      */
     public void confirm_rollClicked() {
-        playerOneToken.setLayoutX(pos_array.get(current_pos).getLayoutX());
-        playerOneToken.setLayoutY(pos_array.get(current_pos).getLayoutY());
+        current_pos = gameBoard.getCurrentPlayerPosition();
+        currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+        currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+
         turnInProgress = false;
         dialogue_pane.setVisible(false);
     }
