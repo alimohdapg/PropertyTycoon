@@ -12,9 +12,9 @@ class GameBoardTest {
     @BeforeEach
     void setUp(){
         gameBoard = new GameBoard(new Player[]{
-                new HumanPlayer(Token.BOOT, new ArrayList<>()),
-                new HumanPlayer(Token.CAT, new ArrayList<>()),
-                new HumanPlayer(Token.HATSTAND, new ArrayList<>())}
+                new HumanPlayer("Boot Player", Token.BOOT, new ArrayList<>()),
+                new HumanPlayer("Cat Player", Token.CAT, new ArrayList<>()),
+                new HumanPlayer("Hat Stand Player", Token.HATSTAND, new ArrayList<>())}
         );
     }
 
@@ -33,24 +33,32 @@ class GameBoardTest {
     @Test
     void testUpdate() {
         gameBoard.update();
-        int player1Position = gameBoard.getDice1Number() + gameBoard.getDice2Number();
+        int player1Position = gameBoard.getDiceRollsSum();
         assertEquals(player1Position, gameBoard.getCurrentPlayerPosition());
         assertEquals(gameBoard.getPlayers()[0], gameBoard.getCurrentPlayer());
         gameBoard.update();
-        assertEquals(gameBoard.getDice1Number() + gameBoard.getDice2Number(), gameBoard.getCurrentPlayerPosition());
+        assertEquals(gameBoard.getDiceRollsSum(), gameBoard.getCurrentPlayerPosition());
         assertEquals(gameBoard.getPlayers()[1], gameBoard.getCurrentPlayer());
         gameBoard.update();
-        assertEquals(gameBoard.getDice1Number() + gameBoard.getDice2Number(), gameBoard.getCurrentPlayerPosition());
+        assertEquals(gameBoard.getDiceRollsSum(), gameBoard.getCurrentPlayerPosition());
         assertEquals(gameBoard.getPlayers()[2], gameBoard.getCurrentPlayer());
         gameBoard.update();
-        assertEquals(player1Position + gameBoard.getDice1Number() + gameBoard.getDice2Number(), gameBoard.getCurrentPlayerPosition());
+        assertEquals(gameBoard.getDiceRollsSum() + player1Position, gameBoard.getCurrentPlayerPosition());
         assertEquals(gameBoard.getPlayers()[0], gameBoard.getCurrentPlayer());
     }
 
     @Test
     void testGetDiceTotal() {
         gameBoard.update();
-        assertEquals(gameBoard.getDice1Number() + gameBoard.getDice2Number(), gameBoard.getCurrentPlayerPosition());
+        int sum = 0;
+        for (Integer[] twoDiceRolls: gameBoard.getDiceRolls()){
+            for (Integer diceRoll: twoDiceRolls){
+                if (diceRoll != null) {
+                    sum += diceRoll;
+                }
+            }
+        }
+        assertEquals(sum, gameBoard.getCurrentPlayerPosition());
     }
 
     @Test

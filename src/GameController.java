@@ -1,4 +1,9 @@
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -39,7 +44,10 @@ public class GameController {
     private Text player1_money;
 
     @FXML
-    private Text roll1, roll2, roll3, roll4, roll5, roll6;
+    private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
+
+    @FXML
+    private ImageView dice1, dice2, dice3, dice4, dice5, dice6;
 
     private int current_pos;
 
@@ -56,24 +64,39 @@ public class GameController {
         pos_array = new ArrayList<>();
         text_array = new ArrayList<>();
 
+        //Currently contains dice roll
         dialogue_pane.setVisible(false);
 
+        //Initiliase the array of GUI objects
         Collections.addAll(pos_array, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
                 p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40);
         Collections.addAll(text_array, a0_text, a1_text, a2_text, a3_text, a4_text, a5_text, a6_text, a7_text, a8_text, a9_text, a10_text,
                 a11_text, a12_text, a13_text, a14_text, a15_text, a16_text, a17_text, a18_text, a19_text, a20_text, a21_text,
                 a22_text, a23_text, a24_text, a25_text, a26_text, a27_text, a28_text, a29_text, a30_text, a31_text, a32_text,
                 a33_text, a34_text, a35_text, a36_text, a37_text, a38_text, a39_text);
+
+        diceimg1 = new Image("/img/dice_faces/d1.png");
+        diceimg2 = new Image("/img/dice_faces/d2.png");
+        diceimg3 = new Image("/img/dice_faces/d3.png");
+        diceimg4 = new Image("/img/dice_faces/d4.png");
+        diceimg5 = new Image("/img/dice_faces/d5.png");
+        diceimg6 = new Image("/img/dice_faces/d6.png");
+
+        //Set default position
         current_pos = 0;
 
-        player1 = new HumanPlayer(Token.CAT, new ArrayList<Property>());
+        player1 = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>());
         players = new Player[1];
         players[0] = player1;
-        current_pos = 0;
+
+        //Setup money
         player1_money.setText("£"+Integer.toString(player1.getMoney().getAmount()));
+
+        //Create gameBoard instance
         gameBoard = new GameBoard(players);
         turnInProgress = false;
 
+        //Load board data
         getTileNames();
     }
 
@@ -92,7 +115,12 @@ public class GameController {
             dialogue_pane.setVisible(true);
 
             //Sets the player token on the GUI to the new location
-
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Warning!");
+            ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            alert.setContentText("A turn is already in progress!");
+            alert.showAndWait();
         }
     }
 
@@ -113,23 +141,53 @@ public class GameController {
      */
     public void displayDice(Integer[][] rolls) {
         if(rolls[0][0] != null) {
-            roll1.setText(Integer.toString(rolls[0][0]));
-        } else { roll1.setText(""); }
+            dice1.setImage(getDiceImage(rolls[0][0]));
+            dice1.setVisible(true);
+        } else { dice1.setVisible(false); }
         if(rolls[0][1] != null) {
-            roll2.setText(Integer.toString(rolls[0][1]));
-        } else { roll2.setText(""); }
+            dice2.setImage(getDiceImage(rolls[0][1]));
+            dice2.setVisible(true);
+        } else { dice2.setVisible(false); }
         if(rolls[1][0] != null) {
-            roll3.setText(Integer.toString(rolls[1][0]));
-        } else { roll3.setText(""); }
+            dice3.setImage(getDiceImage(rolls[1][0]));
+            dice3.setVisible(true);
+        } else { dice3.setVisible(false); }
         if(rolls[1][1] != null) {
-            roll4.setText(Integer.toString(rolls[1][1]));
-        } else { roll4.setText(""); }
+            dice4.setImage(getDiceImage(rolls[1][1]));
+            dice4.setVisible(true);
+        } else { dice4.setVisible(false); }
         if(rolls[2][0] != null) {
-            roll5.setText(Integer.toString(rolls[2][0]));
-        } else { roll5.setText(""); }
+            dice5.setImage(getDiceImage(rolls[2][0]));
+            dice5.setVisible(true);
+        } else { dice5.setVisible(false); }
         if(rolls[2][1] != null) {
-            roll6.setText(Integer.toString(rolls[2][1]));
-        } else { roll6.setText(""); }
+            dice6.setImage(getDiceImage(rolls[2][1]));
+            dice6.setVisible(true);
+        } else { dice6.setVisible(false); }
+    }
+
+    /**
+     * Returns the correct dice image
+     * @param i the integer value that represents the roll number
+     * @return the image of the corresponding dice roll
+     */
+    private Image getDiceImage(Integer i) {
+        switch(i) {
+            case 1:
+                return diceimg1;
+            case 2:
+                return diceimg2;
+            case 3:
+                return diceimg3;
+            case 4:
+                return diceimg4;
+            case 5:
+                return diceimg5;
+            case 6:
+                return diceimg6;
+            default:
+                return null;
+        }
     }
 
     /**

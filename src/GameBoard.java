@@ -12,10 +12,11 @@ public class GameBoard {
     private final Player[] players;
     private final ArrayList<BoardSpace> boardSpaces;
     private int currentPlayerTurn;
+    private boolean currentPlayerInJail;
     private final Dice dice1;
     private final Dice dice2;
     private final FileIO fileIO;
-    private Integer[][] diceRolls;
+    private final Integer[][] diceRolls;
 
     /**
      * Constructs a new Gameboard object.
@@ -26,6 +27,7 @@ public class GameBoard {
         this.players = players;
         this.boardSpaces = new ArrayList<>();
         currentPlayerTurn = -1;
+        currentPlayerInJail = false;
         dice1 = new Dice();
         dice2 = new Dice();
         fileIO = new FileIO();
@@ -70,24 +72,26 @@ public class GameBoard {
         clearDiceRolls();
         Player currentPlayer = players[currentPlayerTurn];
 
+        //TODO: Check if the current player is in the jail
         int round = 0;
         while (round < 3) {
             // roll dice
             int num1 = dice1.rollDice();
             int num2 = dice2.rollDice();
-
             // store dice value & set location
             diceRolls[round][0] = dice1.getNumber();
             diceRolls[round][1] = dice2.getNumber();
             ((HumanPlayer) currentPlayer).setLocation(
                     (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
             );
-
             if (num1 != num2) return;
-
             round++;
         }
+        currentPlayerInJail = true;
+    }
 
+    public void updateJail(){
+        // TODO
         if (checkPayFine()) {
             // probably will improve,
             // because of the problem of updating dara from backend to frontend (several times)
@@ -95,8 +99,10 @@ public class GameBoard {
         } else {
             ((HumanPlayer) players[currentPlayerTurn]).setLocation(40);
         }
-
+        ((HumanPlayer) players[currentPlayerTurn]).setLocation(40);
     }
+
+    
 
     /**
      * Go to next turn at the beginning of each "update"
@@ -120,7 +126,7 @@ public class GameBoard {
             currentPlayerTurn++;
         }
     }
-    
+
     /**
      * @param cur_turn get current player turn
      * @return if the player is in Jail or not
@@ -146,6 +152,18 @@ public class GameBoard {
 
     public Boolean checkPayFine() {
         return true;
+    }
+
+    public int getDiceRollsSum(){
+        int sum = 0;
+        for (Integer[] twoDiceRolls: getDiceRolls()){
+            for (Integer diceRoll: twoDiceRolls){
+                if (diceRoll != null) {
+                    sum += diceRoll;
+                }
+            }
+        }
+        return sum;
     }
 
     /**
