@@ -252,7 +252,7 @@
       <Rectangle fx:id="a39_color" arcHeight="5.0" arcWidth="5.0" fill="#264da1" height="16.0" layoutX="599.0" layoutY="585.0" onMouseClicked="#displayProperty22" rotate="-90.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
       <Text fx:id="a39_text" layoutX="620.0" layoutY="591.0" rotate="-90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="property-text" textAlignment="CENTER" wrappingWidth="58.0" />
       <Circle fx:id="p39" fill="DODGERBLUE" layoutX="669.0" layoutY="593.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-      <Circle fx:id="playerOneToken" fill="DODGERBLUE" layoutX="672.0" layoutY="668.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="playerOneToken" fill="DODGERBLUE" layoutX="649.0" layoutY="668.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
       <Pane fx:id="player_1" layoutX="717.0" prefHeight="79.0" prefWidth="200.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
@@ -270,7 +270,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerOneName" layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" wrappingWidth="128.99999804016988" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="16.0" layoutX="52.0" layoutY="36.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
                <fill>
                   <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0" startX="1.0">
@@ -282,7 +282,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text fx:id="player1_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£100.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerOneMoney" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£100.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
       <Pane fx:id="player_2" layoutX="717.0" layoutY="52.0" prefHeight="79.0" prefWidth="200.0">
@@ -302,7 +302,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerTwoName" layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" wrappingWidth="128.99999804016988" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="16.0" layoutX="52.0" layoutY="36.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
                <fill>
                   <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0" startX="1.0">
@@ -314,10 +314,10 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text fx:id="player2_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£10.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerTwoMoney" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£10.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Pane fx:id="player_3" layoutX="717.0" layoutY="104.0" prefHeight="79.0" prefWidth="200.0">
+      <Pane fx:id="player_3" layoutX="717.0" layoutY="104.0" prefHeight="79.0" prefWidth="200.0" visible="false">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -349,7 +349,7 @@
             <Text fx:id="player3_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Pane fx:id="player_4" layoutX="717.0" layoutY="156.0" prefHeight="79.0" prefWidth="200.0">
+      <Pane fx:id="player_4" layoutX="717.0" layoutY="156.0" prefHeight="79.0" prefWidth="200.0" visible="false">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -381,7 +381,7 @@
             <Text fx:id="player4_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Pane fx:id="player_5" layoutX="717.0" layoutY="208.0" prefHeight="79.0" prefWidth="200.0">
+      <Pane fx:id="player_5" layoutX="717.0" layoutY="208.0" prefHeight="79.0" prefWidth="200.0" visible="false">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -474,5 +474,6 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Circle fx:id="playerTwoToken" fill="#1fff3a" layoutX="688.0" layoutY="668.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

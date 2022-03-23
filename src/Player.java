@@ -1,3 +1,7 @@
+import javafx.fxml.FXML;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+
 import java.util.ArrayList;
 
 public abstract class Player {
@@ -7,12 +11,28 @@ public abstract class Player {
     private Cash money;
     private ArrayList<Property> properties;
 
-    public Player(String name, Token token, Cash money, ArrayList<Property> properties) {
+    @FXML
+    private Circle playerToken;
+
+    @FXML
+    private Text playerName, playerMoney;
+
+    public Player(String name, Token token, Cash money, ArrayList<Property> properties, Circle playerToken, Text playerName, Text playerMoney) {
         this.name = name;
         this.token = token;
         this.money = money;
         this.properties = properties;
+        this.playerToken = playerToken;
+        this.playerName = playerName;
+        this.playerMoney = playerMoney;
+        this.playerName.setText(name);
+        this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
     }
+
+    public Circle getBoardToken(){ return playerToken; }
+
+    public Text getPlayerName() { return playerName; }
+    public Text getPlayerMoney() { return playerMoney; }
 
     public String getName() {
         return name;
