@@ -1,3 +1,5 @@
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +14,7 @@ class JailTest
     public void setup()
     {
         jail = new Jail("Jail");
-        player1 = new HumanPlayer("Iron Player", Token.IRON, null);
+        player1 = new HumanPlayer("Iron Player", Token.IRON, null, new Circle(), new Text(), new Text());
     }
 
     @Test
