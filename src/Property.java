@@ -1,7 +1,7 @@
 /**
  * A class representing properties on the board.
  *
- * @author Ali Ahmed
+ * @author Ali Ahmed & Hanzhen Gong
  */
 public class Property extends BoardSpace {
 
@@ -94,6 +94,7 @@ public class Property extends BoardSpace {
      */
     public void buyHotel() {
         hasHotel = true;
+        houseCount = 0;
     }
 
     /**
@@ -141,5 +142,10 @@ public class Property extends BoardSpace {
      */
     public boolean doesHaveHotel() {
         return hasHotel;
+    }
+
+    public void sellHotel()
+    {
+        hasHotel = false;
     }
 }
