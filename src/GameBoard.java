@@ -219,5 +219,20 @@ public class GameBoard {
         this.currentPlayerTurn = currentPlayerTurn;
     }
 
-    
+
+
+
+
+    public void potLuckPlayerReceivesMoney(Player player, int amountOfMoney)
+    {
+        Cash currentCash = player.getMoney();
+        currentCash.addAmount(amountOfMoney);
+        player.setMoney(currentCash);
+    }
+
+    //TODO: Set player to a specific location
+    public void potLuckPlayerSetLocation(Player player, int location)
+    {
+
+    }
 }
