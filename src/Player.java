@@ -4,13 +4,13 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
-
 public abstract class Player {
 
     private String name;
     private Token token;
     private Cash money;
     private ArrayList<Property> properties;
+    private int location;
 
     @FXML
     private Circle playerToken;
@@ -23,6 +23,7 @@ public abstract class Player {
         this.token = token;
         this.money = money;
         this.properties = properties;
+        location = 0;
         this.playerToken = playerToken;
         this.playerName = playerName;
         this.playerMoney = playerMoney;
@@ -121,5 +122,23 @@ public abstract class Player {
 
     public void setToken(Token token) {
         this.token = token;
+    }
+
+    /**
+     * Retrieve player's current location on the game board
+     *
+     * @return location as int type (0 to 39)
+     */
+    public int getLocation() {
+        return location;
+    }
+
+    /**
+     * Sets the location value to the new value passed into
+     *
+     * @param location location as int type (0 to 39)
+     */
+    public void setLocation(int location) {
+        this.location = location;
     }
 }

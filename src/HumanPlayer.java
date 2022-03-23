@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class HumanPlayer extends Player {
 
-    private int location;
     private boolean inJail;
     private boolean passedGo;
 
@@ -18,30 +17,8 @@ public class HumanPlayer extends Player {
      */
     public HumanPlayer(String name, Token token, ArrayList<Property> properties, Circle playerToken, Text playerName, Text playerMoney) {
         super(name, token, new Cash(1500), properties, playerToken, playerName, playerMoney);
-        location = 0;
         inJail = false;
         passedGo = false;
-    }
-
-
-
-
-    /**
-     * Retrieve player's current location on the game board
-     *
-     * @return location as int type (0 to 39)
-     */
-    public int getLocation() {
-        return location;
-    }
-
-    /**
-     * Sets the location value to the new value passed into
-     *
-     * @param location location as int type (0 to 39)
-     */
-    public void setLocation(int location) {
-        this.location = location;
     }
 
     /**
