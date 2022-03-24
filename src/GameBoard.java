@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * A gameboard class representing and tracking the game's state.
@@ -28,7 +25,9 @@ public class GameBoard {
     public GameBoard(Player[] players) {
         this.players = players;
         playerTurns = new Stack<>();
-        playerTurns.addAll(Arrays.asList(players));
+        List<Player> playersList = Arrays.asList(players);
+        Collections.reverse(playersList);
+        playerTurns.addAll(playersList);
         this.boardSpaces = new ArrayList<>();
         currentPlayerInJail = false;
         dice1 = new Dice();
@@ -84,6 +83,11 @@ public class GameBoard {
         ((HumanPlayer) currentPlayer).setLocation(
                 (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
         );
+        if (dice1.getNumber() == dice2.getNumber()){
+            playerTurns.push(currentPlayer);
+        } else {
+            samePlayerCounter = 0;
+        }
         if (samePlayerCounter == 2) {
             updateJail();
         }
@@ -186,9 +190,6 @@ public class GameBoard {
         return boardSpaces;
     }
 
-    public void setCurrentPlayerTurn(int currentPlayerTurn) {
-        this.currentPlayerTurn = currentPlayerTurn;
-    }
 
 
 

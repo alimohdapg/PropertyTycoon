@@ -46,13 +46,14 @@ public class GameController {
     private ArrayList<Text> text_array;
 
     @FXML
-    private Text property_info_name, currentTurnText;
+    private Text property_info_name, currentTurnText, property_info_rent, property_info_rent_1house,
+            property_info_rent_2house, property_info_rent_3house, property_info_rent_4house, property_info_rent_hotel;
 
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
 
     @FXML
-    private ImageView dice1, dice2, dice3, dice4, dice5, dice6;
+    private ImageView dice1, dice2;
 
     @FXML
     private Rectangle property_info_color;
@@ -115,8 +116,7 @@ public class GameController {
             currentPlayer = gameBoard.getCurrentPlayer();
             //Updates current_pos with the new player position
             current_pos = gameBoard.getCurrentPlayerPosition();
-            Integer[][] dice_rolls = gameBoard.getDiceRolls();
-            displayDice(dice_rolls);
+            displayDice();
             dialogue_pane.setVisible(true);
 
             //Sets the player token on the GUI to the new location
@@ -144,33 +144,12 @@ public class GameController {
     /**
      * Updates the visual UI of the dice roll
      *
-     * @param rolls, the array containing the dice rolls for this turn
      */
-    public void displayDice(Integer[][] rolls) {
-        if(rolls[0][0] != null) {
-            dice1.setImage(getDiceImage(rolls[0][0]));
-            dice1.setVisible(true);
-        } else { dice1.setVisible(false); }
-        if(rolls[0][1] != null) {
-            dice2.setImage(getDiceImage(rolls[0][1]));
-            dice2.setVisible(true);
-        } else { dice2.setVisible(false); }
-        if(rolls[1][0] != null) {
-            dice3.setImage(getDiceImage(rolls[1][0]));
-            dice3.setVisible(true);
-        } else { dice3.setVisible(false); }
-        if(rolls[1][1] != null) {
-            dice4.setImage(getDiceImage(rolls[1][1]));
-            dice4.setVisible(true);
-        } else { dice4.setVisible(false); }
-        if(rolls[2][0] != null) {
-            dice5.setImage(getDiceImage(rolls[2][0]));
-            dice5.setVisible(true);
-        } else { dice5.setVisible(false); }
-        if(rolls[2][1] != null) {
-            dice6.setImage(getDiceImage(rolls[2][1]));
-            dice6.setVisible(true);
-        } else { dice6.setVisible(false); }
+    public void displayDice() {
+        dice1.setImage(getDiceImage(gameBoard.getDice1Number()));
+        dice1.setVisible(true);
+        dice2.setImage(getDiceImage(gameBoard.getDice2Number()));
+        dice2.setVisible(true);
     }
 
     /**
@@ -241,9 +220,23 @@ public class GameController {
     public void loadProperty(int i) {
         property_info.setVisible(true);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-        property_info_name.setText(board_spaces.get(i).getName());
+        Property current_property = (Property) board_spaces.get(i);
+        current_property.sellHotel();
+        current_property.setHouseCount(0);
+        property_info_name.setText(current_property.getName());
         Color c = Color.web(getHex(i));
         property_info_color.setFill(c);
+        property_info_rent.setText("£" + current_property.getRent());
+        current_property.setHouseCount(1);
+        property_info_rent_1house.setText("£" + current_property.getRent());
+        current_property.setHouseCount(2);
+        property_info_rent_2house.setText("£" + current_property.getRent());
+        current_property.setHouseCount(3);
+        property_info_rent_3house.setText("£" + current_property.getRent());
+        current_property.setHouseCount(4);
+        property_info_rent_4house.setText("£" + current_property.getRent());
+        current_property.buyHotel();
+        property_info_rent_hotel.setText("£" + current_property.getRent());
     }
 
     public void closeProperty() {
