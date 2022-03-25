@@ -422,9 +422,79 @@
                   <Font size="19.0" />
                </font>
             </Text>
+            <Text layoutX="22.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="property_info_rent" layoutX="119.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="21.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ set" wrappingWidth="84.99999804016988">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="property_info_rent_set" layoutX="119.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="21.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="98.000000940051">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="property_info_rent_1house" layoutX="119.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="21.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="98.000000940051">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="property_info_rent_2house" layoutX="119.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="22.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="98.000000940051">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="property_info_rent_3house" layoutX="119.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="22.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="98.000000940051">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="property_info_rent_4house" layoutX="119.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="22.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="98.000000940051">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="property_info_rent_hotel" layoutX="119.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="dialogue_pane" layoutX="738.0" layoutY="275.0" prefHeight="341.0" prefWidth="523.0" visible="false">
+      <AnchorPane fx:id="dialogue_pane" layoutX="738.0" layoutY="275.0" prefHeight="341.0" prefWidth="523.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
             <Text layoutX="182.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You rolled:" wrappingWidth="159.23675537109375">
@@ -437,32 +507,12 @@
                   <Font size="17.0" />
                </font>
             </Button>
-            <ImageView fx:id="dice1" fitHeight="68.0" fitWidth="67.0" layoutX="186.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dice1" fitHeight="68.0" fitWidth="67.0" layoutX="182.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/dice_faces/d1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="dice2" fitHeight="68.0" fitWidth="67.0" layoutX="284.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/dice_faces/d1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="dice3" fitHeight="68.0" fitWidth="67.0" layoutX="186.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/dice_faces/d1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="dice4" fitHeight="68.0" fitWidth="67.0" layoutX="284.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/dice_faces/d1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="dice5" fitHeight="68.0" fitWidth="67.0" layoutX="185.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/dice_faces/d1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="dice6" fitHeight="68.0" fitWidth="67.0" layoutX="284.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dice2" fitHeight="68.0" fitWidth="67.0" layoutX="284.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/dice_faces/d1.png" />
                </image>
@@ -470,5 +520,10 @@
          </children>
       </AnchorPane>
       <Circle fx:id="playerTwoToken" fill="#1fff3a" layoutX="688.0" layoutY="668.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="currentTurnText" fill="#e12b2b" layoutX="738.0" layoutY="676.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="'s Turn" wrappingWidth="227.21630859375">
+         <font>
+            <Font name="Helvetica" size="33.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

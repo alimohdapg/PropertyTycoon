@@ -49,19 +49,6 @@ class GameBoardTest {
         assertEquals(gameBoard.getPlayers()[0], gameBoard.getCurrentPlayer());
     }
 
-    @Test
-    void testGetDiceTotal() {
-        gameBoard.update();
-        int sum = 0;
-        for (Integer[] twoDiceRolls: gameBoard.getDiceRolls()){
-            for (Integer diceRoll: twoDiceRolls){
-                if (diceRoll != null) {
-                    sum += diceRoll;
-                }
-            }
-        }
-        assertEquals(sum, gameBoard.getCurrentPlayerPosition());
-    }
 
     @Test
     void testGetCurrentPlayerPosition() {
