@@ -96,6 +96,8 @@ public class Property extends BoardSpace {
         if (houseCount == 4) {
             hasHotel = true;
             houseCount = 0;
+        } else{
+            System.out.println("Error, number of houses exceeds normal!");
         }
     }
 
@@ -146,6 +148,9 @@ public class Property extends BoardSpace {
         return hasHotel;
     }
 
+    /**
+     * Set hasHotel as false
+     */
     public void sellHotel()
     {
         hasHotel = false;

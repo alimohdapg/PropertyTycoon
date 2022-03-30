@@ -71,6 +71,24 @@ public abstract class Player {
     }
 
     /**
+     * A player can buy a single house/hotel from a property
+     *
+     * @param property the property where player wants to buy a house
+     */
+    public void buyAHouse(Property property) {
+        if (money.getAmount() > property.getHouseCost()) {
+            if  (property.getHouseCost() < 4) {
+                property.buyHouse();
+            } else {
+                property.buyHotel();
+            }
+            money.subtractAmount(property.getHouseCost());
+        } else {
+            System.out.println("Error, the player doesn't have enough money!");
+        }
+    }
+
+    /**
      * A player can sell a single house from a property
      *
      * @param property the property where a player wants to sell a house
@@ -128,7 +146,7 @@ public abstract class Player {
         }
     }
 
-// ------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------
 
     /**
      * Get player's name

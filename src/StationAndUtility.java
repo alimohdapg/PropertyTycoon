@@ -37,4 +37,37 @@ public class StationAndUtility extends BoardSpace {
     public Color getColor() {
         return color;
     }
+
+    /**
+     * Get rent of station
+     *
+     * @param num sta owned (the return of GameBoard.checkNumStaUti)
+     * @return rent
+     */
+    public int getStationRent(int num) {
+        return num * 25;
+    }
+
+    /**
+     * Get rent of utility
+     *
+     * @param num uti owned (the return of GameBoard.checkNumStaUti)
+     * @param dice dice num rolled
+     * @return rent
+     */
+    public int getUtilityRent(int num, int dice) {
+
+        switch (num) {
+            case 1:
+                return dice * 4;
+
+            case 2:
+                return dice * 10;
+
+            default:
+                return -999999;
+        }
+    }
+
+
 }
