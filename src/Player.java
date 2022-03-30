@@ -141,4 +141,5 @@ public abstract class Player {
     public void setLocation(int location) {
         this.location = location;
     }
+
 }

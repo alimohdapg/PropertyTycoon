@@ -73,4 +73,5 @@ class GameBoardTest {
         gameBoard.update();
         assertEquals(gameBoard.getPlayers()[0], gameBoard.getCurrentPlayer());
     }
+
 }
