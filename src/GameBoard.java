@@ -46,7 +46,8 @@ public class GameBoard {
             } else if (fileIO.BoardData.get(i).get(3).equals("Station") || fileIO.BoardData.get(i).get(3).equals("Utilities")) {
                 boardSpaces.add(new StationAndUtility(fileIO.BoardData.get(i).get(1),
                         Integer.parseInt(fileIO.BoardData.get(i).get(7)),
-                        Color.findAndCreateColor(fileIO.BoardData.get(i).get(2))    ));
+                        Color.findAndCreateColor(fileIO.BoardData.get(i).get(2))
+                ));
             } else {
                 boardSpaces.add(new Property(fileIO.BoardData.get(i).get(1),
                         Color.findAndCreateColor(fileIO.BoardData.get(i).get(2)),
@@ -78,6 +79,7 @@ public class GameBoard {
         if (playerTurns.isEmpty()) {
             playerTurns.addAll(Arrays.asList(players));
         }
+
         // roll dice
         int num1 = dice1.rollDice();
         int num2 = dice2.rollDice();

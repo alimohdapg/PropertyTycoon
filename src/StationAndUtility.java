@@ -30,9 +30,4 @@ public class StationAndUtility extends BoardSpace {
         return cost;
     }
 
-    public int getRent() {
-        int rent=0;
-
-        return rent;
-    }
 }
