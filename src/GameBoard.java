@@ -234,4 +234,60 @@ public class GameBoard {
     {
 
     }
+
+    public boolean checkIfOwnsAGroupOfProperties(Property property)
+    {
+        Player owner = null;
+        for (Player player : players)
+        {
+            ArrayList<Property> properties = player.getProperties();
+            for (Property p : properties)
+            {
+                if (p == property)
+                {
+                    owner = player;
+                    break;
+                }
+            }
+        }
+
+        ArrayList<Property> properties = owner.getProperties();
+        int numberOfProperties = 0;
+        boolean ownsAll = false;
+
+        // Brown & Deep Blue have 2 properties each
+        if (property.getColor() == Color.BROWN || property.getColor() == Color.DEEPBLUE)
+        {
+            for (Property p : properties)
+            {
+                if (p.getColor() == property.getColor())
+                {
+                    numberOfProperties++;
+                }
+            }
+
+            if (numberOfProperties == 2)
+            {
+                ownsAll = true;
+            }
+
+        }
+        else
+        {
+            for (Property p : properties)
+            {
+                if (p.getColor() == property.getColor())
+                {
+                    numberOfProperties++;
+                }
+            }
+
+            if (numberOfProperties == 3)
+            {
+                ownsAll = true;
+            }
+        }
+
+        return ownsAll;
+    }
 }
