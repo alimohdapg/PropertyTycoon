@@ -93,8 +93,10 @@ public class Property extends BoardSpace {
      * Buys a hotel by setting the hasHotel field to true.
      */
     public void buyHotel() {
-        hasHotel = true;
-        houseCount = 0;
+        if (houseCount == 4) {
+            hasHotel = true;
+            houseCount = 0;
+        }
     }
 
     /**
