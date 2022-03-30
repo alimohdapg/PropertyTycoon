@@ -94,8 +94,8 @@ public class GameController {
         //Set default position
         current_pos = 0;
 
-        playerOne = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>(), playerOneToken, playerOneName, playerOneMoney);
-        playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), playerTwoToken, playerTwoName, playerTwoMoney);
+        playerOne = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerOneToken, playerOneName, playerOneMoney);
+        playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
 
         //Create gameBoard instance
         gameBoard = new GameBoard(new Player[]{playerOne, playerTwo});

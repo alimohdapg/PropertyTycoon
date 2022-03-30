@@ -237,59 +237,90 @@ public class GameBoard {
 
     }
 
-    public boolean checkIfOwnsAGroupOfProperties(Property property)
+    public int checkNum_StaUti(Property property, Player owner)
     {
-        Player owner = null;
-        for (Player player : players)
-        {
-            ArrayList<Property> properties = player.getProperties();
-            for (Property p : properties)
-            {
-                if (p == property)
-                {
-                    owner = player;
-                    break;
-                }
-            }
+        ArrayList<StationAndUtility> stationAndUtilities = owner.getStationAndUtilities();
+        int num = 0;
+
+        for (StationAndUtility su : stationAndUtilities) {
+            if (su.getColor() == property.getColor()) num++;
         }
 
+        return num;
+    }
+
+    public Boolean checkAll_Props(Property property, Player owner)
+    {
         ArrayList<Property> properties = owner.getProperties();
-        int numberOfProperties = 0;
+        int num = 0;
         boolean ownsAll = false;
 
-        // Brown & Deep Blue have 2 properties each
-        if (property.getColor() == Color.BROWN || property.getColor() == Color.DEEPBLUE)
-        {
-            for (Property p : properties)
-            {
-                if (p.getColor() == property.getColor())
-                {
-                    numberOfProperties++;
-                }
-            }
-
-            if (numberOfProperties == 2)
-            {
-                ownsAll = true;
-            }
-
+        for (Property p : properties) {
+            if (p.getColor() == property.getColor()) num++;
         }
-        else
-        {
-            for (Property p : properties)
-            {
-                if (p.getColor() == property.getColor())
-                {
-                    numberOfProperties++;
-                }
-            }
 
-            if (numberOfProperties == 3)
-            {
-                ownsAll = true;
-            }
+        if (property.getColor() == Color.BROWN || property.getColor() == Color.DEEPBLUE) {
+            if (num == 2) ownsAll = true;
+        } else {
+            if (num == 3) ownsAll = true;
         }
 
         return ownsAll;
+//        Player owner = null;
+//        for (Player player : players)
+//        {
+//            ArrayList<Property> properties = player.getProperties();
+//            for (Property p : properties)
+//            {
+//                if (p == property)
+//                {
+//                    owner = player;
+//                    break;
+//                }
+//            }
+//        }
+//
+//        ArrayList<Property> properties = owner.getProperties();
+//        int num = 0;
+//        boolean ownsAll = false;
+
+        // Brown & Deep Blue have 2 properties each
+//        if (property.getColor() == Color.BROWN || property.getColor() == Color.DEEPBLUE)
+//        {
+//            for (Property p : properties)
+//            {
+//                if (p.getColor() == property.getColor())
+//                {
+//                    num++;
+//                }
+//            }
+//
+//            if (num == 2)
+//            {
+//                ownsAll = true;
+//            }
+//
+//        }
+//        else
+//        {
+//            for (Property p : properties)
+//            {
+//                if (p.getColor() == property.getColor())
+//                {
+//                    num++;
+//                }
+//            }
+//
+//            if (num == 3)
+//            {
+//                ownsAll = true;
+//            }
+//        }
     }
+
+
+
+
+
+
 }

@@ -7,7 +7,6 @@ public class StationAndUtility extends BoardSpace {
 
     private final int cost;
     private final Color color;
-    private int rent;
 
     /**
      * Constructs a new station and utility object.
@@ -30,4 +29,12 @@ public class StationAndUtility extends BoardSpace {
         return cost;
     }
 
+    /**
+     * Returns the color of the sta/uti.
+     *
+     * @return Color of the sta/uti.
+     */
+    public Color getColor() {
+        return color;
+    }
 }

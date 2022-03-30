@@ -14,9 +14,9 @@ class GameBoardTest {
     @BeforeEach
     void setUp(){
         gameBoard = new GameBoard(new Player[]{
-                new HumanPlayer("Boot Player", Token.BOOT, new ArrayList<>(), new Circle(), new Text(), new Text()),
-                new HumanPlayer("Cat Player", Token.CAT, new ArrayList<>(), new Circle(), new Text(), new Text()),
-                new HumanPlayer("Hat Stand Player", Token.HATSTAND, new ArrayList<>(),  new Circle(),  new Text(), new Text())}
+                new HumanPlayer("Boot Player", Token.BOOT, new ArrayList<>(), new ArrayList<>(), new Circle(), new Text(), new Text()),
+                new HumanPlayer("Cat Player", Token.CAT, new ArrayList<>(), new ArrayList<>(), new Circle(), new Text(), new Text()),
+                new HumanPlayer("Hat Stand Player", Token.HATSTAND, new ArrayList<>(),  new ArrayList<>(), new Circle(),  new Text(), new Text())}
         );
     }
 
