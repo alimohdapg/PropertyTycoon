@@ -45,7 +45,8 @@ public class GameBoard {
                 boardSpaces.add(new Default(fileIO.BoardData.get(i).get(2)));
             } else if (fileIO.BoardData.get(i).get(3).equals("Station") || fileIO.BoardData.get(i).get(3).equals("Utilities")) {
                 boardSpaces.add(new StationAndUtility(fileIO.BoardData.get(i).get(1),
-                        Integer.parseInt(fileIO.BoardData.get(i).get(7))));
+                        Integer.parseInt(fileIO.BoardData.get(i).get(7)),
+                        Color.findAndCreateColor(fileIO.BoardData.get(i).get(2))    ));
             } else {
                 boardSpaces.add(new Property(fileIO.BoardData.get(i).get(1),
                         Color.findAndCreateColor(fileIO.BoardData.get(i).get(2)),

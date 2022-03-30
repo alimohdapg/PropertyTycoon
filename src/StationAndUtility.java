@@ -6,6 +6,8 @@
 public class StationAndUtility extends BoardSpace {
 
     private final int cost;
+    private final Color color;
+    private int rent;
 
     /**
      * Constructs a new station and utility object.
@@ -13,9 +15,10 @@ public class StationAndUtility extends BoardSpace {
      * @param name The station or utility's name.
      * @param cost The cost of buying the station or utility.
      */
-    public StationAndUtility(String name, int cost) {
+    public StationAndUtility(String name, int cost, Color color) {
         super(name);
         this.cost = cost;
+        this.color = color;
     }
 
     /**
@@ -25,5 +28,11 @@ public class StationAndUtility extends BoardSpace {
      */
     public int getCost() {
         return cost;
+    }
+
+    public int getRent() {
+        int rent=0;
+
+        return rent;
     }
 }
