@@ -16,6 +16,8 @@ public class GameBoard {
     private final FileIO fileIO;
     private int samePlayerCounter;
     private Player currentPlayer;
+    private int freeParkingSum;
+    private boolean paidFine;
 
     /**
      * Constructs a new Gameboard object.
@@ -34,6 +36,7 @@ public class GameBoard {
         dice2 = new Dice();
         fileIO = new FileIO();
         fillBoardSpaces();
+        paidFine = false;
     }
 
     /**
@@ -79,20 +82,51 @@ public class GameBoard {
         if (playerTurns.isEmpty()) {
             playerTurns.addAll(Arrays.asList(players));
         }
-
+        // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
+        // a fine or by using the card.
+        if (checkInJail(currentPlayer)){
+            // TODO make frontend ask player to either use card or pay fine or stay in jail
+        }
         // roll dice
         int num1 = dice1.rollDice();
         int num2 = dice2.rollDice();
+        // Initial pass of go
+        if (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber() > 39){
+            if (!((HumanPlayer) currentPlayer).isPassedGo()){
+                ((HumanPlayer) currentPlayer).setPassedGo(true);
+            }
+            currentPlayer.getMoney().addAmount(200);
+        }
         ((HumanPlayer) currentPlayer).setLocation(
                 (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
         );
-        if (dice1.getNumber() == dice2.getNumber()){
+        if (dice1.getNumber() == dice2.getNumber()) {
             playerTurns.push(currentPlayer);
         } else {
             samePlayerCounter = 0;
         }
+        // Go to jail same dice three times
         if (samePlayerCounter == 2) {
-            updateJail();
+            ((HumanPlayer) currentPlayer).setLocation(40);
+        }
+        // Go to jail board-space
+        if ((((HumanPlayer) currentPlayer).getLocation()) == 30) {
+            ((HumanPlayer) currentPlayer).setLocation(40);
+        }
+        // Square 4 income tax fine
+        if ((((HumanPlayer) currentPlayer).getLocation()) == 4) {
+            currentPlayer.getMoney().subtractAmount(200);
+            freeParkingSum += 200;
+        }
+        // Square 38 income/super tax fine
+        if ((((HumanPlayer) currentPlayer).getLocation()) == 38) {
+            currentPlayer.getMoney().subtractAmount(100);
+            freeParkingSum += 100;
+        }
+        // Free parking board-space get the money and set the sum to 0
+        if ((((HumanPlayer) currentPlayer).getLocation()) == 20) {
+            currentPlayer.getMoney().addAmount(freeParkingSum);
+            freeParkingSum = 0;
         }
     }
 
@@ -117,15 +151,12 @@ public class GameBoard {
      * Send prisoner to Jail
      */
     public void updateJail() {
-        // TODO
+        // TODO either pay fine or use get out of jail card before being placed in jail.
         if (checkPayFine()) {
             // probably will improve,
             // because of the problem of updating dara from backend to frontend (several times)
             ((HumanPlayer) currentPlayer).setLocation(10);
-        } else {
-            ((HumanPlayer) currentPlayer).setLocation(40);
         }
-        ((HumanPlayer) currentPlayer).setLocation(40);
     }
 
     /**
@@ -133,7 +164,6 @@ public class GameBoard {
      * @return if the player is in Jail or not
      */
     private Boolean checkInJail(Player cur_player) {
-
         Jail jail = (Jail) boardSpaces.get(boardSpaces.size() - 1);
         Set<Player> p_inJail = jail.getPlayersInJail();
         return p_inJail.contains(cur_player);
@@ -141,21 +171,21 @@ public class GameBoard {
 
     /**
      * check if one wants to pay fine when he/she be sent to Jail
+     *
      * @return if pay
      */
     public Boolean checkPayFine() {
-        return true;
+        return paidFine;
     }
 
     /**
      * Check in order to know the rent of Station and Utility
      *
      * @param stationAndUtility s/u
-     * @param owner player
+     * @param owner             player
      * @return num of s/u
      */
-    public int checkNumStaUti(StationAndUtility stationAndUtility, Player owner)
-    {
+    public int checkNumStaUti(StationAndUtility stationAndUtility, Player owner) {
         ArrayList<StationAndUtility> stationAndUtilities = owner.getStationAndUtilities();
         int num = 0;
 
@@ -172,11 +202,10 @@ public class GameBoard {
      * 2. if the difference of num_houses in each property (same color set) < 1
      *
      * @param property prop
-     * @param owner player
+     * @param owner    player
      * @return if one can buy a house
      */
-    public Boolean checkBuyHouse(Property property, Player owner)
-    {
+    public Boolean checkBuyHouse(Property property, Player owner) {
         ArrayList<Property> properties = owner.getProperties();
         ArrayList<Integer> houseCount = new ArrayList<>();
         int numProps = 0;
@@ -212,26 +241,21 @@ public class GameBoard {
 
     // -------------------------------- POTLUCK PART ------------------------------------------
 
-    public void potLuckPlayerReceivesMoney(Player player, int amountOfMoney)
-    {
+    public void potLuckPlayerReceivesMoney(Player player, int amountOfMoney) {
         Cash currentCash = player.getMoney();
         currentCash.addAmount(amountOfMoney);
         player.setMoney(currentCash);
     }
 
     //TODO: Set player to a specific location
-    public void potLuckPlayerSetLocation(Player player, int location)
-    {
+    public void potLuckPlayerSetLocation(Player player, int location) {
 
     }
 
-    public void potLuckReceiveMoneyFromOthers(Player player, int amountOfMoney)
-    {
+    public void potLuckReceiveMoneyFromOthers(Player player, int amountOfMoney) {
         int total = 0;
-        for (Player current : players)
-        {
-            if (current != player)
-            {
+        for (Player current : players) {
+            if (current != player) {
                 Cash currentMoney = current.getMoney();
                 currentMoney.subtractAmount(amountOfMoney);
                 player.setMoney(currentMoney);
@@ -246,8 +270,7 @@ public class GameBoard {
     }
 
     // TODO: Remove a player form jail for free
-    public void potLuckGetOutOfJail(Player player)
-    {
+    public void potLuckGetOutOfJail(Player player) {
 
     }
 
