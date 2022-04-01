@@ -12,6 +12,8 @@ public abstract class Player {
     private ArrayList<Property> properties;
     private ArrayList<StationAndUtility> stationAndUtilities;
     private int location;
+    private boolean inJail;
+    private boolean passedGo;
 
     @FXML
     private Circle playerToken;
@@ -34,6 +36,9 @@ public abstract class Player {
         this.playerMoney = playerMoney;
         this.playerName.setText(name);
         this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
+
+        inJail = false;
+        passedGo = false;
     }
 
     /**
@@ -42,7 +47,7 @@ public abstract class Player {
      * @param property the property that a player wants to buy
      */
     public void buyProperty(Property property) {
-        if (money.getAmount() >= property.getHouseCost()) {
+        if (passedGo && money.getAmount() >= property.getHouseCost()){
             money.subtractAmount(property.getHouseCost());
             properties.add(property);
         } else {
@@ -244,6 +249,40 @@ public abstract class Player {
      */
     public Text getPlayerMoney() { return playerMoney; }
 
+    /**
+     * Get player's current status
+     *
+     * @return whether in Jail or not
+     */
+    public boolean isInJail() {
+        return inJail;
+    }
 
+    /**
+     * Sets player's current status
+     *
+     * @param inJail True for "player is in Jail"
+     */
+    public void setInJail(boolean inJail) {
+        this.inJail = inJail;
+    }
+
+    /**
+     * Get player's current status
+     *
+     * @return whether player has completed at least one round
+     */
+    public boolean isPassedGo() {
+        return passedGo;
+    }
+
+    /**
+     * Sets player's current status
+     *
+     * @param passedGo True for "player has completed at least one round"
+     */
+    public void setPassedGo(boolean passedGo) {
+        this.passedGo = passedGo;
+    }
 
 }
