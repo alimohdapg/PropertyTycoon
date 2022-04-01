@@ -42,7 +42,7 @@ public abstract class Player {
      * @param property the property that a player wants to buy
      */
     public void buyProperty(Property property) {
-        if (money.getAmount() >= property.getHouseCost()){
+        if (money.getAmount() >= property.getHouseCost()) {
             money.subtractAmount(property.getHouseCost());
             properties.add(property);
         } else {

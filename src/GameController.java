@@ -114,6 +114,7 @@ public class GameController {
             turnInProgress = true;
             gameBoard.update();
             currentPlayer = gameBoard.getCurrentPlayer();
+            HumanPlayer cPlayer = (HumanPlayer) currentPlayer;
             //Updates current_pos with the new player position
             current_pos = gameBoard.getCurrentPlayerPosition();
             displayDice();
