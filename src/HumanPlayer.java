@@ -15,8 +15,8 @@ public class HumanPlayer extends Player {
      * @param token Player's icon
      * @param properties The property player currently have
      */
-    public HumanPlayer(String name, Token token, ArrayList<Property> properties, Circle playerToken, Text playerName, Text playerMoney) {
-        super(name, token, new Cash(1500), properties, playerToken, playerName, playerMoney);
+    public HumanPlayer(String name, Token token, ArrayList<Property> properties, ArrayList<StationAndUtility> stationAndUtilities, Circle playerToken, Text playerName, Text playerMoney) {
+        super(name, token, new Cash(1500), properties, stationAndUtilities, playerToken, playerName, playerMoney);
         inJail = false;
         passedGo = false;
     }

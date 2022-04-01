@@ -12,7 +12,9 @@ public enum Color {
     RED("red"),
     YELLOW("yellow"),
     GREEN("green"),
-    DEEPBLUE("deep blue");
+    DEEPBLUE("deep blue"),
+    STATION("Station"),
+    UTILITIES("Utilities");
 
     private final String representation;
 
@@ -28,7 +30,7 @@ public enum Color {
      */
     public static Color findAndCreateColor(String color){
         color = color.toLowerCase();
-        Color[] colors = new Color[]{BROWN, BLUE, PURPLE, ORANGE, RED, YELLOW, GREEN, DEEPBLUE};
+        Color[] colors = new Color[]{BROWN, BLUE, PURPLE, ORANGE, RED, YELLOW, GREEN, DEEPBLUE, STATION, UTILITIES};
         for (Color c : colors) {
             if (color.equals(c.representation)) {
                 return c;

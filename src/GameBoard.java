@@ -45,7 +45,9 @@ public class GameBoard {
                 boardSpaces.add(new Default(fileIO.BoardData.get(i).get(2)));
             } else if (fileIO.BoardData.get(i).get(3).equals("Station") || fileIO.BoardData.get(i).get(3).equals("Utilities")) {
                 boardSpaces.add(new StationAndUtility(fileIO.BoardData.get(i).get(1),
-                        Integer.parseInt(fileIO.BoardData.get(i).get(7))));
+                        Integer.parseInt(fileIO.BoardData.get(i).get(7)),
+                        Color.findAndCreateColor(fileIO.BoardData.get(i).get(2))
+                ));
             } else {
                 boardSpaces.add(new Property(fileIO.BoardData.get(i).get(1),
                         Color.findAndCreateColor(fileIO.BoardData.get(i).get(2)),
@@ -77,6 +79,7 @@ public class GameBoard {
         if (playerTurns.isEmpty()) {
             playerTurns.addAll(Arrays.asList(players));
         }
+
         // roll dice
         int num1 = dice1.rollDice();
         int num2 = dice2.rollDice();
@@ -91,18 +94,6 @@ public class GameBoard {
         if (samePlayerCounter == 2) {
             updateJail();
         }
-    }
-
-    public void updateJail() {
-        // TODO
-        if (checkPayFine()) {
-            // probably will improve,
-            // because of the problem of updating dara from backend to frontend (several times)
-            ((HumanPlayer) currentPlayer).setLocation(10);
-        } else {
-            ((HumanPlayer) currentPlayer).setLocation(40);
-        }
-        ((HumanPlayer) currentPlayer).setLocation(40);
     }
 
     /**
@@ -123,6 +114,21 @@ public class GameBoard {
     }
 
     /**
+     * Send prisoner to Jail
+     */
+    public void updateJail() {
+        // TODO
+        if (checkPayFine()) {
+            // probably will improve,
+            // because of the problem of updating dara from backend to frontend (several times)
+            ((HumanPlayer) currentPlayer).setLocation(10);
+        } else {
+            ((HumanPlayer) currentPlayer).setLocation(40);
+        }
+        ((HumanPlayer) currentPlayer).setLocation(40);
+    }
+
+    /**
      * @param cur_player get current player
      * @return if the player is in Jail or not
      */
@@ -133,67 +139,78 @@ public class GameBoard {
         return p_inJail.contains(cur_player);
     }
 
+    /**
+     * check if one wants to pay fine when he/she be sent to Jail
+     * @return if pay
+     */
     public Boolean checkPayFine() {
         return true;
     }
 
-    public int getDiceRollsSum() {
-        return dice1.getNumber() + dice2.getNumber();
+    /**
+     * Check in order to know the rent of Station and Utility
+     *
+     * @param stationAndUtility s/u
+     * @param owner player
+     * @return num of s/u
+     */
+    public int checkNumStaUti(StationAndUtility stationAndUtility, Player owner)
+    {
+        ArrayList<StationAndUtility> stationAndUtilities = owner.getStationAndUtilities();
+        int num = 0;
+
+        for (StationAndUtility su : stationAndUtilities) {
+            if (su.getColor() == stationAndUtility.getColor()) num++;
+        }
+
+        return num;
     }
 
     /**
-     * Retrieves the current number on dice 1.
+     * Need to check !!EVERY TIME!! before buying a house:
+     * 1. if player own all properties in the same color set
+     * 2. if the difference of num_houses in each property (same color set) < 1
      *
-     * @return Number on dice 1.
+     * @param property prop
+     * @param owner player
+     * @return if one can buy a house
      */
-    public int getDice1Number() {
-        return dice1.getNumber();
+    public Boolean checkBuyHouse(Property property, Player owner)
+    {
+        ArrayList<Property> properties = owner.getProperties();
+        ArrayList<Integer> houseCount = new ArrayList<>();
+        int numProps = 0;
+        boolean ownsAll = false;
+        boolean diffOK = true;
+        boolean canBuy = false;
+
+        // record num of props and houses in each prop
+        for (Property p : properties) {
+            if (p.getColor() == property.getColor()) {
+                houseCount.add(p.getHouseCount());
+                numProps++;
+            }
+        }
+
+        // check if one owns all props in same color
+        if (property.getColor() == Color.BROWN || property.getColor() == Color.DEEPBLUE) {
+            if (numProps == 2) ownsAll = true;
+        } else {
+            if (numProps == 3) ownsAll = true;
+        }
+
+        // check house diff < 1
+        for (Integer i : houseCount) {
+            if (property.getHouseCount() > i) diffOK = false;
+        }
+
+        // final check
+        if (ownsAll && diffOK) canBuy = true;
+
+        return canBuy;
     }
 
-    /**
-     * Retrieves the current number on dice 2.
-     *
-     * @return Number on dice 2.
-     */
-    public int getDice2Number() {
-        return dice2.getNumber();
-    }
-
-    /**
-     * Returns the current player's position.
-     *
-     * @return Current player's position on the board.
-     */
-    public int getCurrentPlayerPosition() {
-        return ((HumanPlayer) currentPlayer).getLocation();
-    }
-
-    /**
-     * Returns the current player.
-     *
-     * @return Current player.
-     */
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    /**
-     * Returns the player array used to store all the players.
-     *
-     * @return players array.
-     */
-    public Player[] getPlayers() {
-        return players;
-    }
-
-    public ArrayList<BoardSpace> getBoardSpaces() {
-        return boardSpaces;
-    }
-
-
-
-
-
+    // -------------------------------- POTLUCK PART ------------------------------------------
 
     public void potLuckPlayerReceivesMoney(Player player, int amountOfMoney)
     {
@@ -232,5 +249,70 @@ public class GameBoard {
     public void potLuckGetOutOfJail(Player player)
     {
 
+    }
+
+    // ------------------------------------------------------------------------------------------
+
+    /**
+     * Get sum of two dices
+     *
+     * @return sum
+     */
+    public int getDiceRollsSum() {
+        return dice1.getNumber() + dice2.getNumber();
+    }
+
+    /**
+     * Retrieves the current number on dice 1
+     *
+     * @return Number on dice 1
+     */
+    public int getDice1Number() {
+        return dice1.getNumber();
+    }
+
+    /**
+     * Retrieves the current number on dice 2
+     *
+     * @return Number on dice 2
+     */
+    public int getDice2Number() {
+        return dice2.getNumber();
+    }
+
+    /**
+     * Returns the current player's position
+     *
+     * @return Current player's position on the board
+     */
+    public int getCurrentPlayerPosition() {
+        return ((HumanPlayer) currentPlayer).getLocation();
+    }
+
+    /**
+     * Returns the current player
+     *
+     * @return Current player
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    /**
+     * Returns the player array used to store all the players.
+     *
+     * @return players array
+     */
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    /**
+     * Return board spaces
+     *
+     * @return board spaces
+     */
+    public ArrayList<BoardSpace> getBoardSpaces() {
+        return boardSpaces;
     }
 }
