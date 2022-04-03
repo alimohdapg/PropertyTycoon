@@ -1,5 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
@@ -46,12 +47,16 @@ public class GameController {
     private ArrayList<Text> text_array;
 
     @FXML
-    private Text property_info_name, currentTurnText, property_info_rent, property_info_rent_1house,
-            property_info_rent_2house, property_info_rent_3house, property_info_rent_4house, property_info_rent_hotel;
+    private Text property_info_name, currentTurnText, property_info_rent, property_info_rent_set, property_info_rent_1house,
+            property_info_rent_2house, property_info_rent_3house, property_info_rent_4house, property_info_rent_hotel,
+            property_owner, property_houses;
 
     @FXML
-    private Text property_info_name1, property_info_rent1, property_info_rent_1house1,
+    private Text property_info_name1, property_info_rent1, property_info_rent_set1, property_info_rent_1house1,
             property_info_rent_2house1, property_info_rent_3house1, property_info_rent_4house1, property_info_rent_hotel1;
+
+    @FXML
+    private Text notEnoughMoney;
 
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
@@ -62,18 +67,29 @@ public class GameController {
     @FXML
     private Rectangle property_info_color, property_info_color1;
 
-    private int current_pos;
+    @FXML
+    private Text jailText;
+
+    @FXML
+    private Button jailUseCard, jailPay50;
+
+    private Property current_property;
+
+    private int current_pos, currentSelectedProperty;
 
     private Player playerOne, playerTwo, currentPlayer;
 
     private GameBoard gameBoard;
 
     private boolean turnInProgress;
+    private boolean canEndTurn;
+    private boolean canRoll;
 
     /**
      * Default function, runs on launch. Initialises the array of positional elements
      */
     public void initialize() {
+        //Object arrays for GUI elements
         pos_array = new ArrayList<>();
         text_array = new ArrayList<>();
 
@@ -88,6 +104,7 @@ public class GameController {
                 a22_text, a23_text, a24_text, a25_text, a26_text, a27_text, a28_text, a29_text, a30_text, a31_text, a32_text,
                 a33_text, a34_text, a35_text, a36_text, a37_text, a38_text, a39_text);
 
+        //Load dice images
         diceimg1 = new Image("/img/dice_faces/d1.png");
         diceimg2 = new Image("/img/dice_faces/d2.png");
         diceimg3 = new Image("/img/dice_faces/d3.png");
@@ -95,26 +112,36 @@ public class GameController {
         diceimg5 = new Image("/img/dice_faces/d5.png");
         diceimg6 = new Image("/img/dice_faces/d6.png");
 
-        //Set default position
-        current_pos = 0;
-
+        //Initialise players
         playerOne = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerOneToken, playerOneName, playerOneMoney);
         playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
 
         //Create gameBoard instance
         gameBoard = new GameBoard(new Player[]{playerOne, playerTwo});
+        gameBoard.endTurn();
+
+        current_pos = gameBoard.getCurrentPlayerPosition();
+        currentPlayer = gameBoard.getCurrentPlayer();
+        currentTurnText.setText(currentPlayer.getName() + "'s turn");
+
+        //Boolean flags
         turnInProgress = false;
+        canEndTurn = false;
+        canRoll = true;
 
         //Load board data
         getTileNames();
+
+        //Updates player details on screen
+        gameBoard.updateAllPlayers();
     }
 
     /**
-     * Testing feature, takes turn
-     *
+     * Rolls the dice
      */
-    public void testButtonClicked() {
-        if(!turnInProgress) {
+    public void takeTurn() {
+        gameBoard.updateAllPlayers();
+        if(!turnInProgress && canRoll) {
             turnInProgress = true;
             gameBoard.update();
             currentPlayer = (HumanPlayer) gameBoard.getCurrentPlayer();
@@ -123,6 +150,7 @@ public class GameController {
 
             displayDice();
             dice_roll_pane.setVisible(true);
+            canRoll = false;
 
             //Sets the player token on the GUI to the new location
         } else {
@@ -132,6 +160,54 @@ public class GameController {
             alert.setContentText("A turn is already in progress!");
             alert.showAndWait();
         }
+    }
+
+    /**
+     * Ends turn and tells gameBoard to move onto the next player
+     */
+    public void endTurn() {
+        notEnoughMoney.setVisible(false);
+        gameBoard.updateAllPlayers();
+        if(canEndTurn) {
+            gameBoard.endTurn();
+            canEndTurn = false;
+            canRoll = true;
+            currentTurnText.setText(gameBoard.getCurrentPlayer().getName() + "'s turn");
+            if(gameBoard.getCurrentPlayer().isInJail()) {
+                canRoll = false;
+                jailText.setVisible(true);
+                jailUseCard.setVisible(true);
+                jailPay50.setVisible(true);
+            } else {
+                jailText.setVisible(false);
+                jailUseCard.setVisible(false);
+                jailPay50.setVisible(false);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Warning!");
+            ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            alert.setContentText("Cannot End Turn");
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Method for button onclick uses get out of jail card
+     */
+    public void useCard () {
+        //missing player method for using card
+        ;
+        gameBoard.updateAllPlayers();
+    }
+
+    /**
+     * Method for button pay 50 to be released from jail
+     */
+    public void pay50 () {
+        //missing player method for paying 50
+        ;
+        gameBoard.updateAllPlayers();
     }
 
     /**
@@ -148,6 +224,10 @@ public class GameController {
         handle_board_space();
     }
 
+    /**
+     * Checks the current board space that was landed on and runs the necessary function
+     * (Property -> buy/pay rent, Jail -> Go to jail, Station -> ... etc)
+     */
     public void handle_board_space() {
 
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
@@ -155,8 +235,10 @@ public class GameController {
         if (current_space instanceof Property) {
             loadProperty_buy(currentPlayer.getLocation());
         } else {
-            ;
+            canEndTurn = true;
         }
+        gameBoard.updateAllPlayers();
+
     }
 
     /**
@@ -235,10 +317,16 @@ public class GameController {
     public void displayProperty21() { loadProperty(37); }
     public void displayProperty22() { loadProperty(39); }
 
+    /**
+     * Loads the selected property on the gameBoard into a card for the user to see
+     * @param i the board location
+     */
     public void loadProperty(int i) {
+        currentSelectedProperty = i;
         property_info.setVisible(true);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-        Property current_property = (Property) board_spaces.get(i);
+        current_property = (Property) board_spaces.get(i);
+        property_houses.setText("H: " + current_property.getHouseCount());
         current_property.sellHotel();
         current_property.setHouseCount(0);
         property_info_name.setText(current_property.getName());
@@ -246,6 +334,7 @@ public class GameController {
         property_info_color.setFill(c);
         property_info_rent.setText("£" + current_property.getRent());
         current_property.setHouseCount(1);
+        property_info_rent_set.setText("£" + current_property.getRent() * 2);
         property_info_rent_1house.setText("£" + current_property.getRent());
         current_property.setHouseCount(2);
         property_info_rent_2house.setText("£" + current_property.getRent());
@@ -255,8 +344,13 @@ public class GameController {
         property_info_rent_4house.setText("£" + current_property.getRent());
         current_property.buyHotel();
         property_info_rent_hotel.setText("£" + current_property.getRent());
+
     }
 
+    /**
+     * Duplicate of loadProperty but for the buy property panel
+     * @param i the board location
+     */
     public void loadProperty_buy(int i) {
         buy_property_pane.setVisible(true);
         property_info_buy.setVisible(true);
@@ -268,6 +362,7 @@ public class GameController {
         Color c = Color.web(getHex(i));
         property_info_color1.setFill(c);
         property_info_rent1.setText("£" + current_property.getRent());
+        property_info_rent_set1.setText("£" + current_property.getRent() * 2);
         current_property.setHouseCount(1);
         property_info_rent_1house1.setText("£" + current_property.getRent());
         current_property.setHouseCount(2);
@@ -280,25 +375,67 @@ public class GameController {
         property_info_rent_hotel1.setText("£" + current_property.getRent());
     }
 
+    /**
+     * Method for the buy property button
+     */
     public void buy_property_button_yes() {
+        notEnoughMoney.setVisible(false);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
         Property current_property = (Property) board_spaces.get(currentPlayer.getLocation());
-        System.out.println(currentPlayer.getPlayerName() + " has bought " + current_property.getName());
-        currentPlayer.buyProperty(current_property);
-        buy_property_pane.setVisible(false);
+
+        boolean success = currentPlayer.buyProperty(current_property);
+        gameBoard.updateAllPlayers();
+        if(success) {
+            System.out.println(currentPlayer.getName() + " has bought " + current_property.getName());
+            buy_property_pane.setVisible(false);
+            canEndTurn = true;
+        } else {
+            notEnoughMoney.setVisible(true);
+        }
+
     }
 
+    /**
+     * Method for the rejecting the buy property offer
+     */
     public void buy_property_button_no() {
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-        Property current_property = (Property) board_spaces.get(currentPlayer.getLocation());
-        System.out.println(currentPlayer.getPlayerName() + " has not bought " + current_property.getName());
+        current_property = (Property) board_spaces.get(currentPlayer.getLocation());
+        System.out.println(currentPlayer.getName() + " has not bought " + current_property.getName());
+        canEndTurn = true;
         buy_property_pane.setVisible(false);
+        gameBoard.updateAllPlayers();
     }
 
+    /**
+     * Buys a house on the selected tile
+     */
+    public void buyHouse() {
+        boolean success = currentPlayer.buyAHouse((Property) gameBoard.getBoardSpaces().get(currentSelectedProperty));
+        gameBoard.updateAllPlayers();
+        if(success) {
+            property_houses.setText("H: " + current_property.getHouseCount());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Warning!");
+            ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            alert.setContentText("Failed to buy a house!");
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Method upon clicking the property card to hide it
+     */
     public void closeProperty() {
         property_info.setVisible(false);
     }
 
+    /**
+     * Method for getting the card colour data
+     * @param i the board space
+     * @return the hex value representing the colour
+     */
     public String getHex(int i){
         switch(i) {
             case 1:

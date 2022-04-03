@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
+<AnchorPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
    <children>
       <Pane fx:id="centrePiece" layoutX="98.0" layoutY="97.0" prefHeight="526.0" prefWidth="523.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="526.0" layoutX="-17.0" stroke="BLACK" strokeType="INSIDE" width="526.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="526.0" layoutX="-17.0" stroke="BLACK" strokeType="INSIDE" width="540.0" />
             <ImageView fitHeight="75.0" fitWidth="480.0" layoutX="68.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
                <image>
                   <Image url="@../img/logo.png" />
@@ -408,7 +413,7 @@
             <Text fx:id="player5_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£250.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Button fx:id="testButton" layoutX="1010.0" layoutY="631.0" mnemonicParsing="false" onAction="#testButtonClicked" prefHeight="79.0" prefWidth="259.0" styleClass="menuButton" text="Take turn">
+      <Button fx:id="testButton" layoutX="960.0" layoutY="642.0" mnemonicParsing="false" onAction="#takeTurn" prefHeight="71.0" prefWidth="111.0" styleClass="menuButton" text="Roll">
          <font>
             <Font size="26.0" />
          </font></Button>
@@ -427,7 +432,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="property_info_rent" layoutX="119.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+            <Text fx:id="property_info_rent" layoutX="136.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                <font>
                   <Font size="14.0" />
                </font>
@@ -437,59 +442,70 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="property_info_rent_set" layoutX="119.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+            <Text fx:id="property_info_rent_set" layoutX="136.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="21.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="98.000000940051">
+            <Text layoutX="22.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="118.000000940051">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="property_info_rent_1house" layoutX="119.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+            <Text fx:id="property_info_rent_1house" layoutX="136.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="21.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="98.000000940051">
+            <Text layoutX="22.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="118.00000356626697">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="property_info_rent_2house" layoutX="119.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+            <Text fx:id="property_info_rent_2house" layoutX="136.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="22.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="98.000000940051">
+            <Text layoutX="20.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="111.00001338265793">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="property_info_rent_3house" layoutX="119.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+            <Text fx:id="property_info_rent_3house" layoutX="136.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="22.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="98.000000940051">
+            <Text layoutX="20.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="118.00000356626697">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="property_info_rent_4house" layoutX="119.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+            <Text fx:id="property_info_rent_4house" layoutX="136.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="22.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="98.000000940051">
+            <Text layoutX="20.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="111.00001338265793">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="property_info_rent_hotel" layoutX="119.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+            <Text fx:id="property_info_rent_hotel" layoutX="136.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                <font>
                   <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="property_owner" layoutX="19.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Owner: Vacant" wrappingWidth="158.99998151467298">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="buyHouse" layoutX="19.0" layoutY="255.0" mnemonicParsing="false" onAction="#buyHouse" text="Buy house" />
+            <Text fx:id="property_houses" layoutX="96.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H:0" wrappingWidth="70.99997950204852">
+               <font>
+                  <Font size="15.0" />
                </font>
             </Text>
          </children>
@@ -520,9 +536,9 @@
          </children>
       </AnchorPane>
       <Circle fx:id="playerTwoToken" fill="#1fff3a" layoutX="688.0" layoutY="668.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text fx:id="currentTurnText" fill="#e12b2b" layoutX="738.0" layoutY="676.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="'s Turn" wrappingWidth="227.21630859375">
+      <Text fx:id="currentTurnText" fill="#ff1a1a" layoutX="738.0" layoutY="678.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="'s Turn" wrappingWidth="243.21630859375">
          <font>
-            <Font name="Helvetica" size="33.0" />
+            <Font size="25.0" />
          </font>
       </Text>
       <AnchorPane fx:id="buy_property_pane" layoutX="748.0" layoutY="285.0" prefHeight="341.0" prefWidth="523.0" visible="false">
@@ -543,7 +559,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent1" layoutX="119.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent1" layoutX="129.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -553,57 +569,57 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_set1" layoutX="119.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_set1" layoutX="129.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="21.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="98.000000940051">
+                  <Text layoutX="21.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="118.00000356626697">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_1house1" layoutX="119.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_1house1" layoutX="129.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="21.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="98.000000940051">
+                  <Text layoutX="21.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="111.00001338265793">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_2house1" layoutX="119.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_2house1" layoutX="129.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="22.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="98.000000940051">
+                  <Text layoutX="21.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="128.99999904648212">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_3house1" layoutX="119.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_3house1" layoutX="129.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="22.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="98.000000940051">
+                  <Text layoutX="21.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="111.00003246810957">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_4house1" layoutX="119.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_4house1" layoutX="129.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="22.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="98.000000940051">
+                  <Text layoutX="22.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="98.000000940051">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_hotel1" layoutX="119.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_hotel1" layoutX="129.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -622,7 +638,24 @@
                   <Font size="17.0" />
                </font>
             </Text>
+            <Text fx:id="notEnoughMoney" layoutX="58.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not enough money!" visible="false">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
+      <Button fx:id="testButton1" layoutX="1074.0" layoutY="642.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="71.0" prefWidth="200.0" styleClass="menuButton" text="End turn">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <Button fx:id="jailUseCard" layoutX="1022.0" layoutY="87.0" mnemonicParsing="false" onAction="#useCard" prefHeight="33.0" prefWidth="138.0" text="Use card" visible="false" />
+      <Button fx:id="jailPay50" layoutX="1022.0" layoutY="127.0" mnemonicParsing="false" onAction="#pay50" prefHeight="33.0" prefWidth="138.0" text="Pay £50" visible="false" />
+      <Text fx:id="jailText" fill="RED" layoutX="1016.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You're in jail" visible="false" wrappingWidth="149.9999982254867">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -74,7 +74,8 @@ public class GameBoard {
      * Updated by Hanzhen Gong
      */
     public void update() {
-        goToNextTurn();
+        //goToNextTurn(); moved to new function
+        /**
         if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
             samePlayerCounter++;
         }
@@ -86,7 +87,7 @@ public class GameBoard {
         // a fine or by using the card.
         if (checkInJail(currentPlayer)){
             // TODO make frontend ask player to either use card or pay fine or stay in jail
-        }
+        }**/
         // roll dice
         int num1 = dice1.rollDice();
         int num2 = dice2.rollDice();
@@ -127,6 +128,22 @@ public class GameBoard {
         if ((((HumanPlayer) currentPlayer).getLocation()) == 20) {
             currentPlayer.getMoney().addAmount(freeParkingSum);
             freeParkingSum = 0;
+        }
+    }
+
+    public void endTurn() {
+        goToNextTurn();
+        if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
+            samePlayerCounter++;
+        }
+        currentPlayer = playerTurns.pop();
+        if (playerTurns.isEmpty()) {
+            playerTurns.addAll(Arrays.asList(players));
+        }
+        // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
+        // a fine or by using the card.
+        if (checkInJail(currentPlayer)){
+            // TODO make frontend ask player to either use card or pay fine or stay in jail
         }
     }
 
@@ -337,5 +354,11 @@ public class GameBoard {
      */
     public ArrayList<BoardSpace> getBoardSpaces() {
         return boardSpaces;
+    }
+
+    public void updateAllPlayers() {
+        for(int i = 0; i < players.length; i++) {
+            players[i].updateMoney();
+        }
     }
 }

@@ -46,12 +46,15 @@ public abstract class Player {
      *
      * @param property the property that a player wants to buy
      */
-    public void buyProperty(Property property) {
+    public boolean buyProperty(Property property) {
         if (passedGo && money.getAmount() >= property.getHouseCost()){
             money.subtractAmount(property.getHouseCost());
+            this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
             properties.add(property);
+            return true;
         } else {
             System.out.println("Error, the player doesn't have enough money!");
+            return false;
         }
     }
 
@@ -80,7 +83,7 @@ public abstract class Player {
      *
      * @param property the property where player wants to buy a house
      */
-    public void buyAHouse(Property property) {
+    public boolean buyAHouse(Property property) {
         if (money.getAmount() > property.getHouseCost()) {
             if  (property.getHouseCost() < 4) {
                 property.buyHouse();
@@ -88,8 +91,11 @@ public abstract class Player {
                 property.buyHotel();
             }
             money.subtractAmount(property.getHouseCost());
+            System.out.println("Bought house on " + property.getName());
+            return true;
         } else {
             System.out.println("Error, the player doesn't have enough money!");
+            return false;
         }
     }
 
@@ -283,6 +289,13 @@ public abstract class Player {
      */
     public void setPassedGo(boolean passedGo) {
         this.passedGo = passedGo;
+    }
+
+    /**
+     * Updates the GUI element corresponding with money
+     */
+    public void updateMoney() {
+        this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
     }
 
 }
