@@ -413,7 +413,7 @@
             <Text fx:id="player5_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£250.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Button fx:id="testButton" layoutX="983.0" layoutY="623.0" mnemonicParsing="false" onAction="#testButtonClicked" prefHeight="79.0" prefWidth="259.0" styleClass="menuButton" text="Take turn">
+      <Button fx:id="testButton" layoutX="1010.0" layoutY="631.0" mnemonicParsing="false" onAction="#testButtonClicked" prefHeight="79.0" prefWidth="259.0" styleClass="menuButton" text="Take turn">
          <font>
             <Font size="26.0" />
          </font></Button>
@@ -499,7 +499,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="dialogue_pane" layoutX="738.0" layoutY="275.0" prefHeight="341.0" prefWidth="523.0">
+      <AnchorPane fx:id="dice_roll_pane" layoutX="738.0" layoutY="275.0" prefHeight="341.0" prefWidth="523.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
             <Text layoutX="182.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You rolled:" wrappingWidth="159.23675537109375">
@@ -530,5 +530,104 @@
             <Font name="Helvetica" size="33.0" />
          </font>
       </Text>
+      <AnchorPane fx:id="buy_property_pane" layoutX="748.0" layoutY="285.0" prefHeight="341.0" prefWidth="523.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
+            <AnchorPane fx:id="property_info_buy" layoutX="309.0" layoutY="20.0" onMouseClicked="#closeProperty" prefHeight="301.0" prefWidth="200.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="301.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="281.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="181.0" />
+                  <Rectangle fx:id="property_info_color1" arcHeight="5.0" arcWidth="5.0" fill="#10a55b" height="68.0" layoutX="21.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
+                  <Text fx:id="property_info_name1" layoutX="36.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Test Property&gt;" textAlignment="CENTER" wrappingWidth="128.99999904648212">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="22.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent1" layoutX="119.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="21.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ set" wrappingWidth="84.99999804016988">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_set1" layoutX="119.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="21.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="98.000000940051">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_1house1" layoutX="119.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="21.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="98.000000940051">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_2house1" layoutX="119.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="22.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="98.000000940051">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_3house1" layoutX="119.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="22.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="98.000000940051">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_4house1" layoutX="119.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="22.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="98.000000940051">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_hotel1" layoutX="119.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Button fx:id="buy_property_button_yes" layoutX="27.0" layoutY="193.0" mnemonicParsing="false" onAction="#buy_property_button_yes" prefHeight="54.0" prefWidth="129.0" styleClass="menuButton" text="Yes" />
+            <Button fx:id="buy_property_button_no" layoutX="166.0" layoutY="193.0" mnemonicParsing="false" onAction="#buy_property_button_no" prefHeight="6.0" prefWidth="129.0" styleClass="menuButton" text="No" />
+            <Text layoutX="56.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy this property?" wrappingWidth="219.9999496108503">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Text>
+            <Text layoutX="84.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost: " wrappingWidth="71.04730187939094">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -27,7 +27,7 @@ public class GameController {
     @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney;
 
     @FXML
-    private AnchorPane dialogue_pane, property_info;
+    private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane;
 
     @FXML
     private Circle p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
@@ -50,13 +50,17 @@ public class GameController {
             property_info_rent_2house, property_info_rent_3house, property_info_rent_4house, property_info_rent_hotel;
 
     @FXML
+    private Text property_info_name1, property_info_rent1, property_info_rent_1house1,
+            property_info_rent_2house1, property_info_rent_3house1, property_info_rent_4house1, property_info_rent_hotel1;
+
+    @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
 
     @FXML
     private ImageView dice1, dice2;
 
     @FXML
-    private Rectangle property_info_color;
+    private Rectangle property_info_color, property_info_color1;
 
     private int current_pos;
 
@@ -74,7 +78,7 @@ public class GameController {
         text_array = new ArrayList<>();
 
         //Currently contains dice roll
-        dialogue_pane.setVisible(false);
+        dice_roll_pane.setVisible(false);
 
         //Initiliase the array of GUI objects
         Collections.addAll(pos_array, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
@@ -113,11 +117,12 @@ public class GameController {
         if(!turnInProgress) {
             turnInProgress = true;
             gameBoard.update();
-            currentPlayer = gameBoard.getCurrentPlayer();
+            currentPlayer = (HumanPlayer) gameBoard.getCurrentPlayer();
             //Updates current_pos with the new player position
             current_pos = gameBoard.getCurrentPlayerPosition();
+
             displayDice();
-            dialogue_pane.setVisible(true);
+            dice_roll_pane.setVisible(true);
 
             //Sets the player token on the GUI to the new location
         } else {
@@ -138,7 +143,20 @@ public class GameController {
         currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
 
         turnInProgress = false;
-        dialogue_pane.setVisible(false);
+        dice_roll_pane.setVisible(false);
+
+        handle_board_space();
+    }
+
+    public void handle_board_space() {
+
+        ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
+        BoardSpace current_space = board_spaces.get(currentPlayer.getLocation());
+        if (current_space instanceof Property) {
+            loadProperty_buy(currentPlayer.getLocation());
+        } else {
+            ;
+        }
     }
 
     /**
@@ -237,6 +255,44 @@ public class GameController {
         property_info_rent_4house.setText("£" + current_property.getRent());
         current_property.buyHotel();
         property_info_rent_hotel.setText("£" + current_property.getRent());
+    }
+
+    public void loadProperty_buy(int i) {
+        buy_property_pane.setVisible(true);
+        property_info_buy.setVisible(true);
+        ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
+        Property current_property = (Property) board_spaces.get(i);
+        current_property.sellHotel();
+        current_property.setHouseCount(0);
+        property_info_name1.setText(current_property.getName());
+        Color c = Color.web(getHex(i));
+        property_info_color1.setFill(c);
+        property_info_rent1.setText("£" + current_property.getRent());
+        current_property.setHouseCount(1);
+        property_info_rent_1house1.setText("£" + current_property.getRent());
+        current_property.setHouseCount(2);
+        property_info_rent_2house1.setText("£" + current_property.getRent());
+        current_property.setHouseCount(3);
+        property_info_rent_3house1.setText("£" + current_property.getRent());
+        current_property.setHouseCount(4);
+        property_info_rent_4house1.setText("£" + current_property.getRent());
+        current_property.buyHotel();
+        property_info_rent_hotel1.setText("£" + current_property.getRent());
+    }
+
+    public void buy_property_button_yes() {
+        ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
+        Property current_property = (Property) board_spaces.get(currentPlayer.getLocation());
+        System.out.println(currentPlayer.getPlayerName() + " has bought " + current_property.getName());
+        currentPlayer.buyProperty(current_property);
+        buy_property_pane.setVisible(false);
+    }
+
+    public void buy_property_button_no() {
+        ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
+        Property current_property = (Property) board_spaces.get(currentPlayer.getLocation());
+        System.out.println(currentPlayer.getPlayerName() + " has not bought " + current_property.getName());
+        buy_property_pane.setVisible(false);
     }
 
     public void closeProperty() {
