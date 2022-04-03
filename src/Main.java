@@ -15,7 +15,6 @@ public class Main extends Application {
     private final int WIDTH = 1280;
     private final int HEIGHT = 720;
 
-
     /**
      * Begins the program by loading the menu.
      *

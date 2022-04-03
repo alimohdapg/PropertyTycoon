@@ -1,7 +1,7 @@
 /**
  * A class representing properties on the board.
  *
- * @author Ali Ahmed
+ * @author Ali Ahmed & Hanzhen Gong
  */
 public class Property extends BoardSpace {
 
@@ -14,16 +14,12 @@ public class Property extends BoardSpace {
     private final int rent4House;
     private final int rentHotel;
     private int houseCount;
-
-
-
     private boolean hasHotel;
 
     /**
      * Constructs a new property object.
      *
      * @param name        The property's name.
-     * @param location    The property's location on the board.
      * @param color       The property's color.
      * @param cost        The cost of buying the property.
      * @param rentDefault The default rent when the property has no houses or hotels built.
@@ -33,9 +29,9 @@ public class Property extends BoardSpace {
      * @param rent4House  The rent when the property has four houses.
      * @param rentHotel   The rent when the property has a hotel.
      */
-    public Property(String name, int location, Color color, int cost, int rentDefault, int rent1House, int rent2House,
-                    int rent3House, int rent4House, int rentHotel) {
-        super(name, location);
+    public Property(String name, Color color, int cost, int rentDefault, int rent1House, int rent2House, int rent3House,
+                    int rent4House, int rentHotel) {
+        super(name);
         this.color = color;
         this.cost = cost;
         this.rentDefault = rentDefault;
@@ -97,7 +93,12 @@ public class Property extends BoardSpace {
      * Buys a hotel by setting the hasHotel field to true.
      */
     public void buyHotel() {
-        hasHotel = true;
+        if (houseCount == 4) {
+            hasHotel = true;
+            houseCount++;
+        } else{
+            System.out.println("Error, number of houses exceeds normal!");
+        }
     }
 
     /**
@@ -145,5 +146,13 @@ public class Property extends BoardSpace {
      */
     public boolean doesHaveHotel() {
         return hasHotel;
+    }
+
+    /**
+     * Set hasHotel as false
+     */
+    public void sellHotel()
+    {
+        hasHotel = false;
     }
 }

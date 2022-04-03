@@ -1,20 +1,10 @@
 public abstract class BoardSpace {
 
     private String name;
-    private int location;
 
-    public BoardSpace(String name, int location)
+    public BoardSpace(String name)
     {
         this.name = name;
-        this.location = location;
-    }
-
-    public int getLocation() {
-        return location;
-    }
-
-    public void setLocation(int location) {
-        this.location = location;
     }
 
     public String getName() {
