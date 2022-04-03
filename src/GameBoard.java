@@ -197,12 +197,12 @@ public class GameBoard {
     }
 
     /**
-     * Need to check !!EVERY TIME!! before buying a house:
+     * Need to check !! EVERY TIME !! before buying a house:
      * 1. if player own all properties in the same color set
      * 2. if the difference of num_houses in each property (same color set) < 1
      *
      * @param property prop
-     * @param owner    player
+     * @param owner player
      * @return if one can buy a house
      */
     public Boolean checkBuyHouse(Property property, Player owner) {
