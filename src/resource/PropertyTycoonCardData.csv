@@ -4,7 +4,7 @@ Pot luck card data,,,
 ,,,
 Description,,,Action
 """You inherit £200""",,,Bank pays player £200
-"""You have won 2nd prize in a beauty contest, collect £50""",,,Bank pays player £50
+"""You have won 2nd prize in a beauty contest. collect £50""",,,Bank pays player £50
 """You are up the creek with no paddle - go back to the Old Creek""",,,Player token moves backwards to the Old Creek
 """Student loan refund. Collect £20""",,,Bank pays player £20
 """Bank error in your favour. Collect £200""",,,Bank pays player £200
@@ -12,10 +12,10 @@ Description,,,Action
 """Mega late night taxi bill pay £50""",,,Player pays £50 to the bank
 """Advance to go""",,,Player moves forwards to GO
 """From sale of Bitcoin you get £50""",,,Bank pays player £50
-"""Bitcoin assets fall - pay off Bitcoin short fall""",,,Player pays £50 to the bank
+"""Bitcoin assets fall - pay off Bitcoin short fall. Player pays £50 to the bank""",,,Player pays £50 to the bank
 """Pay a £10 fine or take opportunity knocks""",,,"If fine paid, player puts £10 on free parking"
 """Pay insurance fee of £50""",,,Player puts £50 on free parking
-"""Savings bond matures, collect £100",,,Bank pays £100 to the player
+"""Savings bond matures. collect £100",,,Bank pays £100 to the player
 """Go to jail. Do not pass GO, do not collect £200""",,,As the card says
 """Received interest on shares of £25""",,,Bank pays player £25
 """It's your birthday. Collect £10 from each player""",,,Player receives £10 from each player
