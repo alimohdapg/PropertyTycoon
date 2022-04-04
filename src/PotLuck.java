@@ -53,7 +53,14 @@ public class PotLuck extends BoardSpace
     {
         ArrayList<String> info = new ArrayList<>();
         String nextCard = String.valueOf(cards.getFirst());
-        cards.addLast(cards.removeFirst());
+        if (!nextCard.equals("17"))
+        {
+            cards.addLast(cards.removeFirst());
+        }
+        else
+        {
+            cards.removeFirst();
+        }
 
         info.add(nextCard);
 
@@ -109,6 +116,7 @@ public class PotLuck extends BoardSpace
                 break;
             case "17":
                 info.add(potLuck17);
+
                 break;
         }
         return info;
@@ -220,13 +228,10 @@ public class PotLuck extends BoardSpace
         cards.addLast(element);
     }
 
-    public static void main(String[] args) {
-        PotLuck potLuck = new PotLuck("PotLucks");
-
-        for (int i = 0; i < potLuck.cards.size(); i++)
-        {
-            System.out.println(potLuck.getNextCard());
-        }
+    public void addGetOutOfJailFreeBack()
+    {
+        cards.addLast(17);
     }
+    
 
 }
