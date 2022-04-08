@@ -566,72 +566,78 @@
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text layoutX="22.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent">
+                  <Text layoutX="20.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent1" layoutX="129.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent1" layoutX="136.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="21.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ set" wrappingWidth="84.99999804016988">
+                  <Text layoutX="20.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ set" wrappingWidth="84.99999804016988">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_set1" layoutX="129.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_set1" layoutX="136.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="21.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="118.00000356626697">
+                  <Text layoutX="20.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="118.000000940051">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_1house1" layoutX="129.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_1house1" layoutX="136.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="21.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="111.00001338265793">
+                  <Text layoutX="20.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="118.00000356626697">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_2house1" layoutX="129.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_2house1" layoutX="136.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="21.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="128.99999904648212">
+                  <Text layoutX="20.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="111.00001338265793">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_3house1" layoutX="129.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_3house1" layoutX="136.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="21.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="111.00003246810957">
+                  <Text layoutX="20.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="118.00000356626697">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_4house1" layoutX="129.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_4house1" layoutX="136.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="22.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="98.000000940051">
+                  <Text layoutX="20.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="111.00001338265793">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="property_info_rent_hotel1" layoutX="129.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                  <Text fx:id="property_info_rent_hotel1" layoutX="136.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="84.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost" />
+                  <Text fx:id="property_info_cost1" layoutX="78.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
                      <font>
                         <Font size="14.0" />
                      </font>
