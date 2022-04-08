@@ -417,7 +417,7 @@
          <font>
             <Font size="26.0" />
          </font></Button>
-      <AnchorPane fx:id="property_info" layoutX="110.0" layoutY="310.0" onMouseClicked="#closeProperty" prefHeight="301.0" prefWidth="200.0">
+      <AnchorPane fx:id="property_info" layoutX="110.0" layoutY="310.0" onMouseClicked="#closeProperty" prefHeight="301.0" prefWidth="200.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="301.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="281.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="181.0" />

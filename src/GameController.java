@@ -236,7 +236,7 @@ public class GameController {
 
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
         BoardSpace current_space = board_spaces.get(currentPlayer.getLocation());
-        if (current_space instanceof Property) {
+        if (current_space instanceof Property && currentPlayer.isPassedGo()) {
             loadProperty_buy(currentPlayer.getLocation());
         } else {
             canEndTurn = true;
