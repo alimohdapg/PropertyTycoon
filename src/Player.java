@@ -159,7 +159,14 @@ public abstract class Player {
      */
     public void sellStaUti(StationAndUtility stationAndUtility) {
         if (stationAndUtilities.size() > 0) {
-            money.addAmount(stationAndUtility.getCost());
+            if (!stationAndUtility.isUnderMortgage())
+            {
+                money.addAmount(stationAndUtility.getCost());
+            }
+            else
+            {
+                money.addAmount(stationAndUtility.getCost() / 2);
+            }
             stationAndUtilities.remove(stationAndUtility);
         } else {
             System.out.println("Error, the StaUti ArrayList is empty!");
@@ -308,15 +315,31 @@ public abstract class Player {
     }
 
     /**
-     * Mortgage an owned property
+     * Mortgage an owned property which is not currently under mortgage
+     *
+     * @param property
      */
-    public void mortgage(Property property)
+    public void mortgageProperty(Property property)
     {
-        if (properties.contains(property))
+        if (properties.contains(property) && !property.isUnderMortgage())
         {
             int value = property.getCost() + property.getHouseCount() * property.getHouseCost();
             money.addAmount(value / 2);
             property.setUnderMortgage(true);
+        }
+    }
+
+    /**
+     * Mortgage an owned stationAndUtility which is not currently under mortgage
+     *
+     * @param stationAndUtility
+     */
+    public void mortgageStationAndUtility(StationAndUtility stationAndUtility)
+    {
+        if (stationAndUtilities.contains(stationAndUtility) && !stationAndUtility.isUnderMortgage())
+        {
+            money.addAmount(stationAndUtility.getCost() / 2);
+            stationAndUtility.setUnderMortgage(true);
         }
     }
 }
