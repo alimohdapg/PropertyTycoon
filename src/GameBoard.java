@@ -92,14 +92,14 @@ public class GameBoard {
         int num1 = dice1.rollDice();
         int num2 = dice2.rollDice();
         // Initial pass of go
-        if (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber() > 39){
-            if (!((HumanPlayer) currentPlayer).isPassedGo()){
-                ((HumanPlayer) currentPlayer).setPassedGo(true);
+        if ((currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber() > 39){
+            if (!(currentPlayer).isPassedGo()){
+                (currentPlayer).setPassedGo(true);
             }
             currentPlayer.getMoney().addAmount(200);
         }
-        ((HumanPlayer) currentPlayer).setLocation(
-                (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
+        (currentPlayer).setLocation(
+                ((currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
         );
         if (dice1.getNumber() == dice2.getNumber()) {
             playerTurns.push(currentPlayer);
@@ -108,24 +108,24 @@ public class GameBoard {
         }
         // Go to jail same dice three times
         if (samePlayerCounter == 2) {
-            ((HumanPlayer) currentPlayer).setLocation(40);
+            (currentPlayer).setLocation(40);
         }
         // Go to jail board-space
-        if ((((HumanPlayer) currentPlayer).getLocation()) == 30) {
-            ((HumanPlayer) currentPlayer).setLocation(40);
+        if (((currentPlayer).getLocation()) == 30) {
+            (currentPlayer).setLocation(40);
         }
         // Square 4 income tax fine
-        if ((((HumanPlayer) currentPlayer).getLocation()) == 4) {
+        if (((currentPlayer).getLocation()) == 4) {
             currentPlayer.getMoney().subtractAmount(200);
             freeParkingSum += 200;
         }
         // Square 38 income/super tax fine
-        if ((((HumanPlayer) currentPlayer).getLocation()) == 38) {
+        if (((currentPlayer).getLocation()) == 38) {
             currentPlayer.getMoney().subtractAmount(100);
             freeParkingSum += 100;
         }
         // Free parking board-space get the money and set the sum to 0
-        if ((((HumanPlayer) currentPlayer).getLocation()) == 20) {
+        if (((currentPlayer).getLocation()) == 20) {
             currentPlayer.getMoney().addAmount(freeParkingSum);
             freeParkingSum = 0;
         }
