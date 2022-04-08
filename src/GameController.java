@@ -49,7 +49,7 @@ public class GameController {
     @FXML
     private Text property_info_name, currentTurnText, property_info_rent, property_info_rent_set, property_info_rent_1house,
             property_info_rent_2house, property_info_rent_3house, property_info_rent_4house, property_info_rent_hotel,
-            property_owner, property_houses;
+            property_owner, property_houses, property_info_cost, property_info_current;
 
     @FXML
     private Text property_info_name1, property_info_rent1, property_info_rent_set1, property_info_rent_1house1,
@@ -85,10 +85,14 @@ public class GameController {
     private boolean canEndTurn;
     private boolean canRoll;
 
+    private FileIO fileIO;
     /**
      * Default function, runs on launch. Initialises the array of positional elements
      */
     public void initialize() {
+        //File io
+        fileIO = new FileIO();
+
         //Object arrays for GUI elements
         pos_array = new ArrayList<>();
         text_array = new ArrayList<>();
@@ -232,7 +236,7 @@ public class GameController {
 
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
         BoardSpace current_space = board_spaces.get(currentPlayer.getLocation());
-        if (current_space instanceof Property) {
+        if (current_space instanceof Property && currentPlayer.isPassedGo()) {
             loadProperty_buy(currentPlayer.getLocation());
         } else {
             canEndTurn = true;
@@ -327,23 +331,24 @@ public class GameController {
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
         current_property = (Property) board_spaces.get(i);
         property_houses.setText("H: " + current_property.getHouseCount());
-        current_property.sellHotel();
-        current_property.setHouseCount(0);
-        property_info_name.setText(current_property.getName());
+        property_info_cost.setText("£" + fileIO.BoardData.get(i).get(7));
+        property_info_current.setText("£" + current_property.getRent());
+        property_info_name.setText(fileIO.BoardData.get(i).get(1));
         Color c = Color.web(getHex(i));
         property_info_color.setFill(c);
-        property_info_rent.setText("£" + current_property.getRent());
-        current_property.setHouseCount(1);
-        property_info_rent_set.setText("£" + current_property.getRent() * 2);
-        property_info_rent_1house.setText("£" + current_property.getRent());
-        current_property.setHouseCount(2);
-        property_info_rent_2house.setText("£" + current_property.getRent());
-        current_property.setHouseCount(3);
-        property_info_rent_3house.setText("£" + current_property.getRent());
-        current_property.setHouseCount(4);
-        property_info_rent_4house.setText("£" + current_property.getRent());
-        current_property.buyHotel();
-        property_info_rent_hotel.setText("£" + current_property.getRent());
+
+        property_info_rent.setText("£" + fileIO.BoardData.get(i).get(8));
+        property_info_rent_set.setText("£" + Integer.parseInt(fileIO.BoardData.get(i).get(8)) * 2);
+
+        property_info_rent_1house.setText("£" + fileIO.BoardData.get(i).get(10));
+
+        property_info_rent_2house.setText("£" + fileIO.BoardData.get(i).get(11));
+
+        property_info_rent_3house.setText("£" + fileIO.BoardData.get(i).get(12));
+
+        property_info_rent_4house.setText("£" + fileIO.BoardData.get(i).get(13));
+
+        property_info_rent_hotel.setText("£" + fileIO.BoardData.get(i).get(14));
 
     }
 
