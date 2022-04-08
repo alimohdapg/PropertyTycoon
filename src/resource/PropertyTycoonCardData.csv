@@ -27,16 +27,16 @@ Description,,,Action
 """Bank pays you divided of £50""",,,Bank pays player £50
 """You have won a lip sync battle. Collect £100""",,,Bank pays player £100
 """Advance to Turing Heights""",,,Player token moves forwards to Turing Heights
-"""Advance to Han Xin Gardens. If you pass GO, collect £200""",,,Player moves token
+"""Advance to Han Xin Gardens. If you pass GO. collect £200""",,,Player moves token
 """Fined £15 for speeding""",,,Player puts £15 on free parking
 """Pay university fees of £150""",,,Player pays £150 to the bank
 """Take a trip to Hove station. If you pass GO collect £200""",,,Player moves token
-"""Loan matures, collect £150""",,,Bank pays £150 to the player
-"""You are assessed for repairs, £40/house, £115/hotel""",,,Player pays money to the bank
+"""Loan matures. collect £150""",,,Bank pays £150 to the player
+"""You are assessed for repairs. £40/house. £115/hotel""",,,Player pays money to the bank
 """Advance to GO""",,,Player moves token
-"""You are assessed for repairs, £25/house, £100/hotel""",,,Player pays money to the bank
+"""You are assessed for repairs. £25/house. £100/hotel""",,,Player pays money to the bank
 """Go back 3 spaces""",,,Player moves token
 """Advance to Skywalker Drive. If you pass GO collect £200""",,,Player moves token
-"""Go to jail. Do not pass GO, do not collect £200""",,,As the card says
+"""Go to jail. Do not pass GO. do not collect £200""",,,As the card says
 """Drunk in charge of a hoverboard. Fine £30""",,,Player puts £20 on free parking
 """Get out of jail free""",,,Retained by the player until needed. No resale or trade value

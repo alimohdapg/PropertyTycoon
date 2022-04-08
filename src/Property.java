@@ -15,6 +15,7 @@ public class Property extends BoardSpace {
     private final int rentHotel;
     private int houseCount;
     private boolean hasHotel;
+    private boolean underMortgage;
 
     /**
      * Constructs a new property object.
@@ -42,6 +43,7 @@ public class Property extends BoardSpace {
         this.rentHotel = rentHotel;
         houseCount = 0;
         hasHotel = false;
+        underMortgage = false;
     }
 
     /**
@@ -154,5 +156,13 @@ public class Property extends BoardSpace {
     public void sellHotel()
     {
         hasHotel = false;
+    }
+
+    public boolean isUnderMortgage() {
+        return underMortgage;
+    }
+
+    public void setUnderMortgage(boolean underMortgage) {
+        this.underMortgage = underMortgage;
     }
 }
