@@ -49,11 +49,11 @@ public class GameBoard {
             } else if (fileIO.BoardData.get(i).get(3).equals("Station") || fileIO.BoardData.get(i).get(3).equals("Utilities")) {
                 boardSpaces.add(new StationAndUtility(fileIO.BoardData.get(i).get(1),
                         Integer.parseInt(fileIO.BoardData.get(i).get(7)),
-                        Color.findAndCreateColor(fileIO.BoardData.get(i).get(2))
+                        ColorOfSet.findAndCreateColor(fileIO.BoardData.get(i).get(3))
                 ));
             } else {
                 boardSpaces.add(new Property(fileIO.BoardData.get(i).get(1),
-                        Color.findAndCreateColor(fileIO.BoardData.get(i).get(2)),
+                        ColorOfSet.findAndCreateColor(fileIO.BoardData.get(i).get(3)),
                         Integer.parseInt(fileIO.BoardData.get(i).get(7)),
                         Integer.parseInt(fileIO.BoardData.get(i).get(8)),
                         Integer.parseInt(fileIO.BoardData.get(i).get(10)),
@@ -239,7 +239,7 @@ public class GameBoard {
         }
 
         // check if one owns all props in same color
-        if (property.getColor() == Color.BROWN || property.getColor() == Color.DEEPBLUE) {
+        if (property.getColor() == ColorOfSet.BROWN || property.getColor() == ColorOfSet.DEEPBLUE) {
             if (numProps == 2) ownsAll = true;
         } else {
             if (numProps == 3) ownsAll = true;
