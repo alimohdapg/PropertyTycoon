@@ -413,7 +413,7 @@ public class GameController {
     public void buyHouse() {
         boolean success = currentPlayer.buyAHouse((Property) gameBoard.getBoardSpaces().get(currentSelectedProperty));
         gameBoard.updateAllPlayers();
-        if(success) {
+        if(success && gameBoard.checkBuyHouse(current_property, currentPlayer)) {
             property_houses.setText("H: " + current_property.getHouseCount());
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
