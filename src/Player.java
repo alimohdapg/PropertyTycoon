@@ -3,6 +3,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.concurrent.TransferQueue;
 
 public abstract class Player {
 
@@ -74,7 +75,15 @@ public abstract class Player {
         {
             moneyBack += property.getHouseCount() * property.getHouseCost();
         }
-        money.addAmount(moneyBack);
+
+        if (!property.isUnderMortgage())
+        {
+            money.addAmount(moneyBack);
+        }
+        else
+        {
+            money.addAmount(moneyBack / 2);
+        }
         properties.remove(property);
     }
 
@@ -298,4 +307,16 @@ public abstract class Player {
         this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
     }
 
+    /**
+     * Mortgage an owned property
+     */
+    public void mortgage(Property property)
+    {
+        if (properties.contains(property))
+        {
+            int value = property.getCost() + property.getHouseCount() * property.getHouseCost();
+            money.addAmount(value / 2);
+            property.setUnderMortgage(true);
+        }
+    }
 }
