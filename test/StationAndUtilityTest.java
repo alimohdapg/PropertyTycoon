@@ -9,8 +9,8 @@ class StationAndUtilityTest {
 
     @BeforeEach
     void setUp() {
-        stationAndUtility1 = new StationAndUtility("Test Station", 50, Color.STATION);
-        stationAndUtility2 = new StationAndUtility("Test Utility", 100, Color.UTILITIES);
+        stationAndUtility1 = new StationAndUtility("Test Station", 50, ColorOfSet.STATION);
+        stationAndUtility2 = new StationAndUtility("Test Utility", 100, ColorOfSet.UTILITIES);
     }
 
     @Test

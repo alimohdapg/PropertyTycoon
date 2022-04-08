@@ -5,7 +5,7 @@
  */
 public class Property extends BoardSpace {
 
-    private final Color color;
+    private final ColorOfSet color;
     private final int cost;
     private final int rentDefault;
     private final int rent1House;
@@ -30,7 +30,7 @@ public class Property extends BoardSpace {
      * @param rent4House  The rent when the property has four houses.
      * @param rentHotel   The rent when the property has a hotel.
      */
-    public Property(String name, Color color, int cost, int rentDefault, int rent1House, int rent2House, int rent3House,
+    public Property(String name, ColorOfSet color, int cost, int rentDefault, int rent1House, int rent2House, int rent3House,
                     int rent4House, int rentHotel) {
         super(name);
         this.color = color;
@@ -51,7 +51,7 @@ public class Property extends BoardSpace {
      *
      * @return Color of the property.
      */
-    public Color getColor() {
+    public ColorOfSet getColor() {
         return color;
     }
 
@@ -70,13 +70,13 @@ public class Property extends BoardSpace {
      * @return Cost of buying a house.
      */
     public int getHouseCost() {
-        if (color == Color.BROWN || color == Color.BLUE) {
+        if (color == ColorOfSet.BROWN || color == ColorOfSet.BLUE) {
             return 50;
-        } else if (color == Color.PURPLE || color == Color.ORANGE) {
+        } else if (color == ColorOfSet.PURPLE || color == ColorOfSet.ORANGE) {
             return 100;
-        } else if (color == Color.RED || color == Color.YELLOW) {
+        } else if (color == ColorOfSet.RED || color == ColorOfSet.YELLOW) {
             return 150;
-        } else if (color == Color.GREEN || color == Color.DEEPBLUE) {
+        } else if (color == ColorOfSet.GREEN || color == ColorOfSet.DEEPBLUE) {
             return 200;
         }
         return -1;
