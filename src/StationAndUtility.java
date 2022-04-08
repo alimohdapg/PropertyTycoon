@@ -1,12 +1,13 @@
 /**
  * A class representing stations and utilities on the board.
  *
- * @author Ali Ahmed
+ * @author Ali Ahmed & Hanzhen Gong
  */
 public class StationAndUtility extends BoardSpace {
 
     private final int cost;
     private final Color color;
+    private boolean underMortgage;
 
     /**
      * Constructs a new station and utility object.
@@ -18,6 +19,7 @@ public class StationAndUtility extends BoardSpace {
         super(name);
         this.cost = cost;
         this.color = color;
+        underMortgage = false;
     }
 
     /**
@@ -82,4 +84,20 @@ public class StationAndUtility extends BoardSpace {
     }
 
 
+    /**
+     *
+     * @return if this station&utinity is under mortgage
+     */
+    public boolean isUnderMortgage() {
+        return underMortgage;
+    }
+
+    /**
+     * change under mortgage state
+     *
+     * @param underMortgage
+     */
+    public void setUnderMortgage(boolean underMortgage) {
+        this.underMortgage = underMortgage;
+    }
 }
