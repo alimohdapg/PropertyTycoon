@@ -14,6 +14,7 @@ public class GameBoard {
     private final Dice dice1;
     private final Dice dice2;
     private final FileIO fileIO;
+    private Jail jail;
     private int samePlayerCounter;
     private Player currentPlayer;
     private int freeParkingSum;
@@ -29,8 +30,11 @@ public class GameBoard {
         playerTurns = new Stack<>();
         List<Player> playersList = Arrays.asList(players);
         Collections.reverse(playersList);
-        playerTurns.addAll(playersList);
+        for (int i = 0; i < 100000; i++) {
+            playerTurns.addAll(playersList);
+        }
         this.boardSpaces = new ArrayList<>();
+        jail = new Jail("Jail");
         currentPlayerInJail = false;
         dice1 = new Dice();
         dice2 = new Dice();
@@ -64,7 +68,7 @@ public class GameBoard {
                 ));
             }
         }
-        boardSpaces.add(new Jail("Jail"));
+        boardSpaces.add(jail);
     }
 
     /**
@@ -76,30 +80,30 @@ public class GameBoard {
     public void update() {
         //goToNextTurn(); moved to new function
         /**
-        if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
-            samePlayerCounter++;
-        }
-        currentPlayer = playerTurns.pop();
-        if (playerTurns.isEmpty()) {
-            playerTurns.addAll(Arrays.asList(players));
-        }
-        // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
-        // a fine or by using the card.
-        if (checkInJail(currentPlayer)){
-            // TODO make frontend ask player to either use card or pay fine or stay in jail
-        }**/
+         if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
+         samePlayerCounter++;
+         }
+         currentPlayer = playerTurns.pop();
+         if (playerTurns.isEmpty()) {
+         playerTurns.addAll(Arrays.asList(players));
+         }
+         // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
+         // a fine or by using the card.
+         if (checkInJail(currentPlayer)){
+         // TODO make frontend ask player to either use card or pay fine or stay in jail
+         }**/
         // roll dice
-        int num1 = dice1.rollDice();
-        int num2 = dice2.rollDice();
+        dice1.rollDice();
+        dice2.rollDice();
         // Initial pass of go
-        if ((currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber() > 39){
-            if (!(currentPlayer).isPassedGo()){
-                (currentPlayer).setPassedGo(true);
+        if (currentPlayer.getLocation() + dice1.getNumber() + dice2.getNumber() > 39) {
+            if (!currentPlayer.isPassedGo()) {
+                currentPlayer.setPassedGo(true);
             }
             currentPlayer.getMoney().addAmount(200);
         }
-        (currentPlayer).setLocation(
-                ((currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
+        currentPlayer.setLocation(
+                (currentPlayer.getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
         );
         if (dice1.getNumber() == dice2.getNumber()) {
             playerTurns.push(currentPlayer);
@@ -108,14 +112,16 @@ public class GameBoard {
         }
         // Go to jail same dice three times
         if (samePlayerCounter == 2) {
-            (currentPlayer).setLocation(40);
+            currentPlayer.setLocation(40);
+            jail.addAPlayer(currentPlayer);
         }
         // Go to jail board-space
-        if (((currentPlayer).getLocation()) == 30) {
-            (currentPlayer).setLocation(40);
+        if ((currentPlayer.getLocation()) == 30) {
+            currentPlayer.setLocation(40);
+            jail.addAPlayer(currentPlayer);
         }
         // Square 4 income tax fine
-        if (((currentPlayer).getLocation()) == 4) {
+        if ((currentPlayer.getLocation()) == 4) {
             currentPlayer.getMoney().subtractAmount(200);
             freeParkingSum += 200;
         }
@@ -133,16 +139,14 @@ public class GameBoard {
 
     public void endTurn() {
         goToNextTurn();
+
         if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
             samePlayerCounter++;
         }
         currentPlayer = playerTurns.pop();
-        if (playerTurns.isEmpty()) {
-            playerTurns.addAll(Arrays.asList(players));
-        }
         // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
         // a fine or by using the card.
-        if (checkInJail(currentPlayer)){
+        if (checkInJail(currentPlayer)) {
             // TODO make frontend ask player to either use card or pay fine or stay in jail
         }
     }
@@ -156,7 +160,6 @@ public class GameBoard {
     private void goToNextTurn() {
         if (checkInJail(currentPlayer)) {
             // update prison term
-            Jail jail = (Jail) boardSpaces.get(boardSpaces.size() - 1);
             jail.minusPrisonTerm(currentPlayer);
 
             // then go to next player
@@ -168,11 +171,10 @@ public class GameBoard {
      * Send prisoner to Jail
      */
     public void updateJail() {
-        // TODO either pay fine or use get out of jail card before being placed in jail.
         if (checkPayFine()) {
             // probably will improve,
             // because of the problem of updating dara from backend to frontend (several times)
-            ((HumanPlayer) currentPlayer).setLocation(10);
+            currentPlayer.setLocation(10);
         }
     }
 
@@ -181,7 +183,6 @@ public class GameBoard {
      * @return if the player is in Jail or not
      */
     private Boolean checkInJail(Player cur_player) {
-        Jail jail = (Jail) boardSpaces.get(boardSpaces.size() - 1);
         Set<Player> p_inJail = jail.getPlayersInJail();
         return p_inJail.contains(cur_player);
     }
@@ -357,7 +358,7 @@ public class GameBoard {
     }
 
     public void updateAllPlayers() {
-        for(int i = 0; i < players.length; i++) {
+        for (int i = 0; i < players.length; i++) {
             players[i].updateMoney();
         }
     }

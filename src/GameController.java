@@ -302,7 +302,6 @@ public class GameController {
                 text_array.get(property_indexes[iter]).setText(current.getName());
                 iter++;
             }
-
         }
     }
 
