@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class GameBoard {
 
-    private final Player[] players;
+    private final ArrayList<Player> players;
     private final Stack<Player> playerTurns;
     private final ArrayList<BoardSpace> boardSpaces;
     private boolean currentPlayerInJail;
@@ -25,13 +25,12 @@ public class GameBoard {
      *
      * @param players An array consisting of the players who will be playing the game.
      */
-    public GameBoard(Player[] players) {
+    public GameBoard(ArrayList<Player> players) {
         this.players = players;
         playerTurns = new Stack<>();
-        List<Player> playersList = Arrays.asList(players);
-        Collections.reverse(playersList);
+        Collections.reverse(players);
         for (int i = 0; i < 100000; i++) {
-            playerTurns.addAll(playersList);
+            playerTurns.addAll(players);
         }
         this.boardSpaces = new ArrayList<>();
         jail = new Jail("Jail");
@@ -78,6 +77,8 @@ public class GameBoard {
      * Updated by Hanzhen Gong
      */
     public void update() {
+        // TODO checking if the game has ended
+        checkEndgame();
         //goToNextTurn(); moved to new function
         /**
          if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
@@ -135,19 +136,22 @@ public class GameBoard {
             currentPlayer.getMoney().addAmount(freeParkingSum);
             freeParkingSum = 0;
         }
+
     }
 
     public void endTurn() {
         goToNextTurn();
-
         if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
             samePlayerCounter++;
         }
-        currentPlayer = playerTurns.pop();
-        // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
-        // a fine or by using the card.
-        if (checkInJail(currentPlayer)) {
-            // TODO make frontend ask player to either use card or pay fine or stay in jail
+        do {
+            currentPlayer = playerTurns.pop();
+        } while (!players.contains(currentPlayer));
+        if (currentPlayer.getMoney().getAmount() < 0) {
+            players.remove(currentPlayer);
+        }
+        while (!players.contains(currentPlayer)){
+            currentPlayer = playerTurns.pop();
         }
     }
 
@@ -158,10 +162,12 @@ public class GameBoard {
      * If yes, then decrease his/her prison term, and then go to next player
      */
     private void goToNextTurn() {
+        // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
+        // a fine or by using the card.
+        // TODO make frontend ask player to either use card or pay fine or stay in jail
         if (checkInJail(currentPlayer)) {
             // update prison term
             jail.minusPrisonTerm(currentPlayer);
-
             // then go to next player
             playerTurns.pop();
         }
@@ -257,6 +263,11 @@ public class GameBoard {
         return canBuy;
     }
 
+
+    public boolean checkEndgame() {
+        return false;
+    }
+
     // This part is considering to be deleted.
     // -------------------------------- POTLUCK PART ------------------------------------------
 
@@ -344,7 +355,7 @@ public class GameBoard {
      *
      * @return players array
      */
-    public Player[] getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -358,8 +369,8 @@ public class GameBoard {
     }
 
     public void updateAllPlayers() {
-        for (int i = 0; i < players.length; i++) {
-            players[i].updateMoney();
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).updateMoney();
         }
     }
 }
