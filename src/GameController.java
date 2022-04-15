@@ -26,10 +26,10 @@ public class GameController {
     @FXML
     private Circle playerOneToken, playerTwoToken;
 
-    @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney;
+    @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, FreeParking;
 
     @FXML
-    private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane;
+    private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane;
 
     @FXML
     private Circle p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
@@ -60,7 +60,7 @@ public class GameController {
     private Text notEnoughMoney;
 
     @FXML
-    private Button buyHouseBtn;
+    private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage;
 
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
@@ -72,13 +72,13 @@ public class GameController {
     private Rectangle property_info_color, property_info_color1;
 
     @FXML
-    private Text jailText;
+    private Text jailText, fine_text;
 
     @FXML
     private Button jailUseCard, jailPay50;
 
     @FXML
-    private Text ptex1, ptex2, ptex3, ptex4, ptex5, ptex6, ptex7, crtext;
+    private Text ptex1, ptex2, ptex3, ptex4, ptex5, ptex6, ptex7, crtext, ptex11, ptex12, ptex13, ptex14, ptex15, ptex16, ptex17;
 
     private Property current_property;
 
@@ -187,14 +187,7 @@ public class GameController {
             canRoll = true;
             currentTurnText.setText(gameBoard.getCurrentPlayer().getName() + "'s turn");
             if(gameBoard.getCurrentPlayer().isInJail()) {
-                canRoll = false;
-                jailText.setVisible(true);
-                jailUseCard.setVisible(true);
-                jailPay50.setVisible(true);
-            } else {
-                jailText.setVisible(false);
-                jailUseCard.setVisible(false);
-                jailPay50.setVisible(false);
+                System.out.println("Current player is in jail");
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -247,10 +240,15 @@ public class GameController {
         BoardSpace current_space = board_spaces.get(currentPlayer.getLocation());
         if (current_space instanceof Property && currentPlayer.isPassedGo()) {
             loadProperty_buy(currentPlayer.getLocation());
+        } else if(current_space instanceof StationAndUtility && currentPlayer.isPassedGo()) {
+            loadProperty_buy(currentPlayer.getLocation());
+        } else if(currentPlayer.getLocation() == 4 || currentPlayer.getLocation() == 38){
+            loadFineScreen();
         } else {
             canEndTurn = true;
         }
         gameBoard.updateAllPlayers();
+        updateFreeParking();
 
     }
 
@@ -349,6 +347,30 @@ public class GameController {
         if(board_spaces.get(i) instanceof Property){
             crtext.setText("Current rent:");
             current_property = (Property) board_spaces.get(i);
+            Player owner = current_property.getOwner();
+
+            if(owner == currentPlayer) {
+                btnSellProp.setOpacity(1);
+                btnMortgage.setOpacity(1);
+                btnSellProp.setDisable(false);
+                btnMortgage.setDisable(false);
+                if(current_property.getHouseCount() > 0) {
+                    btnSellHouse.setOpacity(1);
+                    btnSellHouse.setDisable(false);
+                } else {
+                    btnSellHouse.setOpacity(0.25);
+                    btnSellHouse.setDisable(true);
+                }
+            } else {
+                btnSellProp.setOpacity(0.25);
+                btnMortgage.setOpacity(0.25);
+                btnSellProp.setDisable(true);
+                btnMortgage.setDisable(true);
+            }
+
+            if(owner != null) {
+                property_owner.setText("Owner: " + owner.getName());
+            } else { property_owner.setText("Owner: Vacant"); }
             property_houses.setText("H: " + current_property.getHouseCount());
             property_houses.setVisible(true);
             property_info_rent.setVisible(true);
@@ -381,6 +403,7 @@ public class GameController {
             property_info_rent_hotel.setText("£" + fileIO.BoardData.get(i).get(14));
         } else if(board_spaces.get(i) instanceof StationAndUtility) {
             StationAndUtility current_stationutil = (StationAndUtility) board_spaces.get(i);
+
             if(current_stationutil.getColor() == ColorOfSet.STATION) {
                 crtext.setText("Current rent:");
                 property_houses.setVisible(false);
@@ -442,19 +465,70 @@ public class GameController {
         buy_property_pane.setVisible(true);
         property_info_buy.setVisible(true);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-        Property current_property = (Property) board_spaces.get(i);
-        property_info_name1.setText(fileIO.BoardData.get(i).get(1));
-        Color c = Color.web(getHex(i));
-        property_info_color1.setFill(c);
-        property_info_cost1.setText("£" + fileIO.BoardData.get(i).get(7));
-        property_info_rent1.setText("£" + current_property.getRent());
-        property_info_rent_set1.setText("£" + Integer.parseInt(fileIO.BoardData.get(i).get(8)) * 2);
 
-        property_info_rent_1house1.setText("£" + fileIO.BoardData.get(i).get(10));
-        property_info_rent_2house1.setText("£" + fileIO.BoardData.get(i).get(11));
-        property_info_rent_3house1.setText("£" + fileIO.BoardData.get(i).get(12));
-        property_info_rent_4house1.setText("£" + fileIO.BoardData.get(i).get(13));
-        property_info_rent_hotel1.setText("£" + fileIO.BoardData.get(i).get(14));
+        if(board_spaces.get(i) instanceof Property) {
+            Property current_property = (Property) board_spaces.get(i);
+
+            property_info_name1.setText(fileIO.BoardData.get(i).get(1));
+            Color c = Color.web(getHex(i));
+            property_info_color1.setFill(c);
+            property_info_cost1.setText("£" + fileIO.BoardData.get(i).get(7));
+
+            property_info_rent1.setVisible(true);
+            property_info_rent_set1.setVisible(true);
+            property_info_rent_1house1.setVisible(true);
+            property_info_rent_2house1.setVisible(true);
+            property_info_rent_3house1.setVisible(true);
+            property_info_rent_4house1.setVisible(true);
+            property_info_rent_hotel1.setVisible(true);
+            ptex11.setVisible(true);
+            ptex12.setVisible(true);
+            ptex13.setVisible(true);
+            ptex14.setVisible(true);
+            ptex15.setVisible(true);
+            ptex16.setVisible(true);
+            ptex17.setVisible(true);
+
+
+            property_info_rent1.setText("£" + current_property.getRent());
+            property_info_rent_set1.setText("£" + Integer.parseInt(fileIO.BoardData.get(i).get(8)) * 2);
+
+            property_info_rent_1house1.setText("£" + fileIO.BoardData.get(i).get(10));
+            property_info_rent_2house1.setText("£" + fileIO.BoardData.get(i).get(11));
+            property_info_rent_3house1.setText("£" + fileIO.BoardData.get(i).get(12));
+            property_info_rent_4house1.setText("£" + fileIO.BoardData.get(i).get(13));
+            property_info_rent_hotel1.setText("£" + fileIO.BoardData.get(i).get(14));
+        } else if(board_spaces.get(i) instanceof StationAndUtility) {
+            StationAndUtility current_stationutil = (StationAndUtility) board_spaces.get(i);
+
+            property_info_rent1.setVisible(false);
+            property_info_rent_set1.setVisible(false);
+            property_info_rent_1house1.setVisible(false);
+            property_info_rent_2house1.setVisible(false);
+            property_info_rent_3house1.setVisible(false);
+            property_info_rent_4house1.setVisible(false);
+            property_info_rent_hotel1.setVisible(false);
+            ptex11.setVisible(false);
+            ptex12.setVisible(false);
+            ptex13.setVisible(false);
+            ptex14.setVisible(false);
+            ptex15.setVisible(false);
+            ptex16.setVisible(false);
+            ptex17.setVisible(false);
+
+
+            if(current_stationutil.getColor() == ColorOfSet.STATION) {
+                Color c = Color.web("#FFFFFF");
+                property_info_color1.setFill(c);
+                property_info_name1.setText(current_stationutil.getName());
+                property_info_cost1.setText("£" + fileIO.BoardData.get(i).get(7));
+            }else if(current_stationutil.getColor() == ColorOfSet.UTILITIES) {
+                property_info_name1.setText(current_stationutil.getName());
+                Color c = Color.web("#FFFFFF");
+                property_info_color1.setFill(c);
+                property_info_cost1.setText("£" + fileIO.BoardData.get(i).get(7));
+            }
+        }
     }
 
     /**
@@ -463,16 +537,29 @@ public class GameController {
     public void buy_property_button_yes() {
         notEnoughMoney.setVisible(false);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-        Property current_property = (Property) board_spaces.get(currentPlayer.getLocation());
-
-        boolean success = currentPlayer.buyProperty(current_property);
-        gameBoard.updateAllPlayers();
-        if(success) {
-            System.out.println(currentPlayer.getName() + " has bought " + current_property.getName());
-            buy_property_pane.setVisible(false);
-            canEndTurn = true;
-        } else {
-            notEnoughMoney.setVisible(true);
+        int i = currentPlayer.getLocation();
+        if(board_spaces.get(i) instanceof Property) {
+            Property current_property = (Property) board_spaces.get(i);
+            boolean success = currentPlayer.buyProperty(current_property);
+            gameBoard.updateAllPlayers();
+            if(success) {
+                System.out.println(currentPlayer.getName() + " has bought " + current_property.getName());
+                buy_property_pane.setVisible(false);
+                canEndTurn = true;
+            } else {
+                notEnoughMoney.setVisible(true);
+            }
+        } else if(board_spaces.get(i) instanceof StationAndUtility) {
+            StationAndUtility current_stationutil = (StationAndUtility) board_spaces.get(i);
+            boolean success = currentPlayer.buyStaUti(current_stationutil);
+            gameBoard.updateAllPlayers();
+            if(success) {
+                System.out.println(currentPlayer.getName() + " has bought " + current_stationutil.getName());
+                buy_property_pane.setVisible(false);
+                canEndTurn = true;
+            } else {
+                notEnoughMoney.setVisible(true);
+            }
         }
 
     }
@@ -482,8 +569,15 @@ public class GameController {
      */
     public void buy_property_button_no() {
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-        current_property = (Property) board_spaces.get(currentPlayer.getLocation());
-        System.out.println(currentPlayer.getName() + " has not bought " + current_property.getName());
+        int i = currentPlayer.getLocation();
+        if(board_spaces.get(i) instanceof Property) {
+            current_property = (Property) board_spaces.get(currentPlayer.getLocation());
+            System.out.println(currentPlayer.getName() + " has not bought " + current_property.getName());
+        } else if(board_spaces.get(i) instanceof StationAndUtility) {
+            StationAndUtility current_stationutil = (StationAndUtility) board_spaces.get(currentPlayer.getLocation());
+            System.out.println(currentPlayer.getName() + " has not bought " + current_stationutil.getName());
+        }
+
         canEndTurn = true;
         buy_property_pane.setVisible(false);
         gameBoard.updateAllPlayers();
@@ -511,6 +605,13 @@ public class GameController {
      */
     public void closeProperty() {
         property_info.setVisible(false);
+        btnSellHouse.setOpacity(0.25);
+        btnSellProp.setOpacity(0.25);
+        btnMortgage.setOpacity(0.25);
+
+        btnSellHouse.setDisable(true);
+        btnSellProp.setDisable(true);
+        btnMortgage.setDisable(true);
     }
 
     /**
@@ -555,4 +656,48 @@ public class GameController {
         return "#264da1";
     }
 
+    public void updateFreeParking() {
+        FreeParking.setText("Free Parking: £" + gameBoard.getFreeParkingSum());
+    }
+
+    public void loadFineScreen() {
+        if(currentPlayer.getLocation() == 4) {
+            fine_text.setText("You were fined £200!");
+        } else if(currentPlayer.getLocation() == 38) {
+            fine_text.setText("You were fined £100!");
+        }
+        fine_pane.setVisible(true);
+    }
+
+    public void confirmFine() {
+        fine_pane.setVisible(false);
+        canEndTurn = true;
+    }
+
+    public void buttonSellProp() {
+        System.out.println("sold");
+        BoardSpace current = gameBoard.getBoardSpaces().get(currentSelectedProperty);
+        if(current instanceof Property) {
+            current_property = (Property) current;
+            currentPlayer.sellProperty(current_property);
+        }
+    }
+
+    public void buttonSellHouse() {
+        System.out.println("Sold house");
+        BoardSpace current = gameBoard.getBoardSpaces().get(currentSelectedProperty);
+        if(current instanceof Property) {
+            current_property = (Property) current;
+            currentPlayer.sellAHouse(current_property);
+        }
+    }
+
+    public void buttonMortgage() {
+        System.out.println("Mortgaged");
+        BoardSpace current = gameBoard.getBoardSpaces().get(currentSelectedProperty);
+        if(current instanceof Property) {
+            current_property = (Property) current;
+            currentPlayer.mortgageProperty(current_property);
+        }
+    }
 }
