@@ -101,6 +101,39 @@ public class OpportunityKnock extends BoardSpace
                     String subString = currentData.substring(index + 1);
                     subString = subString.replaceAll("\\D", " ");
                     System.out.println(subString);
+
+                case 9:
+                    // Go
+
+                case 10:
+                    index = currentData.indexOf('.');
+                    String subStr = currentData.substring(index + 1);
+                    subString = subStr.replaceAll("\\D", " ");
+                    System.out.println(subString);
+
+                case 11:
+                    // Go back 3 spaces
+
+                case 12:
+                    index = currentData.indexOf("to");
+                    OK13 = currentData.substring(index + 3);
+                    period = OK13.indexOf('.');
+                    OK13 = OK13.substring(0, period);
+                    System.out.println(OK13);
+                    break;
+
+                case 13:
+                    // Go jail
+
+                case 14:
+                    index = currentData.indexOf('£');
+                    moneyString = currentData.substring(index + 1);
+                    OK15 = moneyString.replaceAll("\\D+","");
+                    System.out.println(OK15);
+                    break;
+
+                case 15:
+                    // Get out of jail free
             }
 
         }
