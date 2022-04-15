@@ -5,71 +5,71 @@ class ColorTest {
 
     @Test
     public void testFindAndCreateColor(){
-        assertEquals(Color.findAndCreateColor("Brown"), Color.BROWN);
-        assertEquals(Color.findAndCreateColor("Blue"), Color.BLUE);
-        assertEquals(Color.findAndCreateColor("Purple"), Color.PURPLE);
-        assertEquals(Color.findAndCreateColor("Orange"), Color.ORANGE);
-        assertEquals(Color.findAndCreateColor("Red"), Color.RED);
-        assertEquals(Color.findAndCreateColor("Yellow"), Color.YELLOW);
-        assertEquals(Color.findAndCreateColor("Green"), Color.GREEN);
-        assertEquals(Color.findAndCreateColor("Deep blue"), Color.DEEPBLUE);
-        assertEquals(Color.findAndCreateColor("Deep blue"), Color.DEEPBLUE);
+        assertEquals(ColorOfSet.findAndCreateColor("Brown"), ColorOfSet.BROWN);
+        assertEquals(ColorOfSet.findAndCreateColor("Blue"), ColorOfSet.BLUE);
+        assertEquals(ColorOfSet.findAndCreateColor("Purple"), ColorOfSet.PURPLE);
+        assertEquals(ColorOfSet.findAndCreateColor("Orange"), ColorOfSet.ORANGE);
+        assertEquals(ColorOfSet.findAndCreateColor("Red"), ColorOfSet.RED);
+        assertEquals(ColorOfSet.findAndCreateColor("Yellow"), ColorOfSet.YELLOW);
+        assertEquals(ColorOfSet.findAndCreateColor("Green"), ColorOfSet.GREEN);
+        assertEquals(ColorOfSet.findAndCreateColor("Deep blue"), ColorOfSet.DEEPBLUE);
+        assertEquals(ColorOfSet.findAndCreateColor("Deep blue"), ColorOfSet.DEEPBLUE);
 
     }
 
     @Test
     public void testBrown()
     {
-        Color color = Color.BROWN;
+        ColorOfSet color = ColorOfSet.BROWN;
         assertEquals("brown", color.toString());
     }
 
     @Test
     public void testBlue()
     {
-        Color color = Color.BLUE;
+        ColorOfSet color = ColorOfSet.BLUE;
         assertEquals("blue", color.toString());
     }
 
     @Test
     public void testPurple()
     {
-        Color color = Color.PURPLE;
+        ColorOfSet color = ColorOfSet.PURPLE;
         assertEquals("purple", color.toString());
     }
 
     @Test
     public void testOrange()
     {
-        Color color = Color.ORANGE;
+        ColorOfSet color = ColorOfSet.ORANGE;
         assertEquals("orange", color.toString());
     }
 
     @Test
     public void testRed()
     {
-        Color color = Color.RED;
+        ColorOfSet color = ColorOfSet.RED;
         assertEquals("red", color.toString());
     }
 
     @Test
     public void testYellow()
     {
-        Color color = Color.YELLOW;
+        ColorOfSet color = ColorOfSet.YELLOW;
         assertEquals("yellow", color.toString());
     }
 
     @Test
     public void testGreen()
     {
-        Color color = Color.GREEN;
+        ColorOfSet color = ColorOfSet.GREEN;
         assertEquals("green", color.toString());
     }
 
     @Test
     public void testDeepBlue()
     {
-        Color color = Color.DEEPBLUE;
+        ColorOfSet color = ColorOfSet.DEEPBLUE;
         assertEquals("deep blue", color.toString());
     }
 }

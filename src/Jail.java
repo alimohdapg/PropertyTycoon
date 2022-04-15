@@ -25,17 +25,17 @@ public class Jail extends BoardSpace {
 
     public void addAPlayer(Player player)
     {
-        playersInJail.put(player, 2);
+        playersInJail.put(player, 3);
     }
 
     public void removeAPlayer(Player player)
     {
         playersInJail.remove(player);
+        player.setLocation(10);
     }
 
     public void minusPrisonTerm (Player player) {
         playersInJail.replace(player, playersInJail.get(player)-1);
-
         if (playersInJail.get(player) == 0) {
             removeAPlayer(player);
         }

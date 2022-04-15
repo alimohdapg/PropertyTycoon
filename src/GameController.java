@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -59,6 +60,9 @@ public class GameController {
     private Text notEnoughMoney;
 
     @FXML
+    private Button buyHouseBtn;
+
+    @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
 
     @FXML
@@ -73,11 +77,16 @@ public class GameController {
     @FXML
     private Button jailUseCard, jailPay50;
 
+    @FXML
+    private Text ptex1, ptex2, ptex3, ptex4, ptex5, ptex6, ptex7, crtext;
+
     private Property current_property;
 
     private int current_pos, currentSelectedProperty;
 
     private Player playerOne, playerTwo, currentPlayer;
+
+
 
     private GameBoard gameBoard;
 
@@ -121,7 +130,7 @@ public class GameController {
         playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
 
         //Create gameBoard instance
-        gameBoard = new GameBoard(new Player[]{playerOne, playerTwo});
+        gameBoard = new GameBoard(new ArrayList<Player>(Arrays.asList(playerOne, playerTwo)));
         gameBoard.endTurn();
 
         current_pos = gameBoard.getCurrentPlayerPosition();
@@ -148,7 +157,7 @@ public class GameController {
         if(!turnInProgress && canRoll) {
             turnInProgress = true;
             gameBoard.update();
-            currentPlayer = (HumanPlayer) gameBoard.getCurrentPlayer();
+            currentPlayer = gameBoard.getCurrentPlayer();
             //Updates current_pos with the new player position
             current_pos = gameBoard.getCurrentPlayerPosition();
 
@@ -294,7 +303,6 @@ public class GameController {
                 text_array.get(property_indexes[iter]).setText(current.getName());
                 iter++;
             }
-
         }
     }
 
@@ -321,6 +329,14 @@ public class GameController {
     public void displayProperty21() { loadProperty(37); }
     public void displayProperty22() { loadProperty(39); }
 
+    public void displayStation1() { loadProperty(5); }
+    public void displayStation2() { loadProperty(15);}
+    public void displayStation3() { loadProperty(25);}
+    public void displayStation4() { loadProperty(35);}
+
+    public void displayUtility1() { loadProperty(12);}
+    public void displayUtility2() { loadProperty(28);}
+
     /**
      * Loads the selected property on the gameBoard into a card for the user to see
      * @param i the board location
@@ -329,26 +345,92 @@ public class GameController {
         currentSelectedProperty = i;
         property_info.setVisible(true);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-        current_property = (Property) board_spaces.get(i);
-        property_houses.setText("H: " + current_property.getHouseCount());
-        property_info_cost.setText("£" + fileIO.BoardData.get(i).get(7));
-        property_info_current.setText("£" + current_property.getRent());
-        property_info_name.setText(fileIO.BoardData.get(i).get(1));
-        Color c = Color.web(getHex(i));
-        property_info_color.setFill(c);
 
-        property_info_rent.setText("£" + fileIO.BoardData.get(i).get(8));
-        property_info_rent_set.setText("£" + Integer.parseInt(fileIO.BoardData.get(i).get(8)) * 2);
+        if(board_spaces.get(i) instanceof Property){
+            crtext.setText("Current rent:");
+            current_property = (Property) board_spaces.get(i);
+            property_houses.setText("H: " + current_property.getHouseCount());
+            property_houses.setVisible(true);
+            property_info_rent.setVisible(true);
+            property_info_rent_set.setVisible(true);
+            property_info_rent_1house.setVisible(true);
+            property_info_rent_2house.setVisible(true);
+            property_info_rent_3house.setVisible(true);
+            property_info_rent_4house.setVisible(true);
+            property_info_rent_hotel.setVisible(true);
+            buyHouseBtn.setVisible(true);
+            ptex1.setVisible(true);
+            ptex2.setVisible(true);
+            ptex3.setVisible(true);
+            ptex4.setVisible(true);
+            ptex5.setVisible(true);
+            ptex6.setVisible(true);
+            ptex7.setVisible(true);
 
-        property_info_rent_1house.setText("£" + fileIO.BoardData.get(i).get(10));
+            property_info_cost.setText("£" + fileIO.BoardData.get(i).get(7));
+            property_info_current.setText("£" + current_property.getRent());
+            property_info_name.setText(fileIO.BoardData.get(i).get(1));
+            Color c = Color.web(getHex(i));
+            property_info_color.setFill(c);
+            property_info_rent.setText("£" + fileIO.BoardData.get(i).get(8));
+            property_info_rent_set.setText("£" + Integer.parseInt(fileIO.BoardData.get(i).get(8)) * 2);
+            property_info_rent_1house.setText("£" + fileIO.BoardData.get(i).get(10));
+            property_info_rent_2house.setText("£" + fileIO.BoardData.get(i).get(11));
+            property_info_rent_3house.setText("£" + fileIO.BoardData.get(i).get(12));
+            property_info_rent_4house.setText("£" + fileIO.BoardData.get(i).get(13));
+            property_info_rent_hotel.setText("£" + fileIO.BoardData.get(i).get(14));
+        } else if(board_spaces.get(i) instanceof StationAndUtility) {
+            StationAndUtility current_stationutil = (StationAndUtility) board_spaces.get(i);
+            if(current_stationutil.getColor() == ColorOfSet.STATION) {
+                crtext.setText("Current rent:");
+                property_houses.setVisible(false);
+                Color c = Color.web("#FFFFFF");
+                property_info_color.setFill(c);
+                property_info_name.setText(current_stationutil.getName());
+                property_info_cost.setText("£" + fileIO.BoardData.get(i).get(7));
+                property_info_current.setText("£" + current_stationutil.getStationRent(1));//PROBLEM!!
+                property_info_rent.setVisible(false);
+                property_info_rent_set.setVisible(false);
+                property_info_rent_1house.setVisible(false);
+                property_info_rent_2house.setVisible(false);
+                property_info_rent_3house.setVisible(false);
+                property_info_rent_4house.setVisible(false);
+                property_info_rent_hotel.setVisible(false);
+                ptex1.setVisible(false);
+                ptex2.setVisible(false);
+                ptex3.setVisible(false);
+                ptex4.setVisible(false);
+                ptex5.setVisible(false);
+                ptex6.setVisible(false);
+                ptex7.setVisible(false);
+                buyHouseBtn.setVisible(false);
+            }else if(current_stationutil.getColor() == ColorOfSet.UTILITIES) {
+                crtext.setText("Dice multiplier");
+                property_houses.setVisible(false);
+                property_info_name.setText(current_stationutil.getName());
+                Color c = Color.web("#FFFFFF");
+                property_info_color.setFill(c);
+                property_info_cost.setText("£" + fileIO.BoardData.get(i).get(7));
+                property_info_current.setText("£" + current_stationutil.getUtilityRent(1,1));//PROBLEM!!
+                property_info_rent.setVisible(false);
+                property_info_rent_set.setVisible(false);
+                property_info_rent_1house.setVisible(false);
+                property_info_rent_2house.setVisible(false);
+                property_info_rent_3house.setVisible(false);
+                property_info_rent_4house.setVisible(false);
+                property_info_rent_hotel.setVisible(false);
+                ptex1.setVisible(false);
+                ptex2.setVisible(false);
+                ptex3.setVisible(false);
+                ptex4.setVisible(false);
+                ptex5.setVisible(false);
+                ptex6.setVisible(false);
+                ptex7.setVisible(false);
+                buyHouseBtn.setVisible(false);
+            }
 
-        property_info_rent_2house.setText("£" + fileIO.BoardData.get(i).get(11));
+        }
 
-        property_info_rent_3house.setText("£" + fileIO.BoardData.get(i).get(12));
-
-        property_info_rent_4house.setText("£" + fileIO.BoardData.get(i).get(13));
-
-        property_info_rent_hotel.setText("£" + fileIO.BoardData.get(i).get(14));
 
     }
 

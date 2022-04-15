@@ -49,9 +49,10 @@ public abstract class Player {
      */
     public boolean buyProperty(Property property) {
         if (passedGo && money.getAmount() >= property.getHouseCost()){
-            money.subtractAmount(property.getHouseCost());
+            money.subtractAmount(property.getCost());
             this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
             properties.add(property);
+            property.setOwner(this);
             return true;
         } else {
             System.out.println("Error, the player doesn't have enough money!");

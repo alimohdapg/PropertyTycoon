@@ -6,8 +6,8 @@
 public class StationAndUtility extends BoardSpace {
 
     private final int cost;
-    private final Color color;
     private boolean underMortgage;
+    private final ColorOfSet color;
 
     /**
      * Constructs a new station and utility object.
@@ -15,7 +15,7 @@ public class StationAndUtility extends BoardSpace {
      * @param name The station or utility's name.
      * @param cost The cost of buying the station or utility.
      */
-    public StationAndUtility(String name, int cost, Color color) {
+    public StationAndUtility(String name, int cost, ColorOfSet color) {
         super(name);
         this.cost = cost;
         this.color = color;
@@ -36,7 +36,7 @@ public class StationAndUtility extends BoardSpace {
      *
      * @return Color of the sta/uti.
      */
-    public Color getColor() {
+    public ColorOfSet getColor() {
         return color;
     }
 
@@ -47,13 +47,25 @@ public class StationAndUtility extends BoardSpace {
      * @return rent
      */
     public int getStationRent(int num) {
-        return num * 25;
+
+        if (num == 2) {
+            return 50;
+        }
+        else if (num == 3) {
+            return 100;
+        }
+        else if (num == 4) {
+            return 200;
+        }
+
+
+        return 25;
     }
 
     /**
      * Get rent of utility
      *
-     * @param num uti owned (the return of GameBoard.checkNumStaUti)
+     * @param num  uti owned (the return of GameBoard.checkNumStaUti)
      * @param dice dice num rolled
      * @return rent
      */

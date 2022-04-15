@@ -7,13 +7,14 @@ import java.util.*;
  */
 public class GameBoard {
 
-    private final Player[] players;
+    private final ArrayList<Player> players;
     private final Stack<Player> playerTurns;
     private final ArrayList<BoardSpace> boardSpaces;
     private boolean currentPlayerInJail;
     private final Dice dice1;
     private final Dice dice2;
     private final FileIO fileIO;
+    private Jail jail;
     private int samePlayerCounter;
     private Player currentPlayer;
     private int freeParkingSum;
@@ -24,13 +25,15 @@ public class GameBoard {
      *
      * @param players An array consisting of the players who will be playing the game.
      */
-    public GameBoard(Player[] players) {
+    public GameBoard(ArrayList<Player> players) {
         this.players = players;
         playerTurns = new Stack<>();
-        List<Player> playersList = Arrays.asList(players);
-        Collections.reverse(playersList);
-        playerTurns.addAll(playersList);
+        Collections.reverse(players);
+        for (int i = 0; i < 100000; i++) {
+            playerTurns.addAll(players);
+        }
         this.boardSpaces = new ArrayList<>();
+        jail = new Jail("Jail");
         currentPlayerInJail = false;
         dice1 = new Dice();
         dice2 = new Dice();
@@ -49,11 +52,11 @@ public class GameBoard {
             } else if (fileIO.BoardData.get(i).get(3).equals("Station") || fileIO.BoardData.get(i).get(3).equals("Utilities")) {
                 boardSpaces.add(new StationAndUtility(fileIO.BoardData.get(i).get(1),
                         Integer.parseInt(fileIO.BoardData.get(i).get(7)),
-                        Color.findAndCreateColor(fileIO.BoardData.get(i).get(2))
+                        ColorOfSet.findAndCreateColor(fileIO.BoardData.get(i).get(3))
                 ));
             } else {
                 boardSpaces.add(new Property(fileIO.BoardData.get(i).get(1),
-                        Color.findAndCreateColor(fileIO.BoardData.get(i).get(2)),
+                        ColorOfSet.findAndCreateColor(fileIO.BoardData.get(i).get(3)),
                         Integer.parseInt(fileIO.BoardData.get(i).get(7)),
                         Integer.parseInt(fileIO.BoardData.get(i).get(8)),
                         Integer.parseInt(fileIO.BoardData.get(i).get(10)),
@@ -64,7 +67,7 @@ public class GameBoard {
                 ));
             }
         }
-        boardSpaces.add(new Jail("Jail"));
+        boardSpaces.add(jail);
     }
 
     /**
@@ -74,32 +77,34 @@ public class GameBoard {
      * Updated by Hanzhen Gong
      */
     public void update() {
+        // TODO checking if the game has ended
+        checkEndgame();
         //goToNextTurn(); moved to new function
         /**
-        if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
-            samePlayerCounter++;
-        }
-        currentPlayer = playerTurns.pop();
-        if (playerTurns.isEmpty()) {
-            playerTurns.addAll(Arrays.asList(players));
-        }
-        // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
-        // a fine or by using the card.
-        if (checkInJail(currentPlayer)){
-            // TODO make frontend ask player to either use card or pay fine or stay in jail
-        }**/
+         if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
+         samePlayerCounter++;
+         }
+         currentPlayer = playerTurns.pop();
+         if (playerTurns.isEmpty()) {
+         playerTurns.addAll(Arrays.asList(players));
+         }
+         // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
+         // a fine or by using the card.
+         if (checkInJail(currentPlayer)){
+         // TODO make frontend ask player to either use card or pay fine or stay in jail
+         }**/
         // roll dice
-        int num1 = dice1.rollDice();
-        int num2 = dice2.rollDice();
+        dice1.rollDice();
+        dice2.rollDice();
         // Initial pass of go
-        if (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber() > 39){
-            if (!((HumanPlayer) currentPlayer).isPassedGo()){
-                ((HumanPlayer) currentPlayer).setPassedGo(true);
+        if (currentPlayer.getLocation() + dice1.getNumber() + dice2.getNumber() > 39) {
+            if (!currentPlayer.isPassedGo()) {
+                currentPlayer.setPassedGo(true);
             }
             currentPlayer.getMoney().addAmount(200);
         }
-        ((HumanPlayer) currentPlayer).setLocation(
-                (((HumanPlayer) currentPlayer).getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
+        currentPlayer.setLocation(
+                (currentPlayer.getLocation() + dice1.getNumber() + dice2.getNumber()) % 40
         );
         if (dice1.getNumber() == dice2.getNumber()) {
             playerTurns.push(currentPlayer);
@@ -108,27 +113,30 @@ public class GameBoard {
         }
         // Go to jail same dice three times
         if (samePlayerCounter == 2) {
-            ((HumanPlayer) currentPlayer).setLocation(40);
+            currentPlayer.setLocation(40);
+            jail.addAPlayer(currentPlayer);
         }
         // Go to jail board-space
-        if ((((HumanPlayer) currentPlayer).getLocation()) == 30) {
-            ((HumanPlayer) currentPlayer).setLocation(40);
+        if ((currentPlayer.getLocation()) == 30) {
+            currentPlayer.setLocation(40);
+            jail.addAPlayer(currentPlayer);
         }
         // Square 4 income tax fine
-        if ((((HumanPlayer) currentPlayer).getLocation()) == 4) {
+        if ((currentPlayer.getLocation()) == 4) {
             currentPlayer.getMoney().subtractAmount(200);
             freeParkingSum += 200;
         }
         // Square 38 income/super tax fine
-        if ((((HumanPlayer) currentPlayer).getLocation()) == 38) {
+        if (((currentPlayer).getLocation()) == 38) {
             currentPlayer.getMoney().subtractAmount(100);
             freeParkingSum += 100;
         }
         // Free parking board-space get the money and set the sum to 0
-        if ((((HumanPlayer) currentPlayer).getLocation()) == 20) {
+        if (((currentPlayer).getLocation()) == 20) {
             currentPlayer.getMoney().addAmount(freeParkingSum);
             freeParkingSum = 0;
         }
+
     }
 
     public void endTurn() {
@@ -136,14 +144,14 @@ public class GameBoard {
         if (currentPlayer != null && currentPlayer == playerTurns.peek()) {
             samePlayerCounter++;
         }
-        currentPlayer = playerTurns.pop();
-        if (playerTurns.isEmpty()) {
-            playerTurns.addAll(Arrays.asList(players));
+        do {
+            currentPlayer = playerTurns.pop();
+        } while (!players.contains(currentPlayer));
+        if (currentPlayer.getMoney().getAmount() < 0) {
+            players.remove(currentPlayer);
         }
-        // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
-        // a fine or by using the card.
-        if (checkInJail(currentPlayer)){
-            // TODO make frontend ask player to either use card or pay fine or stay in jail
+        while (!players.contains(currentPlayer)){
+            currentPlayer = playerTurns.pop();
         }
     }
 
@@ -154,11 +162,12 @@ public class GameBoard {
      * If yes, then decrease his/her prison term, and then go to next player
      */
     private void goToNextTurn() {
+        // if player is in jail, and it's their turn then present the opportunity to get out of jail either by paying
+        // a fine or by using the card.
+        // TODO make frontend ask player to either use card or pay fine or stay in jail
         if (checkInJail(currentPlayer)) {
             // update prison term
-            Jail jail = (Jail) boardSpaces.get(boardSpaces.size() - 1);
             jail.minusPrisonTerm(currentPlayer);
-
             // then go to next player
             playerTurns.pop();
         }
@@ -168,11 +177,10 @@ public class GameBoard {
      * Send prisoner to Jail
      */
     public void updateJail() {
-        // TODO either pay fine or use get out of jail card before being placed in jail.
         if (checkPayFine()) {
             // probably will improve,
             // because of the problem of updating dara from backend to frontend (several times)
-            ((HumanPlayer) currentPlayer).setLocation(10);
+            currentPlayer.setLocation(10);
         }
     }
 
@@ -181,7 +189,6 @@ public class GameBoard {
      * @return if the player is in Jail or not
      */
     private Boolean checkInJail(Player cur_player) {
-        Jail jail = (Jail) boardSpaces.get(boardSpaces.size() - 1);
         Set<Player> p_inJail = jail.getPlayersInJail();
         return p_inJail.contains(cur_player);
     }
@@ -239,7 +246,7 @@ public class GameBoard {
         }
 
         // check if one owns all props in same color
-        if (property.getColor() == Color.BROWN || property.getColor() == Color.DEEPBLUE) {
+        if (property.getColor() == ColorOfSet.BROWN || property.getColor() == ColorOfSet.DEEPBLUE) {
             if (numProps == 2) ownsAll = true;
         } else {
             if (numProps == 3) ownsAll = true;
@@ -254,6 +261,11 @@ public class GameBoard {
         if (ownsAll && diffOK) canBuy = true;
 
         return canBuy;
+    }
+
+
+    public boolean checkEndgame() {
+        return false;
     }
 
     // This part is considering to be deleted.
@@ -343,7 +355,7 @@ public class GameBoard {
      *
      * @return players array
      */
-    public Player[] getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -357,8 +369,8 @@ public class GameBoard {
     }
 
     public void updateAllPlayers() {
-        for(int i = 0; i < players.length; i++) {
-            players[i].updateMoney();
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).updateMoney();
         }
     }
 }
