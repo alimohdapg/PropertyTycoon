@@ -85,6 +85,7 @@ public abstract class Player {
         {
             money.addAmount(moneyBack / 2);
         }
+        property.setOwner(null);
         properties.remove(property);
     }
 
