@@ -29,7 +29,7 @@ public class GameController {
     @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, FreeParking;
 
     @FXML
-    private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane;
+    private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane;
 
     @FXML
     private Circle p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
@@ -188,6 +188,7 @@ public class GameController {
             currentTurnText.setText(gameBoard.getCurrentPlayer().getName() + "'s turn");
             if(gameBoard.getCurrentPlayer().isInJail()) {
                 System.out.println("Current player is in jail");
+                jail_pane.setVisible(true);
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -202,18 +203,22 @@ public class GameController {
      * Method for button onclick uses get out of jail card
      */
     public void useCard () {
-        //missing player method for using card
-        ;
-        gameBoard.updateAllPlayers();
+        if(currentPlayer.isHasCard()) {
+            currentPlayer.setHasCard(false);
+            currentPlayer.setOutJail();
+            jail_pane.setVisible(false);
+            gameBoard.updateAllPlayers();
+        }
     }
 
     /**
      * Method for button pay 50 to be released from jail
      */
     public void pay50 () {
-        //missing player method for paying 50
-        ;
+        currentPlayer.getMoney().subtractAmount(50);
+        currentPlayer.setOutJail();
         gameBoard.updateAllPlayers();
+        jail_pane.setVisible(false);
     }
 
     /**

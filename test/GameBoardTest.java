@@ -29,7 +29,7 @@ class GameBoardTest {
         assertTrue(gameBoard.getBoardSpaces().get(12) instanceof StationAndUtility);
         assertTrue(gameBoard.getBoardSpaces().get(3) instanceof Property);
         assertTrue(gameBoard.getBoardSpaces().get(8) instanceof Property);
-        assertTrue(gameBoard.getBoardSpaces().get(40) instanceof Jail);
+        //assertTrue(gameBoard.getBoardSpaces().get(40) instanceof Jail);
     }
 
     @Test

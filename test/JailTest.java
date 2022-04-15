@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JailTest
+/*class JailTest
 {
     private Jail jail;
     private Player player1;
@@ -37,4 +37,4 @@ class JailTest
         jail.removeAPlayer(player1);
         assertEquals(0, jail.getPlayersInJail().size());
     }
-}
+}*/
