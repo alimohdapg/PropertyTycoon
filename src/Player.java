@@ -146,7 +146,7 @@ public abstract class Player {
      * @param stationAndUtility a sta/uti that a player wants to buy
      */
     public boolean buyStaUti(StationAndUtility stationAndUtility) {
-        if (money.getAmount() >= stationAndUtility.getCost()) {
+        if (money.getAmount() >= stationAndUtility.getCost() && stationAndUtility.getOwner() == null) {
             money.subtractAmount(stationAndUtility.getCost());
             stationAndUtilities.add(stationAndUtility);
             return true;
@@ -171,6 +171,7 @@ public abstract class Player {
             {
                 money.addAmount(stationAndUtility.getCost() / 2);
             }
+            stationAndUtility.setOwner(null);
             stationAndUtilities.remove(stationAndUtility);
         } else {
             System.out.println("Error, the StaUti ArrayList is empty!");
