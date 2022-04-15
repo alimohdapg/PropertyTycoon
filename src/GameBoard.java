@@ -373,4 +373,8 @@ public class GameBoard {
             players.get(i).updateMoney();
         }
     }
+
+    public int getFreeParkingSum() {
+        return freeParkingSum;
+    }
 }

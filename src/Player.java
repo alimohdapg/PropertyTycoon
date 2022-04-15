@@ -144,12 +144,14 @@ public abstract class Player {
      *
      * @param stationAndUtility a sta/uti that a player wants to buy
      */
-    public void buyStaUti(StationAndUtility stationAndUtility) {
+    public boolean buyStaUti(StationAndUtility stationAndUtility) {
         if (money.getAmount() >= stationAndUtility.getCost()) {
             money.subtractAmount(stationAndUtility.getCost());
             stationAndUtilities.add(stationAndUtility);
+            return true;
         } else {
             System.out.println("Error, the player doesn't have enough money!");
+            return false;
         }
     }
 
