@@ -48,7 +48,7 @@ public abstract class Player {
      * @param property the property that a player wants to buy
      */
     public boolean buyProperty(Property property) {
-        if (passedGo && money.getAmount() >= property.getHouseCost()){
+        if (passedGo && money.getAmount() >= property.getHouseCost() && property.getOwner() == null){
             money.subtractAmount(property.getCost());
             this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
             properties.add(property);
@@ -85,6 +85,7 @@ public abstract class Player {
         {
             money.addAmount(moneyBack / 2);
         }
+        property.setOwner(null);
         properties.remove(property);
     }
 
@@ -144,12 +145,14 @@ public abstract class Player {
      *
      * @param stationAndUtility a sta/uti that a player wants to buy
      */
-    public void buyStaUti(StationAndUtility stationAndUtility) {
-        if (money.getAmount() >= stationAndUtility.getCost()) {
+    public boolean buyStaUti(StationAndUtility stationAndUtility) {
+        if (money.getAmount() >= stationAndUtility.getCost() && stationAndUtility.getOwner() == null) {
             money.subtractAmount(stationAndUtility.getCost());
             stationAndUtilities.add(stationAndUtility);
+            return true;
         } else {
             System.out.println("Error, the player doesn't have enough money!");
+            return false;
         }
     }
 
@@ -168,6 +171,7 @@ public abstract class Player {
             {
                 money.addAmount(stationAndUtility.getCost() / 2);
             }
+            stationAndUtility.setOwner(null);
             stationAndUtilities.remove(stationAndUtility);
         } else {
             System.out.println("Error, the StaUti ArrayList is empty!");

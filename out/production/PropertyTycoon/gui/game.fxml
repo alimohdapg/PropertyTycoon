@@ -22,6 +22,11 @@
                   <Image url="@../img/logo.png" />
                </image>
             </ImageView>
+            <Text fx:id="FreeParking" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Free Parking: £" wrappingWidth="365.0000077682125">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Rectangle fx:id="a0_bg" arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="98.0" layoutX="620.0" layoutY="622.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
@@ -566,7 +571,7 @@
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text layoutX="20.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent">
+                  <Text fx:id="ptex11" layoutX="20.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -576,7 +581,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="20.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ set" wrappingWidth="84.99999804016988">
+                  <Text fx:id="ptex12" layoutX="20.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ set" wrappingWidth="84.99999804016988">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -586,7 +591,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="20.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="118.000000940051">
+                  <Text fx:id="ptex13" layoutX="20.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="118.000000940051">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -596,7 +601,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="20.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="118.00000356626697">
+                  <Text fx:id="ptex14" layoutX="20.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="118.00000356626697">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -606,7 +611,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="20.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="111.00001338265793">
+                  <Text fx:id="ptex15" layoutX="20.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="111.00001338265793">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -616,7 +621,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="20.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="118.00000356626697">
+                  <Text fx:id="ptex16" layoutX="20.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="118.00000356626697">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -626,7 +631,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="20.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="111.00001338265793">
+                  <Text fx:id="ptex17" layoutX="20.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="111.00001338265793">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -651,11 +656,6 @@
                   <Font size="29.0" />
                </font>
             </Text>
-            <Text layoutX="84.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost: " wrappingWidth="71.04730187939094">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Text>
             <Text fx:id="notEnoughMoney" layoutX="58.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not enough money!" visible="false">
                <font>
                   <Font size="22.0" />
@@ -668,12 +668,43 @@
             <Font size="26.0" />
          </font>
       </Button>
-      <Button fx:id="jailUseCard" layoutX="1022.0" layoutY="87.0" mnemonicParsing="false" onAction="#useCard" prefHeight="33.0" prefWidth="138.0" text="Use card" visible="false" />
-      <Button fx:id="jailPay50" layoutX="1022.0" layoutY="127.0" mnemonicParsing="false" onAction="#pay50" prefHeight="33.0" prefWidth="138.0" text="Pay £50" visible="false" />
-      <Text fx:id="jailText" fill="RED" layoutX="1016.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You're in jail" visible="false" wrappingWidth="149.9999982254867">
+      <AnchorPane fx:id="fine_pane" layoutX="748.0" layoutY="285.0" prefHeight="341.0" prefWidth="523.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
+            <Button fx:id="fine_accept" layoutX="108.0" layoutY="253.0" mnemonicParsing="false" onAction="#confirmFine" prefHeight="58.0" prefWidth="307.0" styleClass="menuButton" text="Confirm" />
+            <Text fx:id="fine_text" layoutX="128.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You were fined £200!" wrappingWidth="266.9999496108503">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="jail_pane" layoutX="739.0" layoutY="290.0" prefHeight="341.0" prefWidth="523.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
+            <Button fx:id="jailUseCard" layoutX="108.0" layoutY="142.0" mnemonicParsing="false" onAction="#useCard" prefHeight="58.0" prefWidth="307.0" styleClass="menuButton" text="Use card" />
+            <Text fx:id="fine_text1" layoutX="175.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are in jail!" wrappingWidth="171.9999496108503">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Text>
+            <Button fx:id="jailPay50" layoutX="108.0" layoutY="215.0" mnemonicParsing="false" onAction="#pay50" prefHeight="58.0" prefWidth="307.0" styleClass="menuButton" text="Pay £50" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnSellProp" layoutX="1010.0" layoutY="4.0" mnemonicParsing="false" onAction="#buttonSellProp" opacity="0.25" prefHeight="71.0" prefWidth="267.0" styleClass="menuButton" text="Sell Property">
          <font>
-            <Font size="27.0" />
+            <Font size="26.0" />
          </font>
-      </Text>
+      </Button>
+      <Button fx:id="btnSellHouse" layoutX="1010.0" layoutY="78.0" mnemonicParsing="false" onAction="#buttonSellHouse" opacity="0.25" prefHeight="71.0" prefWidth="267.0" styleClass="menuButton" text="Sell House">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnMortgage" layoutX="1010.0" layoutY="153.0" mnemonicParsing="false" onAction="#buttonMortgage" opacity="0.25" prefHeight="71.0" prefWidth="267.0" styleClass="menuButton" text="Mortgage">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
