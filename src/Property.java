@@ -16,6 +16,7 @@ public class Property extends BoardSpace {
     private int houseCount;
     private boolean hasHotel;
     private boolean underMortgage;
+    private Player owner;
 
     /**
      * Constructs a new property object.
@@ -44,6 +45,7 @@ public class Property extends BoardSpace {
         houseCount = 0;
         hasHotel = false;
         underMortgage = false;
+        owner = null;
     }
 
     /**
@@ -164,5 +166,13 @@ public class Property extends BoardSpace {
 
     public void setUnderMortgage(boolean underMortgage) {
         this.underMortgage = underMortgage;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
     }
 }

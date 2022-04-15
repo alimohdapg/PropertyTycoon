@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -129,7 +130,7 @@ public class GameController {
         playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
 
         //Create gameBoard instance
-        gameBoard = new GameBoard(new Player[]{playerOne, playerTwo});
+        gameBoard = new GameBoard(new ArrayList<Player>(Arrays.asList(playerOne, playerTwo)));
         gameBoard.endTurn();
 
         current_pos = gameBoard.getCurrentPlayerPosition();
@@ -156,7 +157,7 @@ public class GameController {
         if(!turnInProgress && canRoll) {
             turnInProgress = true;
             gameBoard.update();
-            currentPlayer = (HumanPlayer) gameBoard.getCurrentPlayer();
+            currentPlayer = gameBoard.getCurrentPlayer();
             //Updates current_pos with the new player position
             current_pos = gameBoard.getCurrentPlayerPosition();
 
@@ -302,7 +303,6 @@ public class GameController {
                 text_array.get(property_indexes[iter]).setText(current.getName());
                 iter++;
             }
-
         }
     }
 

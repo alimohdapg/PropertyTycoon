@@ -47,13 +47,25 @@ public class StationAndUtility extends BoardSpace {
      * @return rent
      */
     public int getStationRent(int num) {
-        return num * 25;
+
+        if (num == 2) {
+            return 50;
+        }
+        else if (num == 3) {
+            return 100;
+        }
+        else if (num == 4) {
+            return 200;
+        }
+
+
+        return 25;
     }
 
     /**
      * Get rent of utility
      *
-     * @param num uti owned (the return of GameBoard.checkNumStaUti)
+     * @param num  uti owned (the return of GameBoard.checkNumStaUti)
      * @param dice dice num rolled
      * @return rent
      */
