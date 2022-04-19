@@ -309,7 +309,7 @@ public abstract class Player {
     public void setOutJail() {
         setJailTurn(0);
         inJail = false;
-
+        setLocation(10);
     }
 
     public int getJailTurn() {

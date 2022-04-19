@@ -37,6 +37,7 @@ public class GameBoard {
         fileIO = new FileIO();
         fillBoardSpaces();
         paidFine = false;
+        freeParkingSum = 0;
     }
 
     /**
@@ -98,7 +99,6 @@ public class GameBoard {
         if (currentPlayer.isInJail()) {
             currentPlayer.setJailTurn(currentPlayer.getJailTurn() - 1);
             if (currentPlayer.getJailTurn() <= 0) {
-                currentPlayer.setLocation(10);
                 currentPlayer.setOutJail();
             }
         }

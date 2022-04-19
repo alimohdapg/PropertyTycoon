@@ -154,10 +154,10 @@ public class GameController {
      */
     public void takeTurn() {
         gameBoard.updateAllPlayers();
+        gameBoard.update();
+        currentPlayer = gameBoard.getCurrentPlayer();
         if(!turnInProgress && canRoll) {
             turnInProgress = true;
-            gameBoard.update();
-            currentPlayer = gameBoard.getCurrentPlayer();
             //Updates current_pos with the new player position
             current_pos = gameBoard.getCurrentPlayerPosition();
 
@@ -215,10 +215,11 @@ public class GameController {
      * Method for button pay 50 to be released from jail
      */
     public void pay50 () {
-        currentPlayer.getMoney().subtractAmount(50);
-        currentPlayer.setOutJail();
+        gameBoard.getCurrentPlayer().getMoney().subtractAmount(50);
+        gameBoard.getCurrentPlayer().setOutJail();
         gameBoard.updateAllPlayers();
         jail_pane.setVisible(false);
+        current_pos = gameBoard.getCurrentPlayerPosition();
     }
 
     /**
