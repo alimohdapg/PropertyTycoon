@@ -8,6 +8,7 @@ public class StationAndUtility extends BoardSpace {
     private final int cost;
     private boolean underMortgage;
     private final ColorOfSet color;
+    private Player owner;
 
     /**
      * Constructs a new station and utility object.
@@ -20,6 +21,7 @@ public class StationAndUtility extends BoardSpace {
         this.cost = cost;
         this.color = color;
         underMortgage = false;
+        owner = null;
     }
 
     /**
@@ -38,6 +40,24 @@ public class StationAndUtility extends BoardSpace {
      */
     public ColorOfSet getColor() {
         return color;
+    }
+
+    /**
+     * get the owner
+     *
+     * @return player
+     */
+    public Player getOwner() {
+        return owner;
+    }
+
+    /**
+     * set the owner
+     *
+     * @param owner player
+     */
+    public void setOwner(Player owner) {
+        this.owner = owner;
     }
 
     /**

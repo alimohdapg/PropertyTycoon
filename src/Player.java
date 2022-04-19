@@ -14,6 +14,8 @@ public abstract class Player {
     private ArrayList<StationAndUtility> stationAndUtilities;
     private int location;
     private boolean inJail;
+    private boolean hasCard;
+    private int jailTurn;
     private boolean passedGo;
 
     @FXML
@@ -21,6 +23,7 @@ public abstract class Player {
 
     @FXML
     private Text playerName, playerMoney;
+
 
     public Player(String name, Token token, Cash money, ArrayList<Property> properties,
                   ArrayList<StationAndUtility> stationAndUtilities, Circle playerToken,
@@ -37,9 +40,11 @@ public abstract class Player {
         this.playerMoney = playerMoney;
         this.playerName.setText(name);
         this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
+        this.jailTurn = 0;
 
         inJail = false;
         passedGo = false;
+        hasCard = false;
     }
 
     /**
@@ -48,7 +53,7 @@ public abstract class Player {
      * @param property the property that a player wants to buy
      */
     public boolean buyProperty(Property property) {
-        if (passedGo && money.getAmount() >= property.getHouseCost()){
+        if (passedGo && money.getAmount() >= property.getHouseCost() && property.getOwner() == null) {
             money.subtractAmount(property.getCost());
             this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
             properties.add(property);
@@ -68,23 +73,18 @@ public abstract class Player {
     public void sellProperty(Property property) {
 
         int moneyBack = property.getCost();
-        if (property.doesHaveHotel())
-        {
+        if (property.doesHaveHotel()) {
             moneyBack += property.getHouseCost() * 5;
-        }
-        else
-        {
+        } else {
             moneyBack += property.getHouseCount() * property.getHouseCost();
         }
 
-        if (!property.isUnderMortgage())
-        {
+        if (!property.isUnderMortgage()) {
             money.addAmount(moneyBack);
-        }
-        else
-        {
+        } else {
             money.addAmount(moneyBack / 2);
         }
+        property.setOwner(null);
         properties.remove(property);
     }
 
@@ -95,7 +95,7 @@ public abstract class Player {
      */
     public boolean buyAHouse(Property property) {
         if (money.getAmount() > property.getHouseCost()) {
-            if  (property.getHouseCost() < 4) {
+            if (property.getHouseCost() < 4) {
                 property.buyHouse();
             } else {
                 property.buyHotel();
@@ -109,14 +109,21 @@ public abstract class Player {
         }
     }
 
+    public boolean isHasCard() {
+        return hasCard;
+    }
+
+    public void setHasCard(boolean hasCard) {
+        this.hasCard = hasCard;
+    }
+
     /**
      * A player can sell a single house from a property
      *
      * @param property the property where a player wants to sell a house
      */
-    public void sellAHouse(Property property)
-    {
-        if (property.getHouseCount() > 0){
+    public void sellAHouse(Property property) {
+        if (property.getHouseCount() > 0) {
             money.addAmount(property.getHouseCost());
             property.setHouseCount(property.getHouseCount() - 1);
         } else {
@@ -129,9 +136,8 @@ public abstract class Player {
      *
      * @param property a property where a player wants to sell a hotel
      */
-    public void sellAHotel(Property property)
-    {
-        if (property.doesHaveHotel()){
+    public void sellAHotel(Property property) {
+        if (property.doesHaveHotel()) {
             money.addAmount(property.getHouseCost() * 5);
             property.sellHotel();
         } else {
@@ -139,17 +145,20 @@ public abstract class Player {
         }
     }
 
+
     /**
      * A player can buy a station or utility if one has enough cash
      *
      * @param stationAndUtility a sta/uti that a player wants to buy
      */
-    public void buyStaUti(StationAndUtility stationAndUtility) {
-        if (money.getAmount() >= stationAndUtility.getCost()) {
+    public boolean buyStaUti(StationAndUtility stationAndUtility) {
+        if (money.getAmount() >= stationAndUtility.getCost() && stationAndUtility.getOwner() == null) {
             money.subtractAmount(stationAndUtility.getCost());
             stationAndUtilities.add(stationAndUtility);
+            return true;
         } else {
             System.out.println("Error, the player doesn't have enough money!");
+            return false;
         }
     }
 
@@ -160,14 +169,12 @@ public abstract class Player {
      */
     public void sellStaUti(StationAndUtility stationAndUtility) {
         if (stationAndUtilities.size() > 0) {
-            if (!stationAndUtility.isUnderMortgage())
-            {
+            if (!stationAndUtility.isUnderMortgage()) {
                 money.addAmount(stationAndUtility.getCost());
-            }
-            else
-            {
+            } else {
                 money.addAmount(stationAndUtility.getCost() / 2);
             }
+            stationAndUtility.setOwner(null);
             stationAndUtilities.remove(stationAndUtility);
         } else {
             System.out.println("Error, the StaUti ArrayList is empty!");
@@ -235,42 +242,54 @@ public abstract class Player {
      *
      * @return StaUti ArrayList
      */
-    public ArrayList<StationAndUtility> getStationAndUtilities() { return stationAndUtilities; }
+    public ArrayList<StationAndUtility> getStationAndUtilities() {
+        return stationAndUtilities;
+    }
 
     /**
      * Retrieve player's current location on the game board
      *
      * @return location as int type (0 to 39)
      */
-    public int getLocation() { return location; }
+    public int getLocation() {
+        return location;
+    }
 
     /**
      * Sets the location value to the new value passed into
      *
      * @param location location as int type (0 to 39)
      */
-    public void setLocation(int location) {this.location = location;}
+    public void setLocation(int location) {
+        this.location = location;
+    }
 
     /**
      * Get player token on board
      *
      * @return player token on board
      */
-    public Circle getBoardToken(){ return playerToken; }
+    public Circle getBoardToken() {
+        return playerToken;
+    }
 
     /**
      * Get player name on board
      *
      * @return player name on board
      */
-    public Text getPlayerName() { return playerName; }
+    public Text getPlayerName() {
+        return playerName;
+    }
 
     /**
      * Get player money on board
      *
      * @return player money on board
      */
-    public Text getPlayerMoney() { return playerMoney; }
+    public Text getPlayerMoney() {
+        return playerMoney;
+    }
 
     /**
      * Get player's current status
@@ -281,13 +300,24 @@ public abstract class Player {
         return inJail;
     }
 
-    /**
-     * Sets player's current status
-     *
-     * @param inJail True for "player is in Jail"
-     */
-    public void setInJail(boolean inJail) {
-        this.inJail = inJail;
+
+    public void setInJail() {
+        setJailTurn(3);
+        inJail = true;
+    }
+
+    public void setOutJail() {
+        setJailTurn(0);
+        inJail = false;
+
+    }
+
+    public int getJailTurn() {
+        return jailTurn;
+    }
+
+    public void setJailTurn(int jailTurn) {
+        this.jailTurn = jailTurn;
     }
 
     /**
@@ -320,10 +350,8 @@ public abstract class Player {
      *
      * @param property
      */
-    public void mortgageProperty(Property property)
-    {
-        if (properties.contains(property) && !property.isUnderMortgage())
-        {
+    public void mortgageProperty(Property property) {
+        if (properties.contains(property) && !property.isUnderMortgage()) {
             int value = property.getCost() + property.getHouseCount() * property.getHouseCost();
             money.addAmount(value / 2);
             property.setUnderMortgage(true);
@@ -335,10 +363,8 @@ public abstract class Player {
      *
      * @param stationAndUtility
      */
-    public void mortgageStationAndUtility(StationAndUtility stationAndUtility)
-    {
-        if (stationAndUtilities.contains(stationAndUtility) && !stationAndUtility.isUnderMortgage())
-        {
+    public void mortgageStationAndUtility(StationAndUtility stationAndUtility) {
+        if (stationAndUtilities.contains(stationAndUtility) && !stationAndUtility.isUnderMortgage()) {
             money.addAmount(stationAndUtility.getCost() / 2);
             stationAndUtility.setUnderMortgage(true);
         }

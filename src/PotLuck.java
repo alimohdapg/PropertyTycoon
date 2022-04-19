@@ -20,7 +20,7 @@ public class PotLuck extends BoardSpace
     private FileIO fileIO = new FileIO();
     private String potLuck1;
     private String potLuck2;
-    private String potLuck3;
+    private String potLuck3; // = "Old Creek"
     private String potLuck4;
     private String potLuck5;
     private String potLuck6;
