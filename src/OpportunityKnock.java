@@ -143,4 +143,5 @@ public class OpportunityKnock extends BoardSpace
         OpportunityKnock o = new OpportunityKnock("d");
         o.initialize();
     }
+
 }

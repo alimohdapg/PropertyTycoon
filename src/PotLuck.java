@@ -232,6 +232,59 @@ public class PotLuck extends BoardSpace
     {
         cards.addLast(17);
     }
-    
 
+    // Call this method when PotLuck 1, 2, 4, 5, 9, 13, 15
+    public void playerReceivesMoney(Player player, int money)
+    {
+        Cash currentMoney = player.getMoney();
+        currentMoney.addAmount(money);
+        player.setMoney(currentMoney);
+    }
+
+    // Call this method when PotLuck 16
+    public void playerReceivesMoney(Player player, ArrayList<Player> otherPlayers, int money)
+    {
+        int collectMoney = 0;
+
+        for (Player currentPlayer : otherPlayers)
+        {
+            Cash currentMoney = currentPlayer.getMoney();
+            currentMoney.subtractAmount(money);
+            currentPlayer.setMoney(currentMoney);
+            collectMoney += money;
+        }
+
+        Cash currentMoney = player.getMoney();
+        currentMoney.addAmount(collectMoney);
+        player.setMoney(currentMoney);
+    }
+
+    // Call this method when PotLuck 6, 7, 10, 12
+    public void playerLosesMoney(Player player, int money)
+    {
+        Cash currentMoney = player.getMoney();
+        currentMoney.subtractAmount(money);
+        player.setMoney(currentMoney);
+    }
+
+    // Call this method When PotLuck 17
+    public void getFreeJailCard(Player player)
+    {
+        player.setHasCard(true);
+    }
+
+    // Call this method when PotLuck 3, 8, 14
+    public void setPlayerTo(Player player, int location)
+    {
+        player.setLocation(location);
+    }
+
+
+//    public static void main(String[] args) {
+//        PotLuck p = new PotLuck("da");
+//        for (int i = 0; i < 10; i++)
+//        {
+//            System.out.println(p.getNextCard());
+//        }
+//    }
 }
