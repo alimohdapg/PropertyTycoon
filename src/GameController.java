@@ -1,11 +1,9 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -24,9 +22,13 @@ import java.util.Collections;
 public class GameController {
 
     @FXML
-    private Circle playerOneToken, playerTwoToken;
+    private Circle playerOneToken, playerTwoToken, playerThreeToken, playerFourToken, playerFiveToken;
 
-    @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, FreeParking;
+    @FXML
+    private Pane player_1, player_2, player_3, player_4, player_5;
+
+    @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, playerThreeName, playerThreeMoney, playerFourName, playerFourMoney,
+            playerFiveName, playerFiveMoney, FreeParking;
 
     @FXML
     private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane;
@@ -40,6 +42,15 @@ public class GameController {
         a11_text, a12_text, a13_text, a14_text, a15_text, a16_text, a17_text, a18_text, a19_text, a20_text, a21_text,
         a22_text, a23_text, a24_text, a25_text, a26_text, a27_text, a28_text, a29_text, a30_text, a31_text, a32_text,
         a33_text, a34_text, a35_text, a36_text, a37_text, a38_text, a39_text;
+
+    @FXML
+    private TextField tbox1, tbox2, tbox3, tbox4, tbox5;
+
+    @FXML
+    private CheckBox check1, check2, check3, check4, check5;
+
+    @FXML
+    private AnchorPane playerSelectPane;
 
     @FXML
     private ArrayList<Circle> pos_array;
@@ -84,7 +95,7 @@ public class GameController {
 
     private int current_pos, currentSelectedProperty;
 
-    private Player playerOne, playerTwo, currentPlayer;
+    private Player playerOne, playerTwo, playerThree, playerFour, playerFive, currentPlayer;
 
 
 
@@ -99,6 +110,15 @@ public class GameController {
      * Default function, runs on launch. Initialises the array of positional elements
      */
     public void initialize() {
+
+        playerSelectPane.setVisible(true);
+
+    }
+
+    public void startGame() {
+
+        playerSelectPane.setVisible(false);
+
         //File io
         fileIO = new FileIO();
 
@@ -125,12 +145,47 @@ public class GameController {
         diceimg5 = new Image("/img/dice_faces/d5.png");
         diceimg6 = new Image("/img/dice_faces/d6.png");
 
+        ArrayList<Player> playerList = new ArrayList<Player>();
+
+        if(check1.isSelected()) {
+            playerOne = new HumanPlayer(tbox1.getText(),Token.CAT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerOneToken, playerOneName, playerOneMoney);
+            player_1.setVisible(true);
+            playerOneToken.setVisible(true);
+            playerList.add(playerOne);
+        } else { player_1.setVisible(false); playerOneToken.setVisible(false); }
+        if(check2.isSelected()) {
+            playerTwo = new HumanPlayer(tbox2.getText(),Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
+            player_2.setVisible(true);
+            playerTwoToken.setVisible(true);
+            playerList.add(playerTwo);
+        } else { player_2.setVisible(false); playerTwoToken.setVisible(false); }
+        if(check3.isSelected()) {
+            playerThree = new HumanPlayer(tbox3.getText(),Token.BOOT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerThreeToken, playerThreeName, playerThreeMoney);
+            player_3.setVisible(true);
+            playerThreeToken.setVisible(true);
+            playerList.add(playerThree);
+        } else { player_3.setVisible(false); playerThreeToken.setVisible(false); }
+        if(check4.isSelected()) {
+            playerFour = new HumanPlayer(tbox4.getText(),Token.HATSTAND, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerFourToken, playerFourName, playerFourMoney);
+            player_4.setVisible(true);
+            playerFourToken.setVisible(true);
+            playerList.add(playerFour);
+        } else { player_4.setVisible(false); playerFourToken.setVisible(false);}
+        if(check5.isSelected()) {
+            playerFive = new HumanPlayer(tbox5.getText(),Token.SHIP, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerFiveToken, playerFiveName, playerFiveMoney);
+            player_5.setVisible(true);
+            playerFiveToken.setVisible(true);
+            playerList.add(playerFive);
+        } else { player_5.setVisible(false); playerFiveToken.setVisible(false); }
+
+
+
         //Initialise players
-        playerOne = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerOneToken, playerOneName, playerOneMoney);
-        playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
+        //playerOne = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerOneToken, playerOneName, playerOneMoney);
+        //playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
 
         //Create gameBoard instance
-        gameBoard = new GameBoard(new ArrayList<Player>(Arrays.asList(playerOne, playerTwo)));
+        gameBoard = new GameBoard(playerList);
         gameBoard.endTurn();
 
         current_pos = gameBoard.getCurrentPlayerPosition();
@@ -245,7 +300,10 @@ public class GameController {
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
         BoardSpace current_space = board_spaces.get(currentPlayer.getLocation());
         if (current_space instanceof Property && currentPlayer.isPassedGo()) {
-            loadProperty_buy(currentPlayer.getLocation());
+            current_space = (Property) board_spaces.get(currentPlayer.getLocation());
+            if(((Property) current_space).getOwner() == null) {
+                loadProperty_buy(currentPlayer.getLocation());
+            }
         } else if(current_space instanceof StationAndUtility && currentPlayer.isPassedGo()) {
             loadProperty_buy(currentPlayer.getLocation());
         } else if(currentPlayer.getLocation() == 4 || currentPlayer.getLocation() == 38){
