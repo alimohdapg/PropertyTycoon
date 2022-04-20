@@ -519,6 +519,7 @@ public class GameController {
 
     }
 
+
     /**
      * Duplicate of loadProperty but for the buy property panel
      * @param i the board location
@@ -584,7 +585,7 @@ public class GameController {
                 property_info_color1.setFill(c);
                 property_info_name1.setText(current_stationutil.getName());
                 property_info_cost1.setText("£" + fileIO.BoardData.get(i).get(7));
-            }else if(current_stationutil.getColor() == ColorOfSet.UTILITIES) {
+            } else if(current_stationutil.getColor() == ColorOfSet.UTILITIES) {
                 property_info_name1.setText(current_stationutil.getName());
                 Color c = Color.web("#FFFFFF");
                 property_info_color1.setFill(c);
