@@ -31,7 +31,8 @@ public class GameController {
             playerFiveName, playerFiveMoney, FreeParking;
 
     @FXML
-    private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane;
+    private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane,
+    PLPane, OKPane;
 
     @FXML
     private Circle p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
@@ -178,8 +179,6 @@ public class GameController {
             playerList.add(playerFive);
         } else { player_5.setVisible(false); playerFiveToken.setVisible(false); }
 
-
-
         //Initialise players
         //playerOne = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerOneToken, playerOneName, playerOneMoney);
         //playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
@@ -282,8 +281,27 @@ public class GameController {
      */
     public void confirm_rollClicked() {
         current_pos = gameBoard.getCurrentPlayerPosition();
-        currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
-        currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+        if(currentPlayer == playerOne) {
+            currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+            currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+        }
+        if(currentPlayer == playerTwo) {
+            currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()+10);
+            currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+        }
+        if(currentPlayer == playerThree) {
+            currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+            currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY()+10);
+        }
+        if(currentPlayer == playerFour) {
+            currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()-10);
+            currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+        }
+        if(currentPlayer == playerFive) {
+            currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+            currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() - 10);
+        }
+
 
         turnInProgress = false;
         dice_roll_pane.setVisible(false);
@@ -308,6 +326,10 @@ public class GameController {
             loadProperty_buy(currentPlayer.getLocation());
         } else if(currentPlayer.getLocation() == 4 || currentPlayer.getLocation() == 38){
             loadFineScreen();
+        } else if(currentPlayer.getLocation() == 2 || currentPlayer.getLocation() == 17 || currentPlayer.getLocation() == 33) {
+            loadPotLuck();
+        } else if(currentPlayer.getLocation() == 7 || currentPlayer.getLocation() == 22 || currentPlayer.getLocation() == 36) {
+            loadOpportunityKnocks();
         } else {
             canEndTurn = true;
         }
@@ -763,5 +785,23 @@ public class GameController {
             current_property = (Property) current;
             currentPlayer.mortgageProperty(current_property);
         }
+    }
+
+    public void loadPotLuck() {
+        PLPane.setVisible(true);
+    }
+
+    public void loadOpportunityKnocks() {
+        OKPane.setVisible(true);
+    }
+
+    public void confirmPL() {
+        PLPane.setVisible(false);
+        canEndTurn = true;
+    }
+
+    public void confirmOK() {
+        OKPane.setVisible(false);
+        canEndTurn = true;
     }
 }

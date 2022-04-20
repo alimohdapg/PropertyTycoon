@@ -7,7 +7,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
@@ -783,6 +785,124 @@
             <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="142.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/icons/ship.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="OKPane" layoutX="749.0" layoutY="300.0" prefHeight="341.0" prefWidth="523.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
+            <Text layoutX="110.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opportunity Knocks" textAlignment="CENTER" wrappingWidth="303.09576416015625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="269.0" layoutX="46.0" layoutY="58.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="220.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color blue="0.44999998807907104" green="0.8999999761581421" red="0.6154567003250122" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.9800000190734863" green="0.6075999736785889" red="0.6636345386505127" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="252.0" layoutX="55.0" layoutY="66.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="200.0">
+               <fill>
+                  <RadialGradient centerX="0.5073800878771118" centerY="0.5220820068936994" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color blue="0.9561403393745422" green="0.9561403393745422" red="0.9561403393745422" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.8999999761581421" green="0.8704918026924133" red="0.44999998807907104" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Rectangle>
+            <Text layoutX="59.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="194.76820373535156">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="365.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Button layoutX="323.0" layoutY="234.0" mnemonicParsing="false" onAction="#confirmOK" prefHeight="59.0" prefWidth="181.0" styleClass="menuButton" text="Confirm" />
+            <ImageView fitHeight="43.0" fitWidth="36.0" layoutX="266.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/opportunity_knocks.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="36.0" layoutX="16.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/opportunity_knocks.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="PLPane" layoutX="759.0" layoutY="310.0" prefHeight="341.0" prefWidth="523.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="269.0" layoutX="46.0" layoutY="58.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="220.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#9de573" />
+                        <Stop color="#f4ff9e" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="252.0" layoutX="55.0" layoutY="66.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="200.0">
+               <fill>
+                  <RadialGradient centerX="0.5073800878771118" centerY="0.5220820068936994" radius="0.5">
+                     <stops>
+                        <Stop color="#f4f4f4" />
+                        <Stop color="#f6ff9e" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Rectangle>
+            <ImageView fitHeight="43.0" fitWidth="36.0" layoutX="11.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pot_luck.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="110.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pot Luck" textAlignment="CENTER" wrappingWidth="303.09576416015625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="59.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="194.76820373535156">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="365.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Button layoutX="323.0" layoutY="234.0" mnemonicParsing="false" onAction="#confirmPL" prefHeight="59.0" prefWidth="181.0" styleClass="menuButton" text="Confirm" />
+            <ImageView fitHeight="43.0" fitWidth="36.0" layoutX="263.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pot_luck.png" />
                </image>
             </ImageView>
          </children>
