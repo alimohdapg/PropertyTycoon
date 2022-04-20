@@ -7,7 +7,7 @@ import java.util.Set;
  *
  * @author Hanzhen Gong & Leon
  */
-public class Jail extends BoardSpace {
+/*public class Jail extends BoardSpace {
 
     private HashMap<Player, Integer> playersInJail;
 
@@ -32,6 +32,7 @@ public class Jail extends BoardSpace {
     {
         playersInJail.remove(player);
         player.setLocation(10);
+        System.out.println(player.getLocation());
     }
 
     public void minusPrisonTerm (Player player) {
@@ -40,4 +41,4 @@ public class Jail extends BoardSpace {
             removeAPlayer(player);
         }
     }
-}
+}*/
