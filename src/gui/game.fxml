@@ -563,7 +563,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <AnchorPane fx:id="buy_property_pane" layoutX="748.0" layoutY="285.0" prefHeight="341.0" prefWidth="523.0">
+      <AnchorPane fx:id="buy_property_pane" layoutX="748.0" layoutY="285.0" prefHeight="341.0" prefWidth="523.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
             <AnchorPane fx:id="property_info_buy" layoutX="309.0" layoutY="20.0" onMouseClicked="#closeProperty" prefHeight="301.0" prefWidth="200.0">
