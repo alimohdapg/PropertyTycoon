@@ -17,5 +17,10 @@
       <Button fx:id="playButton" layoutX="547.0" layoutY="319.0" mnemonicParsing="false" onAction="#playButtonClicked" prefHeight="58.0" prefWidth="186.0" styleClass="menuButton" stylesheets="@style.css" text="Play" />
       <Button fx:id="settingsButton" layoutX="547.0" layoutY="425.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="186.0" styleClass="menuButton" stylesheets="@style.css" text="Settings" />
       <Button fx:id="exitButton" layoutX="547.0" layoutY="531.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="58.0" prefWidth="186.0" styleClass="exitButton" stylesheets="@style.css" text="Exit" />
+      <ImageView fitHeight="372.0" fitWidth="529.0" layoutX="223.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/raining_money.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
