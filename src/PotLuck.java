@@ -13,6 +13,8 @@ import java.util.Random;
  * This class serves as an assistant class which provides information to the game logic,
  * and the actual action is implemented in the game logic.
  *
+ * !PotLuck 11, 12 go to Free Parking!
+ *
     @author Hanzhen Gong
  */
 public class PotLuck extends BoardSpace
@@ -278,13 +280,4 @@ public class PotLuck extends BoardSpace
     {
         player.setLocation(location);
     }
-
-
-//    public static void main(String[] args) {
-//        PotLuck p = new PotLuck("da");
-//        for (int i = 0; i < 10; i++)
-//        {
-//            System.out.println(p.getNextCard());
-//        }
-//    }
 }

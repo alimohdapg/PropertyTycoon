@@ -1,6 +1,17 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
+import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Random;
+
+/**
+ * Same as PotLuck
+ *
+ * !Opportunity Knock 5, 15 go to Free Parking!
+ *
+ * @author Hanzhen Gong
+ */
 public class OpportunityKnock extends BoardSpace
 {
     private FileIO fileIO = new FileIO();
@@ -26,6 +37,23 @@ public class OpportunityKnock extends BoardSpace
     public OpportunityKnock(String name)
     {
         super(name);
+        initialize();
+        cards = new LinkedList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16));
+        for (int i = 0; i < 20; i++)
+        {
+            shuffleCards();
+        }
+        System.out.println(cards);
+    }
+
+    private void shuffleCards()
+    {
+        Random random = new Random();
+
+        int index = random.nextInt(cards.size());
+        Integer element = cards.get(index);
+        cards.remove(element);
+        cards.addLast(element);
     }
 
     private void initialize()
@@ -97,22 +125,52 @@ public class OpportunityKnock extends BoardSpace
                     break;
 
                 case 8:
-                    index = currentData.indexOf('.');
-                    String subString = currentData.substring(index + 1);
-                    subString = subString.replaceAll("\\D", " ");
-                    System.out.println(subString);
+                    ArrayList<Integer> periodIndices = new ArrayList<>();
+                    for (int j = 0; j < currentData.length(); j++)
+                    {
+                        if (currentData.charAt(j) == '.')
+                        {
+                            periodIndices.add(j);
+                        }
+                    }
 
-                case 9:
-                    // Go
+                    String part1 = currentData.substring(periodIndices.get(0), periodIndices.get(1));
+                    String part2 = currentData.substring(periodIndices.get(1));
+
+                    String num1 = part1.replaceAll("\\D", "");
+                    String num2 = part2.replaceAll("\\D", "");
+
+                    OK9 = num1 + " " + num2;
+
+                    System.out.println(OK9);
+                    break;
 
                 case 10:
-                    index = currentData.indexOf('.');
-                    String subStr = currentData.substring(index + 1);
-                    subString = subStr.replaceAll("\\D", " ");
-                    System.out.println(subString);
+                    periodIndices = new ArrayList<>();
+                    for (int j = 0; j < currentData.length(); j++)
+                    {
+                        if (currentData.charAt(j) == '.')
+                        {
+                            periodIndices.add(j);
+                        }
+                    }
+
+                    part1 = currentData.substring(periodIndices.get(0), periodIndices.get(1));
+                    part2 = currentData.substring(periodIndices.get(1));
+
+                    num1 = part1.replaceAll("\\D", "");
+                    num2 = part2.replaceAll("\\D", "");
+
+                    OK11 = num1 + " " + num2;
+
+                    System.out.println(OK11);
+                    break;
 
                 case 11:
-                    // Go back 3 spaces
+                    OK12 = currentData.replaceAll("\\D", "");
+                    System.out.println(OK12);
+                    System.out.println("11 End");
+                    break;
 
                 case 12:
                     index = currentData.indexOf("to");
@@ -122,26 +180,139 @@ public class OpportunityKnock extends BoardSpace
                     System.out.println(OK13);
                     break;
 
-                case 13:
-                    // Go jail
-
                 case 14:
-                    index = currentData.indexOf('£');
-                    moneyString = currentData.substring(index + 1);
-                    OK15 = moneyString.replaceAll("\\D+","");
+                    OK15 = currentData.replaceAll("\\D+","");
                     System.out.println(OK15);
                     break;
-
-                case 15:
-                    // Get out of jail free
             }
 
         }
     }
 
-    public static void main(String[] args) {
-        OpportunityKnock o = new OpportunityKnock("d");
-        o.initialize();
+    public ArrayList<String> getNextCard()
+    {
+        ArrayList<String> info = new ArrayList<>();
+        String nextCard = String.valueOf(cards.getFirst());
+        if (!nextCard.equals("16"))
+        {
+            cards.addLast(cards.removeFirst());
+        }
+        else
+        {
+            cards.removeFirst();
+        }
+
+        info.add(nextCard);
+
+        switch (nextCard)
+        {
+            case "1":
+                info.add(OK1);
+                break;
+            case "2":
+                info.add(OK2);
+                break;
+            case "3":
+                info.add(OK3);
+                break;
+            case "4":
+                info.add(OK4);
+                break;
+            case "5":
+                info.add(OK5);
+                break;
+            case "6":
+                info.add(OK6);
+                break;
+            case "7":
+                info.add(OK7);
+                break;
+            case "8":
+                info.add(OK8);
+                break;
+            case "9":
+                info.add(OK9);
+                break;
+            case "10":
+                info.add(OK10);
+                break;
+            case "11":
+                info.add(OK11);
+                break;
+            case "12":
+                info.add(OK12);
+                break;
+            case "13":
+                info.add(OK13);
+                break;
+            case "14":
+                info.add(OK14);
+                break;
+            case "15":
+                info.add(OK15);
+                break;
+            case "16":
+                info.add(OK16);
+                break;
+        }
+
+        return info;
     }
 
+    public void addGetOutOfJailFreeBack()
+    {
+        cards.addLast(16);
+    }
+
+    // Call this method when Opportunity Knock 1, 2, 8
+    public void playerReceiveMoney(Player player, int money)
+    {
+        Cash currentMoney = player.getMoney();
+        currentMoney.addAmount(money);
+        player.setMoney(currentMoney);
+    }
+
+    // Call this method when Opportunity Knock 3, 4, 7, 10, 12, 13, 14
+    public void setPlayerTo(Player player, int location)
+    {
+        player.setLocation(location);
+    }
+
+    // Call this method When Opportunity Knock 5, 6, 15
+    public void playerLoseMoney(Player player, int money)
+    {
+        Cash currentMoney = player.getMoney();
+        currentMoney.subtractAmount(money);
+        player.setMoney(currentMoney);
+    }
+
+    // Call this method When Opportunity Knock 9, 11
+    public void playerRepairProperties(Player player, String Fees)
+    {
+        String[] feesArray = Fees.split(" ");
+        int houseFee = Integer.parseInt(feesArray[0]);
+        int hotelFee = Integer.parseInt(feesArray[1]);
+
+        int totalHouseAmount = 0;
+        int totalHotelAmount = 0;
+
+        ArrayList<Property> properties = player.getProperties();
+        for (Property currentProperty : properties)
+        {
+            totalHouseAmount += currentProperty.getHouseCount();
+            int hotelAmount = currentProperty.doesHaveHotel() ? 1 : 0;
+            totalHotelAmount += hotelAmount;
+        }
+
+        int totalFee = totalHouseAmount * houseFee + totalHotelAmount * hotelFee;
+        Cash currentMoney = player.getMoney();
+        currentMoney.subtractAmount(totalFee);
+        player.setMoney(currentMoney);
+    }
+
+    // Call this method When Opportunity Knock 16
+    public void getFreeJailCard(Player player)
+    {
+        player.setHasCard(true);
+    }
 }
