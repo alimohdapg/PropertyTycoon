@@ -273,7 +273,6 @@ public class GameBoard {
         return canBuy;
     }
 
-
     public boolean checkEndgame() {
         return false;
     }

@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
+<AnchorPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
    <children>
       <Pane fx:id="centrePiece" layoutX="98.0" layoutY="97.0" prefHeight="526.0" prefWidth="523.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="526.0" layoutX="-17.0" stroke="BLACK" strokeType="INSIDE" width="540.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="526.0" layoutX="-8.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" width="540.0" />
             <ImageView fitHeight="75.0" fitWidth="480.0" layoutX="68.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
                <image>
                   <Image url="@../img/logo.png" />
@@ -27,6 +31,114 @@
                   <Font size="25.0" />
                </font>
             </Text>
+            <AnchorPane layoutX="-10.0" prefHeight="536.0" prefWidth="546.0" visible="false">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffd09a" height="526.0" layoutX="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="507.0" />
+                  <Text layoutX="225.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auction" textAlignment="CENTER">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="324.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Who is biding now..." />
+                  <ScrollPane layoutX="266.0" layoutY="99.0" prefHeight="293.0" prefWidth="233.0">
+                     <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="325.0" prefWidth="206.0" />
+                     </content>
+                  </ScrollPane>
+                  <Button layoutX="190.0" layoutY="474.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="69.0" text="BID" />
+                  <Button layoutX="287.0" layoutY="474.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="69.0" text="FOLD" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Button layoutX="414.0" layoutY="430.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="47.0" text="+ 25" />
+                  <Button layoutX="367.0" layoutY="430.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" text="+ 1" />
+                  <TextField layoutX="178.0" layoutY="430.0" prefHeight="30.0" prefWidth="171.0" text="£ num" />
+                  <Button layoutX="125.0" layoutY="430.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" text="- 1" />
+                  <Button layoutX="70.0" layoutY="430.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="47.0" text="- 25" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="301.0" layoutX="45.0" layoutY="95.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="281.0" layoutX="55.0" layoutY="105.0" stroke="BLACK" strokeType="INSIDE" width="181.0" />
+                  <Rectangle fx:id="property_info_color11" arcHeight="5.0" arcWidth="5.0" fill="#10a55b" height="68.0" layoutX="65.0" layoutY="118.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
+                  <Text fx:id="property_info_name11" layoutX="80.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Test Property&gt;" textAlignment="CENTER" wrappingWidth="128.99999904648212">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="131.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost" />
+                  <Text fx:id="property_info_cost11" layoutX="123.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="ptex111" layoutX="65.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent11" layoutX="191.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="ptex121" layoutX="64.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ set" wrappingWidth="84.99999804016988">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_set11" layoutX="191.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="ptex131" layoutX="64.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 1 house" wrappingWidth="118.000000940051">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_1house11" layoutX="190.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="ptex141" layoutX="63.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 2 house" wrappingWidth="118.00000356626697">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_2house11" layoutX="190.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="ptex151" layoutX="61.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 3 house" wrappingWidth="111.00001338265793">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_3house11" layoutX="190.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="ptex161" layoutX="63.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ 4 house" wrappingWidth="118.00000356626697">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_4house11" layoutX="190.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="ptex171" layoutX="61.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent w/ hotel" wrappingWidth="111.00001338265793">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="property_info_rent_hotel11" layoutX="190.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£000" wrappingWidth="66.99997420544241">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children>
       </Pane>
       <Rectangle fx:id="a0_bg" arcHeight="5.0" arcWidth="5.0" fill="#cbebdc" height="98.0" layoutX="620.0" layoutY="622.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
@@ -706,5 +818,139 @@
             <Font size="26.0" />
          </font>
       </Button>
+      <AnchorPane layoutX="724.0" layoutY="230.0" prefHeight="370.0" prefWidth="552.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ce9ff" height="411.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="556.0" />
+            <Text layoutX="246.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pot Luck" textAlignment="CENTER" wrappingWidth="110.4290771484375">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="301.0" layoutX="27.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="252.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9035087823867798" green="0.9035087823867798" blue="0.44896578788757324" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.5833333134651184" green="0.8402777910232544" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="281.0" layoutX="39.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="226.0" AnchorPane.bottomAnchor="63.0" AnchorPane.topAnchor="67.0">
+               <fill>
+                  <RadialGradient centerX="0.5073800878771118" centerY="0.5220820068936994" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9561403393745422" green="0.9561403393745422" blue="0.9561403393745422" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.9782669544219971" green="1.0" blue="0.6800000071525574" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Rectangle>
+            <ImageView fitHeight="32.0" fitWidth="27.0" layoutX="252.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pot_luck.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="65.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="194.76820373535156">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="26.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pot_luck.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="362.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Button layoutX="345.0" layoutY="267.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="145.0" text="Confirm" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="724.0" layoutY="247.0" prefHeight="378.0" prefWidth="523.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ce9ff" height="391.0" layoutX="7.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="540.0" />
+            <Text layoutX="148.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opportunity Knocks" textAlignment="CENTER" wrappingWidth="303.09576416015625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="301.0" layoutX="27.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="243.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.6154567003250122" green="0.8999999761581421" blue="0.44999998807907104" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.6636345386505127" green="0.6075999736785889" blue="0.9800000190734863" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="281.0" layoutX="39.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="220.0">
+               <fill>
+                  <RadialGradient centerX="0.5073800878771118" centerY="0.5220820068936994" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9561403393745422" green="0.9561403393745422" blue="0.9561403393745422" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.44999998807907104" green="0.8704918026924133" blue="0.8999999761581421" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Rectangle>
+            <Text layoutX="58.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="194.76820373535156">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="339.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Button layoutX="322.0" layoutY="253.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="145.0" text="Confirm" />
+            <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="26.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/opportunity_knocks.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="27.0" layoutX="248.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/opportunity_knocks.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
