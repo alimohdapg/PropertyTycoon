@@ -76,7 +76,6 @@ public abstract class Player {
         {
             moneyBack += property.getHouseCount() * property.getHouseCost();
         }
-
         if (!property.isUnderMortgage())
         {
             money.addAmount(moneyBack);
