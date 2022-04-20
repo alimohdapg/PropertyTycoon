@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
@@ -322,7 +327,7 @@
             <Text fx:id="playerTwoMoney" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£10.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Pane fx:id="player_3" layoutX="717.0" layoutY="104.0" prefHeight="79.0" prefWidth="200.0" visible="false">
+      <Pane fx:id="player_3" layoutX="717.0" layoutY="104.0" prefHeight="79.0" prefWidth="200.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -339,7 +344,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerThreeName" layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" wrappingWidth="128.99999804016988" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="16.0" layoutX="52.0" layoutY="36.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
                <fill>
                   <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0" startX="1.0">
@@ -351,10 +356,10 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text fx:id="player3_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerThreeMoney" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Pane fx:id="player_4" layoutX="717.0" layoutY="156.0" prefHeight="79.0" prefWidth="200.0" visible="false">
+      <Pane fx:id="player_4" layoutX="717.0" layoutY="156.0" prefHeight="79.0" prefWidth="200.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -371,7 +376,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerFourName" layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" wrappingWidth="128.99999804016988" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="16.0" layoutX="52.0" layoutY="36.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
                <fill>
                   <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0" startX="1.0">
@@ -383,10 +388,10 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text fx:id="player4_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerFourMoney" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£50.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Pane fx:id="player_5" layoutX="717.0" layoutY="208.0" prefHeight="79.0" prefWidth="200.0" visible="false">
+      <Pane fx:id="player_5" layoutX="717.0" layoutY="208.0" prefHeight="79.0" prefWidth="200.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -403,7 +408,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 5" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerFiveName" layoutX="58.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 5" wrappingWidth="128.99999804016988" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="16.0" layoutX="52.0" layoutY="36.0" stroke="BLACK" strokeType="INSIDE" width="150.0">
                <fill>
                   <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0" startX="1.0">
@@ -415,7 +420,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Text fx:id="player5_money" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£250.00" wrappingWidth="128.99999804016988" />
+            <Text fx:id="playerFiveMoney" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£250.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
       <Button fx:id="testButton" layoutX="960.0" layoutY="642.0" mnemonicParsing="false" onAction="#takeTurn" prefHeight="71.0" prefWidth="111.0" styleClass="menuButton" text="Roll">
@@ -649,18 +654,44 @@
                   </Text>
                </children>
             </AnchorPane>
-            <Button fx:id="buy_property_button_yes" layoutX="27.0" layoutY="193.0" mnemonicParsing="false" onAction="#buy_property_button_yes" prefHeight="54.0" prefWidth="129.0" styleClass="menuButton" text="Yes" />
-            <Button fx:id="buy_property_button_no" layoutX="166.0" layoutY="193.0" mnemonicParsing="false" onAction="#buy_property_button_no" prefHeight="6.0" prefWidth="129.0" styleClass="menuButton" text="No" />
-            <Text layoutX="56.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy this property?" wrappingWidth="219.9999496108503">
-               <font>
-                  <Font size="29.0" />
-               </font>
-            </Text>
-            <Text fx:id="notEnoughMoney" layoutX="58.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not enough money!" visible="false">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
+            <AnchorPane fx:id="auctionPane" prefHeight="341.0" prefWidth="307.0" visible="false">
+               <children>
+                  <Text layoutX="112.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auction" textAlignment="CENTER">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Who is biding now..." />
+                  <ScrollPane layoutX="24.0" layoutY="72.0" prefHeight="153.0" prefWidth="276.0">
+                     <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="154.0" prefWidth="277.0" />
+                     </content>
+                  </ScrollPane>
+                  <Button layoutX="64.0" layoutY="283.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="69.0" text="BID" />
+                  <Button layoutX="172.0" layoutY="283.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="69.0" text="FOLD" />
+                  <Button layoutX="260.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="47.0" text="+ 25" />
+                  <Button layoutX="221.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" text="+ 1" />
+                  <TextField layoutX="92.0" layoutY="239.0" prefHeight="30.0" prefWidth="129.0" text="£ num" />
+                  <Button layoutX="53.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" text="- 1" />
+                  <Button layoutX="6.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="47.0" text="- 25" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="buy_property_pane_info" layoutX="27.0" layoutY="65.962890625" visible="false">
+               <children>
+                  <Button fx:id="buy_property_button_yes" layoutY="127.037109375" mnemonicParsing="false" onAction="#buy_property_button_yes" prefHeight="54.0" prefWidth="129.0" styleClass="menuButton" text="Yes" />
+                  <Button fx:id="buy_property_button_no" layoutX="139.0" layoutY="127.037109375" mnemonicParsing="false" onAction="#buy_property_button_no" prefHeight="6.0" prefWidth="129.0" styleClass="menuButton" text="No" />
+                  <Text layoutX="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy this property?" wrappingWidth="219.9999496108503">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="notEnoughMoney" layoutX="31.0" layoutY="202.767578125" strokeType="OUTSIDE" strokeWidth="0.0" text="Not enough money!" visible="false">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <Button fx:id="testButton1" layoutX="1074.0" layoutY="642.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="71.0" prefWidth="200.0" styleClass="menuButton" text="End turn">
@@ -706,5 +737,218 @@
             <Font size="26.0" />
          </font>
       </Button>
+      <Circle fx:id="playerThreeToken" fill="#efff1f" layoutX="668.0" layoutY="648.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="playerFourToken" fill="#d721ff" layoutX="667.0" layoutY="690.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="playerFiveToken" fill="#ff2121" layoutX="668.0" layoutY="669.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <AnchorPane fx:id="playerSelectPane" prefHeight="726.0" prefWidth="1280.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="720.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
+            <CheckBox fx:id="check1" layoutX="519.0" layoutY="249.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="200.0">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </CheckBox>
+            <TextField fx:id="tbox1" layoutX="202.0" layoutY="262.0" prefHeight="45.0" prefWidth="293.0" text="Player 1" />
+            <Text layoutX="189.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select up to 5 players and enter their names" textAlignment="CENTER" wrappingWidth="777.2163118250355">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tbox2" layoutX="203.0" layoutY="320.0" prefHeight="45.0" prefWidth="293.0" text="Player 2" />
+            <TextField fx:id="tbox3" layoutX="203.0" layoutY="378.0" prefHeight="45.0" prefWidth="293.0" text="Player 3" />
+            <TextField fx:id="tbox4" layoutX="203.0" layoutY="436.0" prefHeight="45.0" prefWidth="293.0" text="Player 4" />
+            <TextField fx:id="tbox5" layoutX="204.0" layoutY="495.0" prefHeight="45.0" prefWidth="293.0" text="Player 5" />
+            <CheckBox fx:id="check2" layoutX="519.0" layoutY="307.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="200.0">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="check3" layoutX="520.0" layoutY="367.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="200.0">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="check4" layoutX="520.0" layoutY="423.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="200.0">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="check5" layoutX="519.0" layoutY="484.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="200.0">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </CheckBox>
+            <Text layoutX="311.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Text>
+            <Text layoutX="520.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Button layoutX="712.0" layoutY="354.0" mnemonicParsing="false" onAction="#startGame" styleClass="menuButton" text="Confirm" />
+            <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="142.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons/cat.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="142.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons/iron.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="142.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons/boot.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="142.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons/hatstand.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="142.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons/ship.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="PLPane" layoutX="729.0" layoutY="275.0" prefHeight="359.0" prefWidth="540.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ce9ff" height="362.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="540.0" />
+            <Text layoutX="246.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pot Luck" textAlignment="CENTER" wrappingWidth="110.4290771484375">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="301.0" layoutX="27.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="252.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color blue="0.44896578788757324" green="0.9035087823867798" red="0.9035087823867798" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="1.0" green="0.8402777910232544" red="0.5833333134651184" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="281.0" layoutX="39.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="226.0" AnchorPane.bottomAnchor="63.0" AnchorPane.topAnchor="67.0">
+               <fill>
+                  <RadialGradient centerX="0.5073800878771118" centerY="0.5220820068936994" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color blue="0.9561403393745422" green="0.9561403393745422" red="0.9561403393745422" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.6800000071525574" green="1.0" red="0.9782669544219971" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Rectangle>
+            <ImageView fitHeight="32.0" fitWidth="27.0" layoutX="252.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pot_luck.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="65.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="194.76820373535156">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="26.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pot_luck.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="362.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Button layoutX="301.0" layoutY="221.0" mnemonicParsing="false" onAction="#confirmPL" prefHeight="59.0" prefWidth="220.0" styleClass="menuButton" text="Confirm" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="OKPane" layoutX="734.0" layoutY="257.0" prefHeight="378.0" prefWidth="523.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ce9ff" height="362.0" layoutX="-4.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="536.0" />
+            <Text layoutX="148.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opportunity Knocks" textAlignment="CENTER" wrappingWidth="303.09576416015625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="301.0" layoutX="27.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="243.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color blue="0.44999998807907104" green="0.8999999761581421" red="0.6154567003250122" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.9800000190734863" green="0.6075999736785889" red="0.6636345386505127" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="281.0" layoutX="39.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="220.0">
+               <fill>
+                  <RadialGradient centerX="0.5073800878771118" centerY="0.5220820068936994" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color blue="0.9561403393745422" green="0.9561403393745422" red="0.9561403393745422" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.8999999761581421" green="0.8704918026924133" red="0.44999998807907104" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Rectangle>
+            <Text layoutX="58.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="194.76820373535156">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="339.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Button layoutX="291.0" layoutY="253.0" mnemonicParsing="false" onAction="#confirmOK" prefHeight="59.0" prefWidth="220.0" styleClass="menuButton" text="Confirm" />
+            <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="26.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/opportunity_knocks.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="27.0" layoutX="248.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/opportunity_knocks.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
