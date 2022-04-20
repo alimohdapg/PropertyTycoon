@@ -22,27 +22,30 @@ import java.util.Collections;
 public class GameController {
 
     @FXML
-    private Circle playerOneToken, playerTwoToken, playerThreeToken, playerFourToken, playerFiveToken;
+    private Circle playerOneToken, playerTwoToken, playerThreeToken, playerFourToken, playerFiveToken, p0, p1, p2, p3,
+            p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26,
+            p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40;;
 
     @FXML
     private Pane player_1, player_2, player_3, player_4, player_5;
 
     @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, playerThreeName, playerThreeMoney, playerFourName, playerFourMoney,
-            playerFiveName, playerFiveMoney, FreeParking;
+            playerFiveName, playerFiveMoney, FreeParking, a0_text, a1_text, a2_text, a3_text, a4_text, a5_text,
+            a6_text, a7_text, a8_text, a9_text, a10_text, a11_text, a12_text, a13_text, a14_text, a15_text, a16_text,
+            a17_text, a18_text, a19_text, a20_text, a21_text, a22_text, a23_text, a24_text, a25_text, a26_text,
+            a27_text, a28_text, a29_text, a30_text, a31_text, a32_text, a33_text, a34_text, a35_text, a36_text,
+            a37_text, a38_text, a39_text, property_info_name, currentTurnText, property_info_rent,
+            property_info_rent_set, property_info_rent_1house, property_info_rent_2house, property_info_rent_3house,
+            property_info_rent_4house, property_info_rent_hotel, property_owner, property_houses, property_info_cost,
+            property_info_current, property_info_name1, property_info_rent1, property_info_rent_set1,
+            property_info_rent_1house1, property_info_rent_2house1, property_info_rent_3house1,
+            property_info_rent_4house1, property_info_rent_hotel1, property_info_cost1, notEnoughMoney, jailText,
+            fine_text, ptex1, ptex2, ptex3, ptex4, ptex5, ptex6, ptex7, crtext, ptex11, ptex12, ptex13, ptex14, ptex15,
+            ptex16, ptex17;
 
     @FXML
     private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane,
-    PLPane, OKPane;
-
-    @FXML
-    private Circle p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
-        p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40;
-
-    @FXML
-    private Text a0_text, a1_text, a2_text, a3_text, a4_text, a5_text, a6_text, a7_text, a8_text, a9_text, a10_text,
-        a11_text, a12_text, a13_text, a14_text, a15_text, a16_text, a17_text, a18_text, a19_text, a20_text, a21_text,
-        a22_text, a23_text, a24_text, a25_text, a26_text, a27_text, a28_text, a29_text, a30_text, a31_text, a32_text,
-        a33_text, a34_text, a35_text, a36_text, a37_text, a38_text, a39_text;
+    PLPane, OKPane, playerSelectPane;
 
     @FXML
     private TextField tbox1, tbox2, tbox3, tbox4, tbox5;
@@ -51,28 +54,13 @@ public class GameController {
     private CheckBox check1, check2, check3, check4, check5;
 
     @FXML
-    private AnchorPane playerSelectPane;
-
-    @FXML
     private ArrayList<Circle> pos_array;
 
     @FXML
     private ArrayList<Text> text_array;
 
     @FXML
-    private Text property_info_name, currentTurnText, property_info_rent, property_info_rent_set, property_info_rent_1house,
-            property_info_rent_2house, property_info_rent_3house, property_info_rent_4house, property_info_rent_hotel,
-            property_owner, property_houses, property_info_cost, property_info_current;
-
-    @FXML
-    private Text property_info_name1, property_info_rent1, property_info_rent_set1, property_info_rent_1house1,
-            property_info_rent_2house1, property_info_rent_3house1, property_info_rent_4house1, property_info_rent_hotel1, property_info_cost1;
-
-    @FXML
-    private Text notEnoughMoney;
-
-    @FXML
-    private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage;
+    private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage, jailUseCard, jailPay50;;
 
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
@@ -83,22 +71,11 @@ public class GameController {
     @FXML
     private Rectangle property_info_color, property_info_color1;
 
-    @FXML
-    private Text jailText, fine_text;
-
-    @FXML
-    private Button jailUseCard, jailPay50;
-
-    @FXML
-    private Text ptex1, ptex2, ptex3, ptex4, ptex5, ptex6, ptex7, crtext, ptex11, ptex12, ptex13, ptex14, ptex15, ptex16, ptex17;
-
     private Property current_property;
 
     private int current_pos, currentSelectedProperty;
 
     private Player playerOne, playerTwo, playerThree, playerFour, playerFive, currentPlayer;
-
-
 
     private GameBoard gameBoard;
 
@@ -107,17 +84,18 @@ public class GameController {
     private boolean canRoll;
 
     private FileIO fileIO;
+
     /**
      * Default function, runs on launch. Initialises the array of positional elements
      */
     public void initialize() {
-
         playerSelectPane.setVisible(true);
-
     }
 
+    /**
+     * Loads all the necessary objects to begin the game and starts the game loop
+     */
     public void startGame() {
-
         playerSelectPane.setVisible(false);
 
         //File io
@@ -146,8 +124,8 @@ public class GameController {
         diceimg5 = new Image("/img/dice_faces/d5.png");
         diceimg6 = new Image("/img/dice_faces/d6.png");
 
+        //Load the players
         ArrayList<Player> playerList = new ArrayList<Player>();
-
         if(check1.isSelected()) {
             playerOne = new HumanPlayer(tbox1.getText(),Token.CAT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerOneToken, playerOneName, playerOneMoney);
             player_1.setVisible(true);
@@ -179,14 +157,11 @@ public class GameController {
             playerList.add(playerFive);
         } else { player_5.setVisible(false); playerFiveToken.setVisible(false); }
 
-        //Initialise players
-        //playerOne = new HumanPlayer("Cat Player", Token.CAT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerOneToken, playerOneName, playerOneMoney);
-        //playerTwo = new HumanPlayer("Iron Player", Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
-
         //Create gameBoard instance
         gameBoard = new GameBoard(playerList);
         gameBoard.endTurn();
 
+        //Current status variables
         current_pos = gameBoard.getCurrentPlayerPosition();
         currentPlayer = gameBoard.getCurrentPlayer();
         currentTurnText.setText(currentPlayer.getName() + "'s turn");
@@ -390,6 +365,7 @@ public class GameController {
         }
     }
 
+    //Onclick functions for the properties, stations and utilities
     public void displayProperty1() { loadProperty(1); }
     public void displayProperty2() { loadProperty(3); }
     public void displayProperty3() { loadProperty(6); }
@@ -742,10 +718,16 @@ public class GameController {
         return "#264da1";
     }
 
+    /**
+     * Updates the free parking text
+     */
     public void updateFreeParking() {
         FreeParking.setText("Free Parking: £" + gameBoard.getFreeParkingSum());
     }
 
+    /*
+     * Displays the fine screen
+     */
     public void loadFineScreen() {
         if(currentPlayer.getLocation() == 4) {
             fine_text.setText("You were fined £200!");
@@ -755,11 +737,17 @@ public class GameController {
         fine_pane.setVisible(true);
     }
 
+    /**
+     * On click function for the button confirming the fine paid
+     */
     public void confirmFine() {
         fine_pane.setVisible(false);
         canEndTurn = true;
     }
 
+    /**
+     * On click function for the button selling a property
+     */
     public void buttonSellProp() {
         System.out.println("sold");
         BoardSpace current = gameBoard.getBoardSpaces().get(currentSelectedProperty);
@@ -769,6 +757,9 @@ public class GameController {
         }
     }
 
+    /**
+     * On click function for the button selling a house
+     */
     public void buttonSellHouse() {
         System.out.println("Sold house");
         BoardSpace current = gameBoard.getBoardSpaces().get(currentSelectedProperty);
@@ -778,6 +769,9 @@ public class GameController {
         }
     }
 
+    /**
+     * On click function for the button mortgaging a property
+     */
     public void buttonMortgage() {
         System.out.println("Mortgaged");
         BoardSpace current = gameBoard.getBoardSpaces().get(currentSelectedProperty);
@@ -787,19 +781,31 @@ public class GameController {
         }
     }
 
+    /**
+     * Loads the potluck screen and pulls a card
+     */
     public void loadPotLuck() {
         PLPane.setVisible(true);
     }
 
+    /**
+     * Loads the opportunity knocks screen and pulls a card
+     */
     public void loadOpportunityKnocks() {
         OKPane.setVisible(true);
     }
 
+    /**
+     * On click function for the button confirming the potluck card
+     */
     public void confirmPL() {
         PLPane.setVisible(false);
         canEndTurn = true;
     }
 
+    /**
+     * On click function for the button confirming the opportunity knocks card
+     */
     public void confirmOK() {
         OKPane.setVisible(false);
         canEndTurn = true;
