@@ -45,7 +45,7 @@ public class GameController {
 
     @FXML
     private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane,
-    PLPane, OKPane, playerSelectPane;
+    PLPane, OKPane, playerSelectPane, buy_property_pane_info, auctionPane;
 
     @FXML
     private TextField tbox1, tbox2, tbox3, tbox4, tbox5;
@@ -526,6 +526,7 @@ public class GameController {
      */
     public void loadProperty_buy(int i) {
         buy_property_pane.setVisible(true);
+        buy_property_pane_info.setVisible(true);
         property_info_buy.setVisible(true);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
 
@@ -641,8 +642,12 @@ public class GameController {
             System.out.println(currentPlayer.getName() + " has not bought " + current_stationutil.getName());
         }
 
+        //buy_property_pane_info.setVisible(false);
+        //buy_property_pane.setVisible(false);
+        //auctionPane.setVisible(true);
+
         canEndTurn = true;
-        buy_property_pane.setVisible(false);
+
         gameBoard.updateAllPlayers();
     }
 
