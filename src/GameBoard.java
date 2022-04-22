@@ -146,9 +146,14 @@ public class GameBoard {
             currentPlayer.getMoney().addAmount(freeParkingSum);
             freeParkingSum = 0;
         }
-
+        // paying rent
+        if(boardSpaces.get(currentPlayer.getLocation()) instanceof Property &&
+                ((Property) boardSpaces.get(currentPlayer.getLocation())).getOwner() != null){
+            Property propertyLandedOn = (Property) boardSpaces.get(currentPlayer.getLocation());
+            currentPlayer.getMoney().subtractAmount(propertyLandedOn.getRent());
+            propertyLandedOn.getOwner().getMoney().addAmount(propertyLandedOn.getRent());
+        }
     }
-
 
     public void endTurn() {
         goToNextTurn();
