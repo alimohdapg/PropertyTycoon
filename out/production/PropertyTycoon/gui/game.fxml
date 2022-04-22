@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -653,18 +654,44 @@
                   </Text>
                </children>
             </AnchorPane>
-            <Button fx:id="buy_property_button_yes" layoutX="27.0" layoutY="193.0" mnemonicParsing="false" onAction="#buy_property_button_yes" prefHeight="54.0" prefWidth="129.0" styleClass="menuButton" text="Yes" />
-            <Button fx:id="buy_property_button_no" layoutX="166.0" layoutY="193.0" mnemonicParsing="false" onAction="#buy_property_button_no" prefHeight="6.0" prefWidth="129.0" styleClass="menuButton" text="No" />
-            <Text layoutX="56.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy this property?" wrappingWidth="219.9999496108503">
-               <font>
-                  <Font size="29.0" />
-               </font>
-            </Text>
-            <Text fx:id="notEnoughMoney" layoutX="58.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not enough money!" visible="false">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
+            <AnchorPane fx:id="auctionPane" prefHeight="341.0" prefWidth="307.0" visible="false">
+               <children>
+                  <Text layoutX="112.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auction" textAlignment="CENTER">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Who is biding now..." />
+                  <ScrollPane layoutX="24.0" layoutY="72.0" prefHeight="153.0" prefWidth="276.0">
+                     <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="154.0" prefWidth="277.0" />
+                     </content>
+                  </ScrollPane>
+                  <Button layoutX="64.0" layoutY="283.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="69.0" text="BID" />
+                  <Button layoutX="172.0" layoutY="283.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="69.0" text="FOLD" />
+                  <Button layoutX="260.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="47.0" text="+ 25" />
+                  <Button layoutX="221.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" text="+ 1" />
+                  <TextField layoutX="92.0" layoutY="239.0" prefHeight="30.0" prefWidth="129.0" text="£ num" />
+                  <Button layoutX="53.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" text="- 1" />
+                  <Button layoutX="6.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="47.0" text="- 25" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="buy_property_pane_info" layoutX="27.0" layoutY="65.962890625" visible="false">
+               <children>
+                  <Button fx:id="buy_property_button_yes" layoutY="127.037109375" mnemonicParsing="false" onAction="#buy_property_button_yes" prefHeight="54.0" prefWidth="129.0" styleClass="menuButton" text="Yes" />
+                  <Button fx:id="buy_property_button_no" layoutX="139.0" layoutY="127.037109375" mnemonicParsing="false" onAction="#buy_property_button_no" prefHeight="6.0" prefWidth="129.0" styleClass="menuButton" text="No" />
+                  <Text layoutX="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy this property?" wrappingWidth="219.9999496108503">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="notEnoughMoney" layoutX="31.0" layoutY="202.767578125" strokeType="OUTSIDE" strokeWidth="0.0" text="Not enough money!" visible="false">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <Button fx:id="testButton1" layoutX="1074.0" layoutY="642.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="71.0" prefWidth="200.0" styleClass="menuButton" text="End turn">
