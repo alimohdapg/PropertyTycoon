@@ -9,6 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,11 +42,11 @@ public class GameController {
             property_info_rent_1house1, property_info_rent_2house1, property_info_rent_3house1,
             property_info_rent_4house1, property_info_rent_hotel1, property_info_cost1, notEnoughMoney, jailText,
             fine_text, ptex1, ptex2, ptex3, ptex4, ptex5, ptex6, ptex7, crtext, ptex11, ptex12, ptex13, ptex14, ptex15,
-            ptex16, ptex17;
+            ptex16, ptex17, rentPrice, rentOwner;
 
     @FXML
     private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane,
-    PLPane, OKPane, playerSelectPane, buy_property_pane_info, auctionPane;
+    PLPane, OKPane, playerSelectPane, buy_property_pane_info, auctionPane, rentPane;
 
     @FXML
     private TextField tbox1, tbox2, tbox3, tbox4, tbox5;
@@ -60,7 +61,7 @@ public class GameController {
     private ArrayList<Text> text_array;
 
     @FXML
-    private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage, jailUseCard, jailPay50;;
+    private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage, jailUseCard, jailPay50, rollButton;
 
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
@@ -78,6 +79,8 @@ public class GameController {
     private Player playerOne, playerTwo, playerThree, playerFour, playerFive, currentPlayer;
 
     private GameBoard gameBoard;
+    private OpportunityKnock opportunityKnocks;
+    private PotLuck potLuck;
 
     private boolean turnInProgress;
     private boolean canEndTurn;
@@ -161,6 +164,10 @@ public class GameController {
         gameBoard = new GameBoard(playerList);
         gameBoard.endTurn();
 
+        //OK/PL
+        opportunityKnocks = new OpportunityKnock("OK");
+        potLuck = new PotLuck("PL");
+
         //Current status variables
         current_pos = gameBoard.getCurrentPlayerPosition();
         currentPlayer = gameBoard.getCurrentPlayer();
@@ -218,6 +225,10 @@ public class GameController {
             if(gameBoard.getCurrentPlayer().isInJail()) {
                 System.out.println("Current player is in jail");
                 jail_pane.setVisible(true);
+                rollButton.setVisible(false);
+                canRoll = false;
+            } else {
+                rollButton.setVisible(true);
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -237,6 +248,7 @@ public class GameController {
             currentPlayer.setOutJail();
             jail_pane.setVisible(false);
             gameBoard.updateAllPlayers();
+            canEndTurn = true;
         }
     }
 
@@ -249,6 +261,7 @@ public class GameController {
         gameBoard.updateAllPlayers();
         jail_pane.setVisible(false);
         current_pos = gameBoard.getCurrentPlayerPosition();
+        canEndTurn = true;
     }
 
     /**
@@ -296,6 +309,11 @@ public class GameController {
             current_space = (Property) board_spaces.get(currentPlayer.getLocation());
             if(((Property) current_space).getOwner() == null) {
                 loadProperty_buy(currentPlayer.getLocation());
+            } else {
+                rentPane.setVisible(true);
+                rentPrice.setText("£" + Integer.toString(current_property.getRent()));
+                rentOwner.setText(current_property.getOwner().getName());
+                canEndTurn = true;
             }
         } else if(current_space instanceof StationAndUtility && currentPlayer.isPassedGo()) {
             loadProperty_buy(currentPlayer.getLocation());
@@ -792,6 +810,14 @@ public class GameController {
      */
     public void loadPotLuck() {
         PLPane.setVisible(true);
+        ArrayList<String> info = potLuck.getNextCard();
+        switch (Integer.parseInt(info.get(0))) {
+            case 1:
+            case 2:
+            case 8:
+                opportunityKnocks.playerReceiveMoney(currentPlayer, Integer.parseInt(info.get(1)));
+                break;
+        }
     }
 
     /**
@@ -815,5 +841,12 @@ public class GameController {
     public void confirmOK() {
         OKPane.setVisible(false);
         canEndTurn = true;
+    }
+
+    /**
+     * On click function for the button confirming the rent paid
+     */
+    public void confirmRent() {
+        rentPane.setVisible(false);
     }
 }
