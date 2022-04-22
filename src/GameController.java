@@ -307,7 +307,7 @@ public class GameController {
                 loadProperty_buy(currentPlayer.getLocation());
             } else {
                 rentPane.setVisible(true);
-                rentPrice.setText("£" + Integer.toString(current_property.getRent()));
+                rentPrice.setText("£" + current_property.getRent());
                 rentOwner.setText(current_property.getOwner().getName());
                 canEndTurn = true;
             }

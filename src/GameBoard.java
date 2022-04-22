@@ -130,6 +130,7 @@ public class GameBoard {
             Property propertyLandedOn = (Property) boardSpaces.get(currentPlayer.getLocation());
             currentPlayer.getMoney().subtractAmount(propertyLandedOn.getRent());
             propertyLandedOn.getOwner().getMoney().addAmount(propertyLandedOn.getRent());
+
         }
     }
 
@@ -207,43 +208,6 @@ public class GameBoard {
         if (ownsAll && diffOK) canBuy = true;
         return canBuy;
     }
-
-    // This part is considering to be deleted.
-    // -------------------------------- POTLUCK PART ------------------------------------------
-
-//    public void potLuckPlayerReceivesMoney(Player player, int amountOfMoney) {
-//        Cash currentCash = player.getMoney();
-//        currentCash.addAmount(amountOfMoney);
-//        player.setMoney(currentCash);
-//    }
-//
-//
-//    public void potLuckPlayerSetLocation(Player player, int location) {
-//
-//    }
-//
-//    public void potLuckReceiveMoneyFromOthers(Player player, int amountOfMoney) {
-//        int total = 0;
-//        for (Player current : players) {
-//            if (current != player) {
-//                Cash currentMoney = current.getMoney();
-//                currentMoney.subtractAmount(amountOfMoney);
-//                player.setMoney(currentMoney);
-//
-//                total += amountOfMoney;
-//            }
-//        }
-//
-//        Cash playerMoney = player.getMoney();
-//        playerMoney.addAmount(total);
-//        player.setMoney(playerMoney);
-//    }
-//
-//    public void potLuckGetOutOfJail(Player player) {
-//
-//    }
-
-    // ------------------------------------------------------------------------------------------
 
     /**
      * Get the sum of the two dice.
