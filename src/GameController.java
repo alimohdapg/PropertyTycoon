@@ -794,6 +794,7 @@ public class GameController {
         if(current instanceof Property) {
             current_property = (Property) current;
             currentPlayer.sellProperty(current_property);
+            gameBoard.updateAllPlayers();
         }
     }
 
@@ -806,6 +807,7 @@ public class GameController {
         if(current instanceof Property) {
             current_property = (Property) current;
             currentPlayer.sellAHouse(current_property);
+            gameBoard.updateAllPlayers();
         }
     }
 
@@ -818,6 +820,7 @@ public class GameController {
         if(current instanceof Property) {
             current_property = (Property) current;
             currentPlayer.mortgageProperty(current_property);
+            gameBoard.updateAllPlayers();
         }
     }
 
