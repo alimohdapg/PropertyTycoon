@@ -864,6 +864,27 @@ public class GameController {
             case 8:
             case 14:
                 potLuck.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
+                current_pos = gameBoard.getCurrentPlayerPosition();
+                if(currentPlayer == playerOne) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerTwo) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()+10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerThree) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY()+10);
+                }
+                if(currentPlayer == playerFour) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()-10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerFive) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() - 10);
+                }
                 break;
         }
     }
@@ -892,6 +913,27 @@ public class GameController {
             case 13:
             case 14:
                 opportunityKnocks.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
+                current_pos = gameBoard.getCurrentPlayerPosition();
+                if(currentPlayer == playerOne) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerTwo) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()+10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerThree) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY()+10);
+                }
+                if(currentPlayer == playerFour) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()-10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerFive) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() - 10);
+                }
                 break;
             case 6:
                 opportunityKnocks.playerLoseMoney(currentPlayer, Integer.parseInt(info.get(1)));
