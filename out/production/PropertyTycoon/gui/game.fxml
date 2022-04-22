@@ -423,7 +423,7 @@
             <Text fx:id="playerFiveMoney" layoutX="58.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£250.00" wrappingWidth="128.99999804016988" />
          </children>
       </Pane>
-      <Button fx:id="testButton" layoutX="960.0" layoutY="642.0" mnemonicParsing="false" onAction="#takeTurn" prefHeight="71.0" prefWidth="111.0" styleClass="menuButton" text="Roll">
+      <Button fx:id="rollButton" layoutX="960.0" layoutY="642.0" mnemonicParsing="false" onAction="#takeTurn" prefHeight="71.0" prefWidth="111.0" styleClass="menuButton" text="Roll">
          <font>
             <Font size="26.0" />
          </font></Button>
@@ -654,7 +654,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="auctionPane" prefHeight="341.0" prefWidth="307.0" visible="false">
+            <AnchorPane fx:id="auctionPane" prefHeight="341.0" prefWidth="307.0">
                <children>
                   <Text layoutX="112.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auction" textAlignment="CENTER">
                      <font>
@@ -664,16 +664,22 @@
                   <Text layoutX="25.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Who is biding now..." />
                   <ScrollPane layoutX="24.0" layoutY="72.0" prefHeight="153.0" prefWidth="276.0">
                      <content>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="154.0" prefWidth="277.0" />
+                        <Text fx:id="bidList" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="267.21624755859375" />
                      </content>
                   </ScrollPane>
-                  <Button layoutX="64.0" layoutY="283.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="69.0" text="BID" />
-                  <Button layoutX="172.0" layoutY="283.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="69.0" text="FOLD" />
-                  <Button layoutX="260.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="47.0" text="+ 25" />
-                  <Button layoutX="221.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" text="+ 1" />
-                  <TextField layoutX="92.0" layoutY="239.0" prefHeight="30.0" prefWidth="129.0" text="£ num" />
-                  <Button layoutX="53.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" text="- 1" />
-                  <Button layoutX="6.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="47.0" text="- 25" />
+                  <Button fx:id="buttonBid" layoutX="64.0" layoutY="283.0" mnemonicParsing="false" onAction="#submitBid" prefHeight="33.0" prefWidth="69.0" text="BID" />
+                  <Button fx:id="buttonSkip" layoutX="172.0" layoutY="283.0" mnemonicParsing="false" onAction="#skipBid" prefHeight="33.0" prefWidth="69.0" text="SKIP" />
+                  <TextField fx:id="bidInput" layoutX="154.0" layoutY="244.0" prefHeight="30.0" prefWidth="129.0" />
+                  <Text layoutX="23.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter bid:" wrappingWidth="111.00003246810957">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="139.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£" wrappingWidth="42.67739829308266">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="buy_property_pane_info" layoutX="27.0" layoutY="65.962890625" visible="false">
@@ -865,7 +871,7 @@
                   <Image url="@../img/pot_luck.png" />
                </image>
             </ImageView>
-            <Text layoutX="65.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="194.76820373535156">
+            <Text fx:id="PLDescription" layoutX="51.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="194.76820373535156">
                <font>
                   <Font size="24.0" />
                </font>
@@ -875,9 +881,9 @@
                   <Image url="@../img/pot_luck.png" />
                </image>
             </ImageView>
-            <Text layoutX="362.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action">
+            <Text fx:id="PLAction" layoutX="279.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="243.2163050318236">
                <font>
-                  <Font size="36.0" />
+                  <Font size="18.0" />
                </font>
             </Text>
             <Button layoutX="301.0" layoutY="221.0" mnemonicParsing="false" onAction="#confirmPL" prefHeight="59.0" prefWidth="220.0" styleClass="menuButton" text="Confirm" />
@@ -927,16 +933,6 @@
                   </RadialGradient>
                </fill>
             </Rectangle>
-            <Text layoutX="58.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="194.76820373535156">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text layoutX="339.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Text>
             <Button layoutX="291.0" layoutY="253.0" mnemonicParsing="false" onAction="#confirmOK" prefHeight="59.0" prefWidth="220.0" styleClass="menuButton" text="Confirm" />
             <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="26.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -948,6 +944,47 @@
                   <Image url="@../img/opportunity_knocks.png" />
                </image>
             </ImageView>
+            <Text fx:id="OKAction" layoutX="279.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="243.2163050318236">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="OKDescription" layoutX="51.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="194.76820373535156">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="rentPane" layoutX="739.0" layoutY="290.0" prefHeight="341.0" prefWidth="523.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
+            <Text layoutX="50.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You paid:" wrappingWidth="407.337890625">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text layoutX="50.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" wrappingWidth="407.337890625">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text layoutX="186.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent paid" wrappingWidth="149.9999982254867">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fx:id="rentPrice" layoutX="194.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="£">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Button layoutX="152.0" layoutY="237.0" mnemonicParsing="false" onAction="#confirmRent" prefHeight="59.0" prefWidth="220.0" styleClass="menuButton" text="Confirm" />
+            <Text fx:id="rentOwner" layoutX="103.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
