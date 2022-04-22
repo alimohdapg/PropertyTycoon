@@ -79,6 +79,20 @@ public abstract class Player {
     }
 
     /**
+     * Work in progress for the auction
+     * @param property
+     * @param bid
+     * @return
+     */
+    public boolean auctionProperty(Property property, int bid) {
+        money.subtractAmount(bid);
+        this.playerMoney.setText(("£" + Integer.toString(money.getAmount())));
+        properties.add(property);
+        property.setOwner(this);
+        return true;
+    }
+
+    /**
      * A player can sell an entire property, any houses or hotel will be sold, and the original price will be added back.
      *
      * @param property The property that a player wants to sell.

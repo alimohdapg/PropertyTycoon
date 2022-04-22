@@ -325,4 +325,6 @@ public class GameBoard {
     public int getFreeParkingSum() {
         return freeParkingSum;
     }
+
+    public void addToFreeParking(int amount) { freeParkingSum += amount; }
 }

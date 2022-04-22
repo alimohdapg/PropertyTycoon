@@ -19,14 +19,18 @@ import java.util.Collections;
  */
 public class GameController {
 
+    private ArrayList<Player> playerList, playerList_Auction;
     private Property current_property;
-    private int current_pos, currentSelectedProperty;
+    private int current_pos, currentSelectedProperty, max_bid, max_bid_pos, bid_pos;
     private Player playerOne, playerTwo, playerThree, playerFour, playerFive, currentPlayer;
     private GameBoard gameBoard;
+    private OpportunityKnock opportunityKnocks;
+    private PotLuck potLuck;
     private boolean turnInProgress;
     private boolean canEndTurn;
     private boolean canRoll;
     private FileIO fileIO;
+    private int[] bids;
 
     @FXML
     private Circle playerOneToken, playerTwoToken, playerThreeToken, playerFourToken, playerFiveToken, p0, p1, p2, p3,
@@ -34,191 +38,28 @@ public class GameController {
             p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40;
     @FXML
     private Pane player_1, player_2, player_3, player_4, player_5;
-    @FXML
-    Text playerOneName;
-    @FXML
-    Text playerOneMoney;
-    @FXML
-    Text playerTwoName;
-    @FXML
-    Text playerTwoMoney;
-    @FXML
-    Text playerThreeName;
-    @FXML
-    Text playerThreeMoney;
-    @FXML
-    Text playerFourName;
-    @FXML
-    Text playerFourMoney;
-    @FXML
-    Text playerFiveName;
-    @FXML
-    Text playerFiveMoney;
-    @FXML
-    Text FreeParking;
-    @FXML
-    Text a0_text;
-    @FXML
-    Text a1_text;
-    @FXML
-    Text a2_text;
-    @FXML
-    Text a3_text;
-    @FXML
-    Text a4_text;
-    @FXML
-    Text a5_text;
-    @FXML
-    Text a6_text;
-    @FXML
-    Text a7_text;
-    @FXML
-    Text a8_text;
-    @FXML
-    Text a9_text;
-    @FXML
-    Text a10_text;
-    @FXML
-    Text a11_text;
-    @FXML
-    Text a12_text;
-    @FXML
-    Text a13_text;
-    @FXML
-    Text a14_text;
-    @FXML
-    Text a15_text;
-    @FXML
-    Text a16_text;
-    @FXML
-    Text a17_text;
-    @FXML
-    Text a18_text;
-    @FXML
-    Text a19_text;
-    @FXML
-    Text a20_text;
-    @FXML
-    Text a21_text;
-    @FXML
-    Text a22_text;
-    @FXML
-    Text a23_text;
-    @FXML
-    Text a24_text;
-    @FXML
-    Text a25_text;
-    @FXML
-    Text a26_text;
-    @FXML
-    Text a27_text;
-    @FXML
-    Text a28_text;
-    @FXML
-    Text a29_text;
-    @FXML
-    Text a30_text;
-    @FXML
-    Text a31_text;
-    @FXML
-    Text a32_text;
-    @FXML
-    Text a33_text;
-    @FXML
-    Text a34_text;
-    @FXML
-    Text a35_text;
-    @FXML
-    Text a36_text;
-    @FXML
-    Text a37_text;
-    @FXML
-    Text a38_text;
-    @FXML
-    Text a39_text;
-    @FXML
-    Text property_info_name;
-    @FXML
-    Text currentTurnText;
-    @FXML
-    Text property_info_rent;
-    @FXML
-    Text property_info_rent_set;
-    @FXML
-    Text property_info_rent_1house;
-    @FXML
-    Text property_info_rent_2house;
-    @FXML
-    Text property_info_rent_3house;
-    @FXML
-    Text property_info_rent_4house;
-    @FXML
-    Text property_info_rent_hotel;
-    @FXML
-    Text property_owner;
-    @FXML
-    Text property_houses;
-    @FXML
-    Text property_info_cost;
-    @FXML
-    Text property_info_current;
-    @FXML
-    Text property_info_name1;
-    @FXML
-    Text property_info_rent1;
-    @FXML
-    Text property_info_rent_set1;
-    @FXML
-    Text property_info_rent_1house1;
-    @FXML
-    Text property_info_rent_2house1;
-    @FXML
-    Text property_info_rent_3house1;
-    @FXML
-    Text property_info_rent_4house1;
-    @FXML
-    Text property_info_rent_hotel1;
-    @FXML
-    Text property_info_cost1;
-    @FXML
-    Text notEnoughMoney;
-    @FXML
-    Text fine_text;
-    @FXML
-    Text ptex1;
-    @FXML
-    Text ptex2;
-    @FXML
-    Text ptex3;
-    @FXML
-    Text ptex4;
-    @FXML
-    Text ptex5;
-    @FXML
-    Text ptex6;
-    @FXML
-    Text ptex7;
-    @FXML
-    Text crtext;
-    @FXML
-    Text ptex11;
-    @FXML
-    Text ptex12;
-    @FXML
-    Text ptex13;
-    @FXML
-    Text ptex14;
-    @FXML
-    Text ptex15;
-    @FXML
-    Text ptex16;
-    @FXML
-    Text ptex17;
+
+    @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, playerThreeName, playerThreeMoney, playerFourName, playerFourMoney,
+            playerFiveName, playerFiveMoney, FreeParking, a0_text, a1_text, a2_text, a3_text, a4_text, a5_text,
+            a6_text, a7_text, a8_text, a9_text, a10_text, a11_text, a12_text, a13_text, a14_text, a15_text, a16_text,
+            a17_text, a18_text, a19_text, a20_text, a21_text, a22_text, a23_text, a24_text, a25_text, a26_text,
+            a27_text, a28_text, a29_text, a30_text, a31_text, a32_text, a33_text, a34_text, a35_text, a36_text,
+            a37_text, a38_text, a39_text, property_info_name, currentTurnText, property_info_rent,
+            property_info_rent_set, property_info_rent_1house, property_info_rent_2house, property_info_rent_3house,
+            property_info_rent_4house, property_info_rent_hotel, property_owner, property_houses, property_info_cost,
+            property_info_current, property_info_name1, property_info_rent1, property_info_rent_set1,
+            property_info_rent_1house1, property_info_rent_2house1, property_info_rent_3house1,
+            property_info_rent_4house1, property_info_rent_hotel1, property_info_cost1, notEnoughMoney, jailText,
+            fine_text, ptex1, ptex2, ptex3, ptex4, ptex5, ptex6, ptex7, crtext, ptex11, ptex12, ptex13, ptex14, ptex15,
+            ptex16, ptex17, rentPrice, rentOwner, PLDescription, PLAction, OKDescription, OKAction, bidList;
+
     @FXML
     private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane,
-            PLPane, OKPane, playerSelectPane, buy_property_pane_info, auctionPane;
+    PLPane, OKPane, playerSelectPane, buy_property_pane_info, auctionPane, rentPane;
+
     @FXML
-    private TextField tbox1, tbox2, tbox3, tbox4, tbox5;
+    private TextField tbox1, tbox2, tbox3, tbox4, tbox5, bidInput;
+
     @FXML
     private CheckBox check1, check2, check3, check4, check5;
     @FXML
@@ -226,7 +67,8 @@ public class GameController {
     @FXML
     private ArrayList<Text> text_array;
     @FXML
-    private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage, jailUseCard, jailPay50;
+    private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage, jailUseCard, jailPay50, rollButton;
+
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
     @FXML
@@ -317,6 +159,9 @@ public class GameController {
         // Create gameBoard instance
         gameBoard = new GameBoard(playerList);
         gameBoard.endTurn();
+        //OK/PL
+        opportunityKnocks = new OpportunityKnock("OK");
+        potLuck = new PotLuck("PL");
         // Current status variables
         current_pos = gameBoard.getCurrentPlayerPosition();
         currentPlayer = gameBoard.getCurrentPlayer();
@@ -369,6 +214,11 @@ public class GameController {
             if (gameBoard.getCurrentPlayer().isInJail()) {
                 System.out.println("Current player is in jail");
                 jail_pane.setVisible(true);
+                rollButton.setVisible(false);
+                canRoll = false;
+                canEndTurn = true;
+            } else {
+                rollButton.setVisible(true);
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -388,7 +238,18 @@ public class GameController {
             currentPlayer.setOutJail();
             jail_pane.setVisible(false);
             gameBoard.updateAllPlayers();
+            canEndTurn = true;
         }
+        /*
+        if(currentPlayer.isHasCardOK()) {
+            currentPlayer.setHasCardOK(false);
+            currentPlayer.setOutJail();
+            jail_pane.setVisible(false);
+            gameBoard.updateAllPlayers();
+            canEndTurn = true;
+
+         */
+        //opportunityKnocks.addJail??
     }
 
     /**
@@ -400,6 +261,7 @@ public class GameController {
         gameBoard.updateAllPlayers();
         jail_pane.setVisible(false);
         current_pos = gameBoard.getCurrentPlayerPosition();
+        canEndTurn = true;
     }
 
     /**
@@ -443,6 +305,11 @@ public class GameController {
             current_space = board_spaces.get(currentPlayer.getLocation());
             if (((Property) current_space).getOwner() == null) {
                 loadProperty_buy(currentPlayer.getLocation());
+            } else {
+                rentPane.setVisible(true);
+                rentPrice.setText("£" + Integer.toString(current_property.getRent()));
+                rentOwner.setText(current_property.getOwner().getName());
+                canEndTurn = true;
             }
         } else if (current_space instanceof StationAndUtility && currentPlayer.isPassedGo()) {
             loadProperty_buy(currentPlayer.getLocation());
@@ -830,6 +697,7 @@ public class GameController {
      * @param i The property's location on the board.
      */
     public void loadProperty_buy(int i) {
+        auctionPane.setVisible(false);
         buy_property_pane.setVisible(true);
         buy_property_pane_info.setVisible(true);
         property_info_buy.setVisible(true);
@@ -936,8 +804,14 @@ public class GameController {
             StationAndUtility currentStationOrUtility = (StationAndUtility) board_spaces.get(currentPlayer.getLocation());
             System.out.println(currentPlayer.getName() + " has not bought " + currentStationOrUtility.getName());
         }
+
+
+        //Do not remove these comments. This is the auctioning feature which is not working at the time of completion
+        buy_property_pane_info.setVisible(false);
+        //auctionPane.setVisible(true);
+        //startAuction();
+        buy_property_pane.setVisible(false);
         canEndTurn = true;
-        gameBoard.updateAllPlayers();
     }
 
     /**
@@ -1049,6 +923,7 @@ public class GameController {
         if (current instanceof Property) {
             current_property = (Property) current;
             currentPlayer.sellProperty(current_property);
+            gameBoard.updateAllPlayers();
         }
     }
 
@@ -1061,6 +936,7 @@ public class GameController {
         if (current instanceof Property) {
             current_property = (Property) current;
             currentPlayer.sellAHouse(current_property);
+            gameBoard.updateAllPlayers();
         }
     }
 
@@ -1073,6 +949,7 @@ public class GameController {
         if (current instanceof Property) {
             current_property = (Property) current;
             currentPlayer.mortgageProperty(current_property);
+            gameBoard.updateAllPlayers();
         }
     }
 
@@ -1081,6 +958,67 @@ public class GameController {
      */
     public void loadPotLuck() {
         PLPane.setVisible(true);
+        ArrayList<String> info = potLuck.getNextCard();
+        int plcardno = Integer.parseInt(info.get(0));
+        String desc = fileIO.PotLuckCardData.get(plcardno - 1).get(0);
+        PLDescription.setText(desc.substring(3, desc.length()-3));
+        PLAction.setText(fileIO.PotLuckCardData.get(plcardno - 1).get(3));
+        switch (plcardno) {
+            case 1:
+            case 2:
+            case 4:
+            case 5:
+            case 9:
+            case 13:
+            case 15:
+                potLuck.playerReceivesMoney(currentPlayer, Integer.parseInt(info.get(1)));
+                break;
+            case 16:
+                potLuck.playerReceivesMoney(currentPlayer, playerList, Integer.parseInt(info.get(1)));
+                Cash temp_cash = currentPlayer.getMoney();
+                temp_cash.addAmount(Integer.parseInt(info.get(1)));
+                currentPlayer.setMoney(temp_cash);
+                break;
+            case 6:
+            case 7:
+            case 10:
+                potLuck.playerLosesMoney(currentPlayer, Integer.parseInt(info.get(1)));
+                break;
+            case 11:
+            case 12:
+                potLuck.playerLosesMoney(currentPlayer, Integer.parseInt(info.get(1)));
+                gameBoard.addToFreeParking(Integer.parseInt(info.get(1)));
+                break;
+            case 17:
+                potLuck.getFreeJailCard(currentPlayer);
+                break;
+            case 3:
+            case 8:
+            case 14:
+                potLuck.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
+                current_pos = gameBoard.getCurrentPlayerPosition();
+                if(currentPlayer == playerOne) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerTwo) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()+10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerThree) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY()+10);
+                }
+                if(currentPlayer == playerFour) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()-10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerFive) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() - 10);
+                }
+                break;
+        }
     }
 
     /**
@@ -1088,6 +1026,63 @@ public class GameController {
      */
     public void loadOpportunityKnocks() {
         OKPane.setVisible(true);
+        ArrayList<String> info = opportunityKnocks.getNextCard();
+        int okcardno = Integer.parseInt(info.get(0));
+        String desc = fileIO.PotLuckCardData.get(okcardno - 1).get(0);
+        OKDescription.setText(desc.substring(3, desc.length()-3));
+        OKAction.setText(fileIO.PotLuckCardData.get(okcardno - 1).get(3));
+        switch (okcardno) {
+            case 1:
+            case 2:
+            case 8:
+                opportunityKnocks.playerReceiveMoney(currentPlayer, Integer.parseInt(info.get(1)));
+                break;
+            case 3:
+            case 4:
+            case 7:
+            case 10:
+            case 12:
+            case 13:
+            case 14:
+                opportunityKnocks.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
+                current_pos = gameBoard.getCurrentPlayerPosition();
+                if(currentPlayer == playerOne) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerTwo) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()+10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerThree) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY()+10);
+                }
+                if(currentPlayer == playerFour) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()-10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
+                }
+                if(currentPlayer == playerFive) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() - 10);
+                }
+                break;
+            case 6:
+                opportunityKnocks.playerLoseMoney(currentPlayer, Integer.parseInt(info.get(1)));
+                break;
+            case 5:
+            case 15:
+                opportunityKnocks.playerLoseMoney(currentPlayer, Integer.parseInt(info.get(1)));
+                gameBoard.addToFreeParking(Integer.parseInt(info.get(1)));
+                break;
+            case 9:
+            case 11:
+                opportunityKnocks.playerRepairProperties(currentPlayer, info.get(1));
+                break;
+            case 16:
+                opportunityKnocks.getFreeJailCard(currentPlayer);
+                break;
+        }
     }
 
     /**
@@ -1099,10 +1094,89 @@ public class GameController {
     }
 
     /**
-     * On click function for the button used for confirming the opportunity knocks card.
+     * On click function for the button confirming the opportunity knocks card
      */
     public void confirmOK() {
         OKPane.setVisible(false);
         canEndTurn = true;
+    }
+
+    /**
+     * On click function for the button confirming the rent paid
+     */
+    public void confirmRent() {
+        rentPane.setVisible(false);
+        canEndTurn = true;
+    }
+
+    public void startAuction() {
+        playerList_Auction = gameBoard.getPlayers();
+        bids = new int[playerList_Auction.size()];
+        bidList.setText(playerList_Auction.get(bid_pos).getName() + " is bidding.\n");
+        max_bid = 0;
+        max_bid_pos = 0;
+        bid_pos = 0;
+    }
+
+    public void endAuction() {
+        auctionPane.setVisible(false);
+        canEndTurn = true;
+        buy_property_pane.setVisible(false);
+        gameBoard.updateAllPlayers();
+        if(max_bid != 0) {
+            playerList_Auction.get(max_bid_pos).auctionProperty(current_property, max_bid);
+        }
+
+    }
+
+    public void submitBid() {
+        int desired_bid = Integer.parseInt(bidInput.getText());
+        System.out.println(bid_pos);
+        if (desired_bid <= playerList_Auction.get(bid_pos).getMoney().getAmount()) {
+            bids[bid_pos] = desired_bid;
+            if(bids[bid_pos] > max_bid) {
+                max_bid = bids[bid_pos];
+                max_bid_pos = bid_pos;
+            }
+            String listText = bidList.getText();
+            listText += playerList_Auction.get(bid_pos).getName() + " has bid £" + bids[bid_pos] + "\n";
+            bidList.setText(listText);
+            bid_pos++;
+
+            boolean cond = false;
+            while(!cond) {
+                if(!playerList_Auction.get(bid_pos).isPassedGo()) {
+                    bid_pos++;
+                    if(bid_pos >= playerList_Auction.size()) {
+                        endAuction();
+                    }
+                } else {
+                    cond = true;
+                }
+            }
+
+            if(bid_pos >= playerList_Auction.size()) {
+                endAuction();
+            } else {
+                String listText2 = bidList.getText();
+                listText2 += playerList_Auction.get(bid_pos).getName() + " is bidding. \n";
+                bidList.setText(listText2);
+            }
+        }
+    }
+
+    public void skipBid() {
+        String listText = bidList.getText();
+        listText += playerList_Auction.get(bid_pos).getName() + " has skipped. \n" + bids[bid_pos];
+        bidList.setText(listText);
+        bid_pos++;
+
+        if(bid_pos >= playerList_Auction.size()) {
+            endAuction();
+        } else {
+            String listText2 = bidList.getText();
+            listText2 += playerList_Auction.get(bid_pos).getName() + " is bidding. \n";
+            bidList.setText(listText2);
+        }
     }
 }
