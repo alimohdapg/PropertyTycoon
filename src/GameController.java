@@ -977,6 +977,7 @@ public class GameController {
      */
     public void confirmRent() {
         rentPane.setVisible(false);
+        canEndTurn = true;
     }
 
     public void startAuction() {
