@@ -1,7 +1,7 @@
 /**
  * A class representing properties on the board.
  *
- * @author Ali Ahmed & Hanzhen Gong
+ * @author Ali Ahmed {@literal &} Hanzhen Gong
  */
 public class Property extends BoardSpace {
 
@@ -160,18 +160,38 @@ public class Property extends BoardSpace {
         hasHotel = false;
     }
 
+    /**
+     * Returns whether the property is inder mortgage.
+     *
+     * @return True if the property is inder mortgage, false otherwise.
+     */
     public boolean isUnderMortgage() {
         return underMortgage;
     }
 
+    /**
+     * Sets the underMortgage field to the boolean value given.
+     *
+     * @param underMortgage The new underMortgage boolean value.
+     */
     public void setUnderMortgage(boolean underMortgage) {
         this.underMortgage = underMortgage;
     }
 
+    /**
+     * Returns the player who owns this property.
+     *
+     * @return The player who owns this property.
+     */
     public Player getOwner() {
         return owner;
     }
 
+    /**
+     * Sets the owner field to the new Player given.
+     *
+     * @param owner The new owner of the property.
+     */
     public void setOwner(Player owner) {
         this.owner = owner;
     }

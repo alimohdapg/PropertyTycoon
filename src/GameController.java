@@ -10,191 +10,342 @@ import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * The controller class for the main game scene
+ * The controller class for the main game's scene.
  *
  * @author Kieran Young
  */
-
 public class GameController {
+
+    private Property current_property;
+    private int current_pos, currentSelectedProperty;
+    private Player playerOne, playerTwo, playerThree, playerFour, playerFive, currentPlayer;
+    private GameBoard gameBoard;
+    private boolean turnInProgress;
+    private boolean canEndTurn;
+    private boolean canRoll;
+    private FileIO fileIO;
 
     @FXML
     private Circle playerOneToken, playerTwoToken, playerThreeToken, playerFourToken, playerFiveToken, p0, p1, p2, p3,
             p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26,
-            p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40;;
-
+            p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40;
     @FXML
     private Pane player_1, player_2, player_3, player_4, player_5;
-
-    @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, playerThreeName, playerThreeMoney, playerFourName, playerFourMoney,
-            playerFiveName, playerFiveMoney, FreeParking, a0_text, a1_text, a2_text, a3_text, a4_text, a5_text,
-            a6_text, a7_text, a8_text, a9_text, a10_text, a11_text, a12_text, a13_text, a14_text, a15_text, a16_text,
-            a17_text, a18_text, a19_text, a20_text, a21_text, a22_text, a23_text, a24_text, a25_text, a26_text,
-            a27_text, a28_text, a29_text, a30_text, a31_text, a32_text, a33_text, a34_text, a35_text, a36_text,
-            a37_text, a38_text, a39_text, property_info_name, currentTurnText, property_info_rent,
-            property_info_rent_set, property_info_rent_1house, property_info_rent_2house, property_info_rent_3house,
-            property_info_rent_4house, property_info_rent_hotel, property_owner, property_houses, property_info_cost,
-            property_info_current, property_info_name1, property_info_rent1, property_info_rent_set1,
-            property_info_rent_1house1, property_info_rent_2house1, property_info_rent_3house1,
-            property_info_rent_4house1, property_info_rent_hotel1, property_info_cost1, notEnoughMoney, jailText,
-            fine_text, ptex1, ptex2, ptex3, ptex4, ptex5, ptex6, ptex7, crtext, ptex11, ptex12, ptex13, ptex14, ptex15,
-            ptex16, ptex17;
-
+    @FXML
+    Text playerOneName;
+    @FXML
+    Text playerOneMoney;
+    @FXML
+    Text playerTwoName;
+    @FXML
+    Text playerTwoMoney;
+    @FXML
+    Text playerThreeName;
+    @FXML
+    Text playerThreeMoney;
+    @FXML
+    Text playerFourName;
+    @FXML
+    Text playerFourMoney;
+    @FXML
+    Text playerFiveName;
+    @FXML
+    Text playerFiveMoney;
+    @FXML
+    Text FreeParking;
+    @FXML
+    Text a0_text;
+    @FXML
+    Text a1_text;
+    @FXML
+    Text a2_text;
+    @FXML
+    Text a3_text;
+    @FXML
+    Text a4_text;
+    @FXML
+    Text a5_text;
+    @FXML
+    Text a6_text;
+    @FXML
+    Text a7_text;
+    @FXML
+    Text a8_text;
+    @FXML
+    Text a9_text;
+    @FXML
+    Text a10_text;
+    @FXML
+    Text a11_text;
+    @FXML
+    Text a12_text;
+    @FXML
+    Text a13_text;
+    @FXML
+    Text a14_text;
+    @FXML
+    Text a15_text;
+    @FXML
+    Text a16_text;
+    @FXML
+    Text a17_text;
+    @FXML
+    Text a18_text;
+    @FXML
+    Text a19_text;
+    @FXML
+    Text a20_text;
+    @FXML
+    Text a21_text;
+    @FXML
+    Text a22_text;
+    @FXML
+    Text a23_text;
+    @FXML
+    Text a24_text;
+    @FXML
+    Text a25_text;
+    @FXML
+    Text a26_text;
+    @FXML
+    Text a27_text;
+    @FXML
+    Text a28_text;
+    @FXML
+    Text a29_text;
+    @FXML
+    Text a30_text;
+    @FXML
+    Text a31_text;
+    @FXML
+    Text a32_text;
+    @FXML
+    Text a33_text;
+    @FXML
+    Text a34_text;
+    @FXML
+    Text a35_text;
+    @FXML
+    Text a36_text;
+    @FXML
+    Text a37_text;
+    @FXML
+    Text a38_text;
+    @FXML
+    Text a39_text;
+    @FXML
+    Text property_info_name;
+    @FXML
+    Text currentTurnText;
+    @FXML
+    Text property_info_rent;
+    @FXML
+    Text property_info_rent_set;
+    @FXML
+    Text property_info_rent_1house;
+    @FXML
+    Text property_info_rent_2house;
+    @FXML
+    Text property_info_rent_3house;
+    @FXML
+    Text property_info_rent_4house;
+    @FXML
+    Text property_info_rent_hotel;
+    @FXML
+    Text property_owner;
+    @FXML
+    Text property_houses;
+    @FXML
+    Text property_info_cost;
+    @FXML
+    Text property_info_current;
+    @FXML
+    Text property_info_name1;
+    @FXML
+    Text property_info_rent1;
+    @FXML
+    Text property_info_rent_set1;
+    @FXML
+    Text property_info_rent_1house1;
+    @FXML
+    Text property_info_rent_2house1;
+    @FXML
+    Text property_info_rent_3house1;
+    @FXML
+    Text property_info_rent_4house1;
+    @FXML
+    Text property_info_rent_hotel1;
+    @FXML
+    Text property_info_cost1;
+    @FXML
+    Text notEnoughMoney;
+    @FXML
+    Text fine_text;
+    @FXML
+    Text ptex1;
+    @FXML
+    Text ptex2;
+    @FXML
+    Text ptex3;
+    @FXML
+    Text ptex4;
+    @FXML
+    Text ptex5;
+    @FXML
+    Text ptex6;
+    @FXML
+    Text ptex7;
+    @FXML
+    Text crtext;
+    @FXML
+    Text ptex11;
+    @FXML
+    Text ptex12;
+    @FXML
+    Text ptex13;
+    @FXML
+    Text ptex14;
+    @FXML
+    Text ptex15;
+    @FXML
+    Text ptex16;
+    @FXML
+    Text ptex17;
     @FXML
     private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane,
-    PLPane, OKPane, playerSelectPane, buy_property_pane_info, auctionPane;
-
+            PLPane, OKPane, playerSelectPane, buy_property_pane_info, auctionPane;
     @FXML
     private TextField tbox1, tbox2, tbox3, tbox4, tbox5;
-
     @FXML
     private CheckBox check1, check2, check3, check4, check5;
-
     @FXML
     private ArrayList<Circle> pos_array;
-
     @FXML
     private ArrayList<Text> text_array;
-
     @FXML
-    private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage, jailUseCard, jailPay50;;
-
+    private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage, jailUseCard, jailPay50;
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
-
     @FXML
     private ImageView dice1, dice2;
-
     @FXML
     private Rectangle property_info_color, property_info_color1;
 
-    private Property current_property;
-
-    private int current_pos, currentSelectedProperty;
-
-    private Player playerOne, playerTwo, playerThree, playerFour, playerFive, currentPlayer;
-
-    private GameBoard gameBoard;
-
-    private boolean turnInProgress;
-    private boolean canEndTurn;
-    private boolean canRoll;
-
-    private FileIO fileIO;
-
     /**
-     * Default function, runs on launch. Initialises the array of positional elements
+     * Default function, runs on launch. Initialises the array of positional elements.
      */
     public void initialize() {
         playerSelectPane.setVisible(true);
     }
 
     /**
-     * Loads all the necessary objects to begin the game and starts the game loop
+     * Loads all the necessary objects to begin the game and starts the game loop.
      */
     public void startGame() {
         playerSelectPane.setVisible(false);
-
-        //File io
+        // File io
         fileIO = new FileIO();
-
-        //Object arrays for GUI elements
+        // Object arrays for GUI elements
         pos_array = new ArrayList<>();
         text_array = new ArrayList<>();
-
-        //Currently contains dice roll
+        // Currently, contains dice rolls
         dice_roll_pane.setVisible(false);
-
-        //Initiliase the array of GUI objects
+        // Initialise the array of GUI objects
         Collections.addAll(pos_array, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
                 p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40);
         Collections.addAll(text_array, a0_text, a1_text, a2_text, a3_text, a4_text, a5_text, a6_text, a7_text, a8_text, a9_text, a10_text,
                 a11_text, a12_text, a13_text, a14_text, a15_text, a16_text, a17_text, a18_text, a19_text, a20_text, a21_text,
                 a22_text, a23_text, a24_text, a25_text, a26_text, a27_text, a28_text, a29_text, a30_text, a31_text, a32_text,
                 a33_text, a34_text, a35_text, a36_text, a37_text, a38_text, a39_text);
-
-        //Load dice images
+        // Load dice images
         diceimg1 = new Image("/img/dice_faces/d1.png");
         diceimg2 = new Image("/img/dice_faces/d2.png");
         diceimg3 = new Image("/img/dice_faces/d3.png");
         diceimg4 = new Image("/img/dice_faces/d4.png");
         diceimg5 = new Image("/img/dice_faces/d5.png");
         diceimg6 = new Image("/img/dice_faces/d6.png");
-
-        //Load the players
-        ArrayList<Player> playerList = new ArrayList<Player>();
-        if(check1.isSelected()) {
-            playerOne = new HumanPlayer(tbox1.getText(),Token.CAT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerOneToken, playerOneName, playerOneMoney);
+        // Load the players
+        ArrayList<Player> playerList = new ArrayList<>();
+        if (check1.isSelected()) {
+            playerOne = new HumanPlayer(tbox1.getText(), Token.CAT, new ArrayList<>(), new ArrayList<>(), playerOneToken, playerOneName, playerOneMoney);
             player_1.setVisible(true);
             playerOneToken.setVisible(true);
             playerList.add(playerOne);
-        } else { player_1.setVisible(false); playerOneToken.setVisible(false); }
-        if(check2.isSelected()) {
-            playerTwo = new HumanPlayer(tbox2.getText(),Token.IRON, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerTwoToken, playerTwoName, playerTwoMoney);
+        } else {
+            player_1.setVisible(false);
+            playerOneToken.setVisible(false);
+        }
+        if (check2.isSelected()) {
+            playerTwo = new HumanPlayer(tbox2.getText(), Token.IRON, new ArrayList<>(), new ArrayList<>(), playerTwoToken, playerTwoName, playerTwoMoney);
             player_2.setVisible(true);
             playerTwoToken.setVisible(true);
             playerList.add(playerTwo);
-        } else { player_2.setVisible(false); playerTwoToken.setVisible(false); }
-        if(check3.isSelected()) {
-            playerThree = new HumanPlayer(tbox3.getText(),Token.BOOT, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerThreeToken, playerThreeName, playerThreeMoney);
+        } else {
+            player_2.setVisible(false);
+            playerTwoToken.setVisible(false);
+        }
+        if (check3.isSelected()) {
+            playerThree = new HumanPlayer(tbox3.getText(), Token.BOOT, new ArrayList<>(), new ArrayList<>(), playerThreeToken, playerThreeName, playerThreeMoney);
             player_3.setVisible(true);
             playerThreeToken.setVisible(true);
             playerList.add(playerThree);
-        } else { player_3.setVisible(false); playerThreeToken.setVisible(false); }
-        if(check4.isSelected()) {
-            playerFour = new HumanPlayer(tbox4.getText(),Token.HATSTAND, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerFourToken, playerFourName, playerFourMoney);
+        } else {
+            player_3.setVisible(false);
+            playerThreeToken.setVisible(false);
+        }
+        if (check4.isSelected()) {
+            playerFour = new HumanPlayer(tbox4.getText(), Token.HATSTAND, new ArrayList<>(), new ArrayList<>(), playerFourToken, playerFourName, playerFourMoney);
             player_4.setVisible(true);
             playerFourToken.setVisible(true);
             playerList.add(playerFour);
-        } else { player_4.setVisible(false); playerFourToken.setVisible(false);}
-        if(check5.isSelected()) {
-            playerFive = new HumanPlayer(tbox5.getText(),Token.SHIP, new ArrayList<Property>(), new ArrayList<StationAndUtility>(), playerFiveToken, playerFiveName, playerFiveMoney);
+        } else {
+            player_4.setVisible(false);
+            playerFourToken.setVisible(false);
+        }
+        if (check5.isSelected()) {
+            playerFive = new HumanPlayer(tbox5.getText(), Token.SHIP, new ArrayList<>(), new ArrayList<>(), playerFiveToken, playerFiveName, playerFiveMoney);
             player_5.setVisible(true);
             playerFiveToken.setVisible(true);
             playerList.add(playerFive);
-        } else { player_5.setVisible(false); playerFiveToken.setVisible(false); }
-
-        //Create gameBoard instance
+        } else {
+            player_5.setVisible(false);
+            playerFiveToken.setVisible(false);
+        }
+        // Create gameBoard instance
         gameBoard = new GameBoard(playerList);
         gameBoard.endTurn();
-
-        //Current status variables
+        // Current status variables
         current_pos = gameBoard.getCurrentPlayerPosition();
         currentPlayer = gameBoard.getCurrentPlayer();
         currentTurnText.setText(currentPlayer.getName() + "'s turn");
-
-        //Boolean flags
+        // Boolean flags
         turnInProgress = false;
         canEndTurn = false;
         canRoll = true;
-
-        //Load board data
+        // Load board data
         getTileNames();
-
-        //Updates player details on screen
+        // Updates player details on screen
         gameBoard.updateAllPlayers();
     }
 
     /**
-     * Rolls the dice
+     * Takes a single turn and performs the actions associated with taking it.
      */
     public void takeTurn() {
         gameBoard.updateAllPlayers();
         gameBoard.update();
         currentPlayer = gameBoard.getCurrentPlayer();
-        if(!turnInProgress && canRoll) {
+        if (!turnInProgress && canRoll) {
             turnInProgress = true;
-            //Updates current_pos with the new player position
+            // Updates current_pos with the new player position
             current_pos = gameBoard.getCurrentPlayerPosition();
-
             displayDice();
             dice_roll_pane.setVisible(true);
             canRoll = false;
-
-            //Sets the player token on the GUI to the new location
+            // Sets the player token on the GUI to the new location
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Warning!");
@@ -205,17 +356,17 @@ public class GameController {
     }
 
     /**
-     * Ends turn and tells gameBoard to move onto the next player
+     * Ends turn and tells the gameBoard to move onto the next player.
      */
     public void endTurn() {
         notEnoughMoney.setVisible(false);
         gameBoard.updateAllPlayers();
-        if(canEndTurn) {
+        if (canEndTurn) {
             gameBoard.endTurn();
             canEndTurn = false;
             canRoll = true;
             currentTurnText.setText(gameBoard.getCurrentPlayer().getName() + "'s turn");
-            if(gameBoard.getCurrentPlayer().isInJail()) {
+            if (gameBoard.getCurrentPlayer().isInJail()) {
                 System.out.println("Current player is in jail");
                 jail_pane.setVisible(true);
             }
@@ -229,10 +380,10 @@ public class GameController {
     }
 
     /**
-     * Method for button onclick uses get out of jail card
+     * Method for the button used to get out of jail by using the get out of jail card.
      */
-    public void useCard () {
-        if(currentPlayer.isHasCard()) {
+    public void useCard() {
+        if (currentPlayer.isHasCard()) {
             currentPlayer.setHasCard(false);
             currentPlayer.setOutJail();
             jail_pane.setVisible(false);
@@ -241,9 +392,9 @@ public class GameController {
     }
 
     /**
-     * Method for button pay 50 to be released from jail
+     * Method for the button used to get out of jail by paying 50.
      */
-    public void pay50 () {
+    public void pay50() {
         gameBoard.getCurrentPlayer().getMoney().subtractAmount(50);
         gameBoard.getCurrentPlayer().setOutJail();
         gameBoard.updateAllPlayers();
@@ -252,70 +403,64 @@ public class GameController {
     }
 
     /**
-     * Confirms the dice roll, updates position
+     * Confirms the dice roll, updates the position of the player on the board.
      */
     public void confirm_rollClicked() {
         current_pos = gameBoard.getCurrentPlayerPosition();
-        if(currentPlayer == playerOne) {
+        if (currentPlayer == playerOne) {
             currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
             currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
         }
-        if(currentPlayer == playerTwo) {
-            currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()+10);
+        if (currentPlayer == playerTwo) {
+            currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX() + 10);
             currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
         }
-        if(currentPlayer == playerThree) {
+        if (currentPlayer == playerThree) {
             currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
-            currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY()+10);
+            currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() + 10);
         }
-        if(currentPlayer == playerFour) {
-            currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()-10);
+        if (currentPlayer == playerFour) {
+            currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX() - 10);
             currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
         }
-        if(currentPlayer == playerFive) {
+        if (currentPlayer == playerFive) {
             currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
             currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() - 10);
         }
-
-
         turnInProgress = false;
         dice_roll_pane.setVisible(false);
-
         handle_board_space();
     }
 
     /**
      * Checks the current board space that was landed on and runs the necessary function
-     * (Property -> buy/pay rent, Jail -> Go to jail, Station -> ... etc)
+     * (Property -&lt; buy/pay rent, Jail -&lt; Go to jail, Station -&lt; ... etc.).
      */
     public void handle_board_space() {
-
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
         BoardSpace current_space = board_spaces.get(currentPlayer.getLocation());
         if (current_space instanceof Property && currentPlayer.isPassedGo()) {
-            current_space = (Property) board_spaces.get(currentPlayer.getLocation());
-            if(((Property) current_space).getOwner() == null) {
+            current_space = board_spaces.get(currentPlayer.getLocation());
+            if (((Property) current_space).getOwner() == null) {
                 loadProperty_buy(currentPlayer.getLocation());
             }
-        } else if(current_space instanceof StationAndUtility && currentPlayer.isPassedGo()) {
+        } else if (current_space instanceof StationAndUtility && currentPlayer.isPassedGo()) {
             loadProperty_buy(currentPlayer.getLocation());
-        } else if(currentPlayer.getLocation() == 4 || currentPlayer.getLocation() == 38){
+        } else if (currentPlayer.getLocation() == 4 || currentPlayer.getLocation() == 38) {
             loadFineScreen();
-        } else if(currentPlayer.getLocation() == 2 || currentPlayer.getLocation() == 17 || currentPlayer.getLocation() == 33) {
+        } else if (currentPlayer.getLocation() == 2 || currentPlayer.getLocation() == 17 || currentPlayer.getLocation() == 33) {
             loadPotLuck();
-        } else if(currentPlayer.getLocation() == 7 || currentPlayer.getLocation() == 22 || currentPlayer.getLocation() == 36) {
+        } else if (currentPlayer.getLocation() == 7 || currentPlayer.getLocation() == 22 || currentPlayer.getLocation() == 36) {
             loadOpportunityKnocks();
         } else {
             canEndTurn = true;
         }
         gameBoard.updateAllPlayers();
         updateFreeParking();
-
     }
 
     /**
-     * Updates the visual UI of the dice roll
-     *
+     * Updates the visual UI of the dice roll.
      */
     public void displayDice() {
         dice1.setImage(getDiceImage(gameBoard.getDice1Number()));
@@ -325,12 +470,13 @@ public class GameController {
     }
 
     /**
-     * Returns the correct dice image
-     * @param i the integer value that represents the roll number
-     * @return the image of the corresponding dice roll
+     * Returns the correct dice image.
+     *
+     * @param i The integer value that represents the roll number.
+     * @return The image of the corresponding dice roll.
      */
     private Image getDiceImage(Integer i) {
-        switch(i) {
+        switch (i) {
             case 1:
                 return diceimg1;
             case 2:
@@ -350,73 +496,236 @@ public class GameController {
     }
 
     /**
-     * Updates the board tile names using data from the gameboard
+     * Updates the board tile names using data from the GameBoard.
      */
     public void getTileNames() {
-        int[] property_indexes = new int[]{1,3,6,8,9,11,13,14,16,18,19,21,23,24,26,27,29,31,32,34,37,39};
-        int iter = 0;
+        int[] property_indexes = new int[]{1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39};
+        int count = 0;
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
         for (BoardSpace current : board_spaces) {
             if (current instanceof Property) {
-                System.out.println(text_array.get(property_indexes[iter]).getText());
-                text_array.get(property_indexes[iter]).setText(current.getName());
-                iter++;
+                System.out.println(text_array.get(property_indexes[count]).getText());
+                text_array.get(property_indexes[count]).setText(current.getName());
+                count++;
             }
         }
     }
 
-    //Onclick functions for the properties, stations and utilities
-    public void displayProperty1() { loadProperty(1); }
-    public void displayProperty2() { loadProperty(3); }
-    public void displayProperty3() { loadProperty(6); }
-    public void displayProperty4() { loadProperty(8); }
-    public void displayProperty5() { loadProperty(9); }
-    public void displayProperty6() { loadProperty(11); }
-    public void displayProperty7() { loadProperty(13); }
-    public void displayProperty8() { loadProperty(14); }
-    public void displayProperty9() { loadProperty(16); }
-    public void displayProperty10() { loadProperty(18); }
-    public void displayProperty11() { loadProperty(19); }
-    public void displayProperty12() { loadProperty(21); }
-    public void displayProperty13() { loadProperty(23); }
-    public void displayProperty14() { loadProperty(24); }
-    public void displayProperty15() { loadProperty(26); }
-    public void displayProperty16() { loadProperty(27); }
-    public void displayProperty17() { loadProperty(29); }
-    public void displayProperty18() { loadProperty(31); }
-    public void displayProperty19() { loadProperty(32); }
-    public void displayProperty20() { loadProperty(34); }
-    public void displayProperty21() { loadProperty(37); }
-    public void displayProperty22() { loadProperty(39); }
-
-    public void displayStation1() { loadProperty(5); }
-    public void displayStation2() { loadProperty(15);}
-    public void displayStation3() { loadProperty(25);}
-    public void displayStation4() { loadProperty(35);}
-
-    public void displayUtility1() { loadProperty(12);}
-    public void displayUtility2() { loadProperty(28);}
+    /**
+     * Onclick function for the property at position 1.
+     */
+    public void displayProperty1() {
+        loadProperty(1);
+    }
 
     /**
-     * Loads the selected property on the gameBoard into a card for the user to see
-     * @param i the board location
+     * Onclick function for the property at position 3.
+     */
+    public void displayProperty2() {
+        loadProperty(3);
+    }
+
+    /**
+     * Onclick function for the property at position 6.
+     */
+    public void displayProperty3() {
+        loadProperty(6);
+    }
+
+    /**
+     * Onclick function for the property at position 8.
+     */
+    public void displayProperty4() {
+        loadProperty(8);
+    }
+
+    /**
+     * Onclick function for the property at position 9.
+     */
+    public void displayProperty5() {
+        loadProperty(9);
+    }
+
+    /**
+     * Onclick function for the property at position 11.
+     */
+    public void displayProperty6() {
+        loadProperty(11);
+    }
+
+    /**
+     * Onclick function for the property at position 13.
+     */
+    public void displayProperty7() {
+        loadProperty(13);
+    }
+
+    /**
+     * Onclick function for the property at position 14.
+     */
+    public void displayProperty8() {
+        loadProperty(14);
+    }
+
+    /**
+     * Onclick function for the property at position 16.
+     */
+    public void displayProperty9() {
+        loadProperty(16);
+    }
+
+    /**
+     * Onclick function for the property at position 18.
+     */
+    public void displayProperty10() {
+        loadProperty(18);
+    }
+
+    /**
+     * Onclick function for the property at position 19.
+     */
+    public void displayProperty11() {
+        loadProperty(19);
+    }
+
+    /**
+     * Onclick function for the property at position 21.
+     */
+    public void displayProperty12() {
+        loadProperty(21);
+    }
+
+    /**
+     * Onclick function for the property at position 23.
+     */
+    public void displayProperty13() {
+        loadProperty(23);
+    }
+
+    /**
+     * Onclick function for the property at position 24.
+     */
+    public void displayProperty14() {
+        loadProperty(24);
+    }
+
+    /**
+     * Onclick function for the property at position 26.
+     */
+    public void displayProperty15() {
+        loadProperty(26);
+    }
+
+    /**
+     * Onclick function for the property at position 27.
+     */
+    public void displayProperty16() {
+        loadProperty(27);
+    }
+
+    /**
+     * Onclick function for the property at position 29.
+     */
+    public void displayProperty17() {
+        loadProperty(29);
+    }
+
+    /**
+     * Onclick function for the property at position 31.
+     */
+    public void displayProperty18() {
+        loadProperty(31);
+    }
+
+    /**
+     * Onclick function for the property at position 32.
+     */
+    public void displayProperty19() {
+        loadProperty(32);
+    }
+
+    /**
+     * Onclick function for the property at position 34.
+     */
+    public void displayProperty20() {
+        loadProperty(34);
+    }
+
+    /**
+     * Onclick function for the property at position 37.
+     */
+    public void displayProperty21() {
+        loadProperty(37);
+    }
+
+    /**
+     * Onclick function for the property at position 39.
+     */
+    public void displayProperty22() {
+        loadProperty(39);
+    }
+
+    /**
+     * Onclick function for the station at position 5.
+     */
+    public void displayStation1() {
+        loadProperty(5);
+    }
+
+    /**
+     * Onclick function for the station at position 15.
+     */
+    public void displayStation2() {
+        loadProperty(15);
+    }
+
+    /**
+     * Onclick function for the station at position 25.
+     */
+    public void displayStation3() {
+        loadProperty(25);
+    }
+
+    /**
+     * Onclick function for the station at position 35.
+     */
+    public void displayStation4() {
+        loadProperty(35);
+    }
+
+    /**
+     * Onclick function for the utility at position 12.
+     */
+    public void displayUtility1() {
+        loadProperty(12);
+    }
+
+    /**
+     * Onclick function for the utility at position 28.
+     */
+    public void displayUtility2() {
+        loadProperty(28);
+    }
+
+    /**
+     * Loads the selected property on the gameBoard into a card for the user to see.
+     *
+     * @param i The property's location on the board.
      */
     public void loadProperty(int i) {
         currentSelectedProperty = i;
         property_info.setVisible(true);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-
-        if(board_spaces.get(i) instanceof Property){
+        if (board_spaces.get(i) instanceof Property) {
             crtext.setText("Current rent:");
             current_property = (Property) board_spaces.get(i);
             Player owner = current_property.getOwner();
-
-            if(owner == currentPlayer) {
+            if (owner == currentPlayer) {
                 btnSellProp.setOpacity(1);
                 btnMortgage.setOpacity(1);
                 btnSellProp.setDisable(false);
                 btnMortgage.setDisable(false);
-                if(current_property.getHouseCount() > 0) {
+                if (current_property.getHouseCount() > 0) {
                     btnSellHouse.setOpacity(1);
                     btnSellHouse.setDisable(false);
                 } else {
@@ -429,10 +738,11 @@ public class GameController {
                 btnSellProp.setDisable(true);
                 btnMortgage.setDisable(true);
             }
-
-            if(owner != null) {
+            if (owner != null) {
                 property_owner.setText("Owner: " + owner.getName());
-            } else { property_owner.setText("Owner: Vacant"); }
+            } else {
+                property_owner.setText("Owner: Vacant");
+            }
             property_houses.setText("H: " + current_property.getHouseCount());
             property_houses.setVisible(true);
             property_info_rent.setVisible(true);
@@ -450,7 +760,6 @@ public class GameController {
             ptex5.setVisible(true);
             ptex6.setVisible(true);
             ptex7.setVisible(true);
-
             property_info_cost.setText("£" + fileIO.BoardData.get(i).get(7));
             property_info_current.setText("£" + current_property.getRent());
             property_info_name.setText(fileIO.BoardData.get(i).get(1));
@@ -463,17 +772,16 @@ public class GameController {
             property_info_rent_3house.setText("£" + fileIO.BoardData.get(i).get(12));
             property_info_rent_4house.setText("£" + fileIO.BoardData.get(i).get(13));
             property_info_rent_hotel.setText("£" + fileIO.BoardData.get(i).get(14));
-        } else if(board_spaces.get(i) instanceof StationAndUtility) {
-            StationAndUtility current_stationutil = (StationAndUtility) board_spaces.get(i);
-
-            if(current_stationutil.getColor() == ColorOfSet.STATION) {
+        } else if (board_spaces.get(i) instanceof StationAndUtility) {
+            StationAndUtility currentStationOrUtility = (StationAndUtility) board_spaces.get(i);
+            if (currentStationOrUtility.getColor() == ColorOfSet.STATION) {
                 crtext.setText("Current rent:");
                 property_houses.setVisible(false);
                 Color c = Color.web("#FFFFFF");
                 property_info_color.setFill(c);
-                property_info_name.setText(current_stationutil.getName());
+                property_info_name.setText(currentStationOrUtility.getName());
                 property_info_cost.setText("£" + fileIO.BoardData.get(i).get(7));
-                property_info_current.setText("£" + current_stationutil.getStationRent(1));//PROBLEM!!
+                property_info_current.setText("£" + currentStationOrUtility.getStationRent(1));//PROBLEM!!
                 property_info_rent.setVisible(false);
                 property_info_rent_set.setVisible(false);
                 property_info_rent_1house.setVisible(false);
@@ -489,14 +797,14 @@ public class GameController {
                 ptex6.setVisible(false);
                 ptex7.setVisible(false);
                 buyHouseBtn.setVisible(false);
-            }else if(current_stationutil.getColor() == ColorOfSet.UTILITIES) {
+            } else if (currentStationOrUtility.getColor() == ColorOfSet.UTILITIES) {
                 crtext.setText("Dice multiplier");
                 property_houses.setVisible(false);
-                property_info_name.setText(current_stationutil.getName());
+                property_info_name.setText(currentStationOrUtility.getName());
                 Color c = Color.web("#FFFFFF");
                 property_info_color.setFill(c);
                 property_info_cost.setText("£" + fileIO.BoardData.get(i).get(7));
-                property_info_current.setText("£" + current_stationutil.getUtilityRent(1,1));//PROBLEM!!
+                property_info_current.setText("£" + currentStationOrUtility.getUtilityRent(1, 1));//PROBLEM!!
                 property_info_rent.setVisible(false);
                 property_info_rent_set.setVisible(false);
                 property_info_rent_1house.setVisible(false);
@@ -513,31 +821,25 @@ public class GameController {
                 ptex7.setVisible(false);
                 buyHouseBtn.setVisible(false);
             }
-
         }
-
-
     }
 
-
     /**
-     * Duplicate of loadProperty but for the buy property panel
-     * @param i the board location
+     * Duplicate of loadProperty but for the buy property panel.
+     *
+     * @param i The property's location on the board.
      */
     public void loadProperty_buy(int i) {
         buy_property_pane.setVisible(true);
         buy_property_pane_info.setVisible(true);
         property_info_buy.setVisible(true);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
-
-        if(board_spaces.get(i) instanceof Property) {
+        if (board_spaces.get(i) instanceof Property) {
             Property current_property = (Property) board_spaces.get(i);
-
             property_info_name1.setText(fileIO.BoardData.get(i).get(1));
             Color c = Color.web(getHex(i));
             property_info_color1.setFill(c);
             property_info_cost1.setText("£" + fileIO.BoardData.get(i).get(7));
-
             property_info_rent1.setVisible(true);
             property_info_rent_set1.setVisible(true);
             property_info_rent_1house1.setVisible(true);
@@ -552,19 +854,15 @@ public class GameController {
             ptex15.setVisible(true);
             ptex16.setVisible(true);
             ptex17.setVisible(true);
-
-
             property_info_rent1.setText("£" + current_property.getRent());
             property_info_rent_set1.setText("£" + Integer.parseInt(fileIO.BoardData.get(i).get(8)) * 2);
-
             property_info_rent_1house1.setText("£" + fileIO.BoardData.get(i).get(10));
             property_info_rent_2house1.setText("£" + fileIO.BoardData.get(i).get(11));
             property_info_rent_3house1.setText("£" + fileIO.BoardData.get(i).get(12));
             property_info_rent_4house1.setText("£" + fileIO.BoardData.get(i).get(13));
             property_info_rent_hotel1.setText("£" + fileIO.BoardData.get(i).get(14));
-        } else if(board_spaces.get(i) instanceof StationAndUtility) {
-            StationAndUtility current_stationutil = (StationAndUtility) board_spaces.get(i);
-
+        } else if (board_spaces.get(i) instanceof StationAndUtility) {
+            StationAndUtility currentStationOrUtility = (StationAndUtility) board_spaces.get(i);
             property_info_rent1.setVisible(false);
             property_info_rent_set1.setVisible(false);
             property_info_rent_1house1.setVisible(false);
@@ -579,15 +877,13 @@ public class GameController {
             ptex15.setVisible(false);
             ptex16.setVisible(false);
             ptex17.setVisible(false);
-
-
-            if(current_stationutil.getColor() == ColorOfSet.STATION) {
+            if (currentStationOrUtility.getColor() == ColorOfSet.STATION) {
                 Color c = Color.web("#FFFFFF");
                 property_info_color1.setFill(c);
-                property_info_name1.setText(current_stationutil.getName());
+                property_info_name1.setText(currentStationOrUtility.getName());
                 property_info_cost1.setText("£" + fileIO.BoardData.get(i).get(7));
-            } else if(current_stationutil.getColor() == ColorOfSet.UTILITIES) {
-                property_info_name1.setText(current_stationutil.getName());
+            } else if (currentStationOrUtility.getColor() == ColorOfSet.UTILITIES) {
+                property_info_name1.setText(currentStationOrUtility.getName());
                 Color c = Color.web("#FFFFFF");
                 property_info_color1.setFill(c);
                 property_info_cost1.setText("£" + fileIO.BoardData.get(i).get(7));
@@ -596,68 +892,61 @@ public class GameController {
     }
 
     /**
-     * Method for the buy property button
+     * Method for the buy property button.
      */
     public void buy_property_button_yes() {
         notEnoughMoney.setVisible(false);
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
         int i = currentPlayer.getLocation();
-        if(board_spaces.get(i) instanceof Property) {
+        if (board_spaces.get(i) instanceof Property) {
             Property current_property = (Property) board_spaces.get(i);
             boolean success = currentPlayer.buyProperty(current_property);
             gameBoard.updateAllPlayers();
-            if(success) {
+            if (success) {
                 System.out.println(currentPlayer.getName() + " has bought " + current_property.getName());
                 buy_property_pane.setVisible(false);
                 canEndTurn = true;
             } else {
                 notEnoughMoney.setVisible(true);
             }
-        } else if(board_spaces.get(i) instanceof StationAndUtility) {
-            StationAndUtility current_stationutil = (StationAndUtility) board_spaces.get(i);
-            boolean success = currentPlayer.buyStaUti(current_stationutil);
+        } else if (board_spaces.get(i) instanceof StationAndUtility) {
+            StationAndUtility currentStationOrUtility = (StationAndUtility) board_spaces.get(i);
+            boolean success = currentPlayer.buyStaUti(currentStationOrUtility);
             gameBoard.updateAllPlayers();
-            if(success) {
-                System.out.println(currentPlayer.getName() + " has bought " + current_stationutil.getName());
+            if (success) {
+                System.out.println(currentPlayer.getName() + " has bought " + currentStationOrUtility.getName());
                 buy_property_pane.setVisible(false);
                 canEndTurn = true;
             } else {
                 notEnoughMoney.setVisible(true);
             }
         }
-
     }
 
     /**
-     * Method for the rejecting the buy property offer
+     * Method for rejecting the buy property offer.
      */
     public void buy_property_button_no() {
         ArrayList<BoardSpace> board_spaces = gameBoard.getBoardSpaces();
         int i = currentPlayer.getLocation();
-        if(board_spaces.get(i) instanceof Property) {
+        if (board_spaces.get(i) instanceof Property) {
             current_property = (Property) board_spaces.get(currentPlayer.getLocation());
             System.out.println(currentPlayer.getName() + " has not bought " + current_property.getName());
-        } else if(board_spaces.get(i) instanceof StationAndUtility) {
-            StationAndUtility current_stationutil = (StationAndUtility) board_spaces.get(currentPlayer.getLocation());
-            System.out.println(currentPlayer.getName() + " has not bought " + current_stationutil.getName());
+        } else if (board_spaces.get(i) instanceof StationAndUtility) {
+            StationAndUtility currentStationOrUtility = (StationAndUtility) board_spaces.get(currentPlayer.getLocation());
+            System.out.println(currentPlayer.getName() + " has not bought " + currentStationOrUtility.getName());
         }
-
-        //buy_property_pane_info.setVisible(false);
-        //buy_property_pane.setVisible(false);
-        //auctionPane.setVisible(true);
-
         canEndTurn = true;
-
         gameBoard.updateAllPlayers();
     }
 
     /**
-     * Buys a house on the selected tile
+     * Buys a house on the selected tile.
      */
     public void buyHouse() {
         boolean success = currentPlayer.buyAHouse((Property) gameBoard.getBoardSpaces().get(currentSelectedProperty));
         gameBoard.updateAllPlayers();
-        if(success && gameBoard.checkBuyHouse(current_property, currentPlayer)) {
+        if (success && gameBoard.checkBuyHouse(current_property, currentPlayer)) {
             property_houses.setText("H: " + current_property.getHouseCount());
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -669,26 +958,26 @@ public class GameController {
     }
 
     /**
-     * Method upon clicking the property card to hide it
+     * Method that triggers upon clicking the property card to hide it.
      */
     public void closeProperty() {
         property_info.setVisible(false);
         btnSellHouse.setOpacity(0.25);
         btnSellProp.setOpacity(0.25);
         btnMortgage.setOpacity(0.25);
-
         btnSellHouse.setDisable(true);
         btnSellProp.setDisable(true);
         btnMortgage.setDisable(true);
     }
 
     /**
-     * Method for getting the card colour data
-     * @param i the board space
-     * @return the hex value representing the colour
+     * Method for getting the card colour data.
+     *
+     * @param i The board space.
+     * @return The hex value representing the colour.
      */
-    public String getHex(int i){
-        switch(i) {
+    public String getHex(int i) {
+        switch (i) {
             case 1:
             case 3:
                 return "#915336";
@@ -720,31 +1009,31 @@ public class GameController {
             case 39:
                 return "#264da1";
         }
-        //If fails
+        // If fails
         return "#264da1";
     }
 
     /**
-     * Updates the free parking text
+     * Updates the free parking text.
      */
     public void updateFreeParking() {
         FreeParking.setText("Free Parking: £" + gameBoard.getFreeParkingSum());
     }
 
-    /*
-     * Displays the fine screen
+    /**
+     * Displays the fine screen.
      */
     public void loadFineScreen() {
-        if(currentPlayer.getLocation() == 4) {
+        if (currentPlayer.getLocation() == 4) {
             fine_text.setText("You were fined £200!");
-        } else if(currentPlayer.getLocation() == 38) {
+        } else if (currentPlayer.getLocation() == 38) {
             fine_text.setText("You were fined £100!");
         }
         fine_pane.setVisible(true);
     }
 
     /**
-     * On click function for the button confirming the fine paid
+     * On click function for the button confirming the fine paid.
      */
     public void confirmFine() {
         fine_pane.setVisible(false);
@@ -752,57 +1041,57 @@ public class GameController {
     }
 
     /**
-     * On click function for the button selling a property
+     * On click function for the button used for selling a property.
      */
     public void buttonSellProp() {
         System.out.println("sold");
         BoardSpace current = gameBoard.getBoardSpaces().get(currentSelectedProperty);
-        if(current instanceof Property) {
+        if (current instanceof Property) {
             current_property = (Property) current;
             currentPlayer.sellProperty(current_property);
         }
     }
 
     /**
-     * On click function for the button selling a house
+     * On click function for the button used for selling a house.
      */
     public void buttonSellHouse() {
         System.out.println("Sold house");
         BoardSpace current = gameBoard.getBoardSpaces().get(currentSelectedProperty);
-        if(current instanceof Property) {
+        if (current instanceof Property) {
             current_property = (Property) current;
             currentPlayer.sellAHouse(current_property);
         }
     }
 
     /**
-     * On click function for the button mortgaging a property
+     * On click function for the button used for mortgaging a property.
      */
     public void buttonMortgage() {
         System.out.println("Mortgaged");
         BoardSpace current = gameBoard.getBoardSpaces().get(currentSelectedProperty);
-        if(current instanceof Property) {
+        if (current instanceof Property) {
             current_property = (Property) current;
             currentPlayer.mortgageProperty(current_property);
         }
     }
 
     /**
-     * Loads the potluck screen and pulls a card
+     * Loads the potluck screen and pulls a card.
      */
     public void loadPotLuck() {
         PLPane.setVisible(true);
     }
 
     /**
-     * Loads the opportunity knocks screen and pulls a card
+     * Loads the opportunity knocks screen and pulls a card.
      */
     public void loadOpportunityKnocks() {
         OKPane.setVisible(true);
     }
 
     /**
-     * On click function for the button confirming the potluck card
+     * On click function for the button used for confirming the potluck card.
      */
     public void confirmPL() {
         PLPane.setVisible(false);
@@ -810,7 +1099,7 @@ public class GameController {
     }
 
     /**
-     * On click function for the button confirming the opportunity knocks card
+     * On click function for the button used for confirming the opportunity knocks card.
      */
     public void confirmOK() {
         OKPane.setVisible(false);
