@@ -39,7 +39,8 @@ public class GameController {
     @FXML
     private Pane player_1, player_2, player_3, player_4, player_5;
 
-    @FXML Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, playerThreeName, playerThreeMoney, playerFourName, playerFourMoney,
+    @FXML
+    Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, playerThreeName, playerThreeMoney, playerFourName, playerFourMoney,
             playerFiveName, playerFiveMoney, FreeParking, a0_text, a1_text, a2_text, a3_text, a4_text, a5_text,
             a6_text, a7_text, a8_text, a9_text, a10_text, a11_text, a12_text, a13_text, a14_text, a15_text, a16_text,
             a17_text, a18_text, a19_text, a20_text, a21_text, a22_text, a23_text, a24_text, a25_text, a26_text,
@@ -55,7 +56,7 @@ public class GameController {
 
     @FXML
     private AnchorPane dice_roll_pane, property_info, property_info_buy, buy_property_pane, fine_pane, jail_pane,
-    PLPane, OKPane, playerSelectPane, buy_property_pane_info, auctionPane, rentPane;
+            PLPane, OKPane, playerSelectPane, buy_property_pane_info, auctionPane, rentPane;
 
     @FXML
     private TextField tbox1, tbox2, tbox3, tbox4, tbox5, bidInput;
@@ -961,7 +962,7 @@ public class GameController {
         ArrayList<String> info = potLuck.getNextCard();
         int plcardno = Integer.parseInt(info.get(0));
         String desc = fileIO.PotLuckCardData.get(plcardno - 1).get(0);
-        PLDescription.setText(desc.substring(3, desc.length()-3));
+        PLDescription.setText(desc.substring(3, desc.length() - 3));
         PLAction.setText(fileIO.PotLuckCardData.get(plcardno - 1).get(3));
         switch (plcardno) {
             case 1:
@@ -997,23 +998,23 @@ public class GameController {
             case 14:
                 potLuck.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
                 current_pos = gameBoard.getCurrentPlayerPosition();
-                if(currentPlayer == playerOne) {
+                if (currentPlayer == playerOne) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
                     currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
                 }
-                if(currentPlayer == playerTwo) {
-                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()+10);
+                if (currentPlayer == playerTwo) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX() + 10);
                     currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
                 }
-                if(currentPlayer == playerThree) {
+                if (currentPlayer == playerThree) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
-                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY()+10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() + 10);
                 }
-                if(currentPlayer == playerFour) {
-                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()-10);
+                if (currentPlayer == playerFour) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX() - 10);
                     currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
                 }
-                if(currentPlayer == playerFive) {
+                if (currentPlayer == playerFive) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
                     currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() - 10);
                 }
@@ -1029,7 +1030,7 @@ public class GameController {
         ArrayList<String> info = opportunityKnocks.getNextCard();
         int okcardno = Integer.parseInt(info.get(0));
         String desc = fileIO.PotLuckCardData.get(okcardno - 1).get(0);
-        OKDescription.setText(desc.substring(3, desc.length()-3));
+        OKDescription.setText(desc.substring(3, desc.length() - 3));
         OKAction.setText(fileIO.PotLuckCardData.get(okcardno - 1).get(3));
         switch (okcardno) {
             case 1:
@@ -1046,23 +1047,23 @@ public class GameController {
             case 14:
                 opportunityKnocks.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
                 current_pos = gameBoard.getCurrentPlayerPosition();
-                if(currentPlayer == playerOne) {
+                if (currentPlayer == playerOne) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
                     currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
                 }
-                if(currentPlayer == playerTwo) {
-                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()+10);
+                if (currentPlayer == playerTwo) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX() + 10);
                     currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
                 }
-                if(currentPlayer == playerThree) {
+                if (currentPlayer == playerThree) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
-                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY()+10);
+                    currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() + 10);
                 }
-                if(currentPlayer == playerFour) {
-                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX()-10);
+                if (currentPlayer == playerFour) {
+                    currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX() - 10);
                     currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY());
                 }
-                if(currentPlayer == playerFive) {
+                if (currentPlayer == playerFive) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
                     currentPlayer.getBoardToken().setLayoutY(pos_array.get(current_pos).getLayoutY() - 10);
                 }
@@ -1123,7 +1124,7 @@ public class GameController {
         canEndTurn = true;
         buy_property_pane.setVisible(false);
         gameBoard.updateAllPlayers();
-        if(max_bid != 0) {
+        if (max_bid != 0) {
             playerList_Auction.get(max_bid_pos).auctionProperty(current_property, max_bid);
         }
 
@@ -1134,7 +1135,7 @@ public class GameController {
         System.out.println(bid_pos);
         if (desired_bid <= playerList_Auction.get(bid_pos).getMoney().getAmount()) {
             bids[bid_pos] = desired_bid;
-            if(bids[bid_pos] > max_bid) {
+            if (bids[bid_pos] > max_bid) {
                 max_bid = bids[bid_pos];
                 max_bid_pos = bid_pos;
             }
@@ -1144,10 +1145,10 @@ public class GameController {
             bid_pos++;
 
             boolean cond = false;
-            while(!cond) {
-                if(!playerList_Auction.get(bid_pos).isPassedGo()) {
+            while (!cond) {
+                if (!playerList_Auction.get(bid_pos).isPassedGo()) {
                     bid_pos++;
-                    if(bid_pos >= playerList_Auction.size()) {
+                    if (bid_pos >= playerList_Auction.size()) {
                         endAuction();
                     }
                 } else {
@@ -1155,7 +1156,7 @@ public class GameController {
                 }
             }
 
-            if(bid_pos >= playerList_Auction.size()) {
+            if (bid_pos >= playerList_Auction.size()) {
                 endAuction();
             } else {
                 String listText2 = bidList.getText();
@@ -1171,7 +1172,7 @@ public class GameController {
         bidList.setText(listText);
         bid_pos++;
 
-        if(bid_pos >= playerList_Auction.size()) {
+        if (bid_pos >= playerList_Auction.size()) {
             endAuction();
         } else {
             String listText2 = bidList.getText();

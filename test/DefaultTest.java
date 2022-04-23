@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DefaultTest {
@@ -16,7 +17,7 @@ class DefaultTest {
     }
 
     @Test
-    void testGetName(){
+    void testGetName() {
         assertEquals("Go", testDefault1.getName());
         assertEquals("Pot Luck", testDefault2.getName());
         assertEquals("Opportunity Knocks", testDefault3.getName());

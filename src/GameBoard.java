@@ -130,7 +130,6 @@ public class GameBoard {
             Property propertyLandedOn = (Property) boardSpaces.get(currentPlayer.getLocation());
             currentPlayer.getMoney().subtractAmount(propertyLandedOn.getRent());
             propertyLandedOn.getOwner().getMoney().addAmount(propertyLandedOn.getRent());
-
         }
     }
 
