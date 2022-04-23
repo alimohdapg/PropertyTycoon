@@ -79,10 +79,11 @@ public abstract class Player {
     }
 
     /**
-     * Work in progress for the auction
-     * @param property
-     * @param bid
-     * @return
+     * Work in progress for the auction.
+     *
+     * @param property Property to be auctioned.
+     * @param bid      Current bid on the property.
+     * @return True if the property is sold, false otherwise.
      */
     public boolean auctionProperty(Property property, int bid) {
         money.subtractAmount(bid);
