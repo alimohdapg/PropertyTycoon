@@ -3,7 +3,7 @@
  *
  * @author Ali Ahmed
  */
-public enum Color {
+public enum ColorOfSet {
 
     BROWN("brown"),
     BLUE("blue"),
@@ -13,12 +13,17 @@ public enum Color {
     YELLOW("yellow"),
     GREEN("green"),
     DEEPBLUE("deep blue"),
-    STATION("Station"),
-    UTILITIES("Utilities");
+    STATION("station"),
+    UTILITIES("utilities");
 
     private final String representation;
 
-    Color(String representation) {
+    /**
+     * Constructs a new ColorOfSet object.
+     *
+     * @param representation The string representation of the ColorOfSet object.
+     */
+    ColorOfSet(String representation) {
         this.representation = representation;
     }
 
@@ -28,10 +33,10 @@ public enum Color {
      * @param color String color name to match.
      * @return A Color enum matching the input string.
      */
-    public static Color findAndCreateColor(String color){
+    public static ColorOfSet findAndCreateColor(String color) {
         color = color.toLowerCase();
-        Color[] colors = new Color[]{BROWN, BLUE, PURPLE, ORANGE, RED, YELLOW, GREEN, DEEPBLUE, STATION, UTILITIES};
-        for (Color c : colors) {
+        ColorOfSet[] colors = new ColorOfSet[]{BROWN, BLUE, PURPLE, ORANGE, RED, YELLOW, GREEN, DEEPBLUE, STATION, UTILITIES};
+        for (ColorOfSet c : colors) {
             if (color.equals(c.representation)) {
                 return c;
             }
@@ -39,6 +44,11 @@ public enum Color {
         return null;
     }
 
+    /**
+     * Returns the string representation of the ColorOfSet object.
+     *
+     * @return The string representation of the ColorOfSet object.
+     */
     @Override
     public String toString() {
         return representation;

@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CashTest {
@@ -7,7 +8,7 @@ class CashTest {
     private Cash cash;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         cash = new Cash(1000);
     }
 

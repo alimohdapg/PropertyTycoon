@@ -1,11 +1,11 @@
 /**
  * A class representing properties on the board.
  *
- * @author Ali Ahmed & Hanzhen Gong
+ * @author Ali Ahmed {@literal &} Hanzhen Gong
  */
 public class Property extends BoardSpace {
 
-    private final Color color;
+    private final ColorOfSet color;
     private final int cost;
     private final int rentDefault;
     private final int rent1House;
@@ -15,6 +15,8 @@ public class Property extends BoardSpace {
     private final int rentHotel;
     private int houseCount;
     private boolean hasHotel;
+    private boolean underMortgage;
+    private Player owner;
 
     /**
      * Constructs a new property object.
@@ -29,7 +31,7 @@ public class Property extends BoardSpace {
      * @param rent4House  The rent when the property has four houses.
      * @param rentHotel   The rent when the property has a hotel.
      */
-    public Property(String name, Color color, int cost, int rentDefault, int rent1House, int rent2House, int rent3House,
+    public Property(String name, ColorOfSet color, int cost, int rentDefault, int rent1House, int rent2House, int rent3House,
                     int rent4House, int rentHotel) {
         super(name);
         this.color = color;
@@ -42,6 +44,8 @@ public class Property extends BoardSpace {
         this.rentHotel = rentHotel;
         houseCount = 0;
         hasHotel = false;
+        underMortgage = false;
+        owner = null;
     }
 
     /**
@@ -49,7 +53,7 @@ public class Property extends BoardSpace {
      *
      * @return Color of the property.
      */
-    public Color getColor() {
+    public ColorOfSet getColor() {
         return color;
     }
 
@@ -68,13 +72,13 @@ public class Property extends BoardSpace {
      * @return Cost of buying a house.
      */
     public int getHouseCost() {
-        if (color == Color.BROWN || color == Color.BLUE) {
+        if (color == ColorOfSet.BROWN || color == ColorOfSet.BLUE) {
             return 50;
-        } else if (color == Color.PURPLE || color == Color.ORANGE) {
+        } else if (color == ColorOfSet.PURPLE || color == ColorOfSet.ORANGE) {
             return 100;
-        } else if (color == Color.RED || color == Color.YELLOW) {
+        } else if (color == ColorOfSet.RED || color == ColorOfSet.YELLOW) {
             return 150;
-        } else if (color == Color.GREEN || color == Color.DEEPBLUE) {
+        } else if (color == ColorOfSet.GREEN || color == ColorOfSet.DEEPBLUE) {
             return 200;
         }
         return -1;
@@ -96,7 +100,7 @@ public class Property extends BoardSpace {
         if (houseCount == 4) {
             hasHotel = true;
             houseCount++;
-        } else{
+        } else {
             System.out.println("Error, number of houses exceeds normal!");
         }
     }
@@ -154,5 +158,41 @@ public class Property extends BoardSpace {
     public void sellHotel()
     {
         hasHotel = false;
+    }
+
+    /**
+     * Returns whether the property is inder mortgage.
+     *
+     * @return True if the property is inder mortgage, false otherwise.
+     */
+    public boolean isUnderMortgage() {
+        return underMortgage;
+    }
+
+    /**
+     * Sets the underMortgage field to the boolean value given.
+     *
+     * @param underMortgage The new underMortgage boolean value.
+     */
+    public void setUnderMortgage(boolean underMortgage) {
+        this.underMortgage = underMortgage;
+    }
+
+    /**
+     * Returns the player who owns this property.
+     *
+     * @return The player who owns this property.
+     */
+    public Player getOwner() {
+        return owner;
+    }
+
+    /**
+     * Sets the owner field to the new Player given.
+     *
+     * @param owner The new owner of the property.
+     */
+    public void setOwner(Player owner) {
+        this.owner = owner;
     }
 }
