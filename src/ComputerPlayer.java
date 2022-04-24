@@ -3,6 +3,9 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
+/**
+ * A class which extends the Player abstract class and represents a computer player.
+ */
 public class ComputerPlayer extends Player {
 
     /**

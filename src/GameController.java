@@ -40,7 +40,7 @@ public class GameController {
     private Pane player_1, player_2, player_3, player_4, player_5;
 
     @FXML
-    Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, playerThreeName, playerThreeMoney, playerFourName, playerFourMoney,
+    private Text playerOneName, playerOneMoney, playerTwoName, playerTwoMoney, playerThreeName, playerThreeMoney, playerFourName, playerFourMoney,
             playerFiveName, playerFiveMoney, FreeParking, a0_text, a1_text, a2_text, a3_text, a4_text, a5_text,
             a6_text, a7_text, a8_text, a9_text, a10_text, a11_text, a12_text, a13_text, a14_text, a15_text, a16_text,
             a17_text, a18_text, a19_text, a20_text, a21_text, a22_text, a23_text, a24_text, a25_text, a26_text,
@@ -69,7 +69,6 @@ public class GameController {
     private ArrayList<Text> text_array;
     @FXML
     private Button buyHouseBtn, btnSellProp, btnSellHouse, btnMortgage, jailUseCard, jailPay50, rollButton;
-
     @FXML
     private Image diceimg1, diceimg2, diceimg3, diceimg4, diceimg5, diceimg6;
     @FXML
