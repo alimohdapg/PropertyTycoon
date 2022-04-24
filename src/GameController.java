@@ -1036,9 +1036,9 @@ public class GameController {
         OKPane.setVisible(true);
         ArrayList<String> info = opportunityKnocks.getNextCard();
         int okcardno = Integer.parseInt(info.get(0));
-        String desc = fileIO.PotLuckCardData.get(okcardno - 1).get(0);
+        String desc = fileIO.OpKnocksCardData.get(okcardno - 1).get(0);
         OKDescription.setText(desc.substring(3, desc.length() - 3));
-        OKAction.setText(fileIO.PotLuckCardData.get(okcardno - 1).get(3));
+        OKAction.setText(fileIO.OpKnocksCardData.get(okcardno - 1).get(3));
         switch (okcardno) {
             case 1:
             case 2:

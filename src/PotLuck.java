@@ -116,6 +116,7 @@ public class PotLuck extends BoardSpace {
 
                 break;
         }
+        System.out.println(info);
         return info;
     }
 
