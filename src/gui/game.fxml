@@ -956,7 +956,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="rentPane" layoutX="739.0" layoutY="290.0" prefHeight="341.0" prefWidth="523.0">
+      <AnchorPane fx:id="rentPane" layoutX="739.0" layoutY="290.0" prefHeight="341.0" prefWidth="523.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9999" height="341.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="523.0" />
             <Text layoutX="50.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You paid:" wrappingWidth="407.337890625">
