@@ -996,7 +996,14 @@ public class GameController {
             case 3:
             case 8:
             case 14:
-                potLuck.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
+                String name = info.get(1);
+                int new_position = 0;
+                for(int i = 0; i < gameBoard.getBoardSpaces().size(); i++) {
+                    if(gameBoard.getBoardSpaces().get(i).getName() == name) {
+                        new_position = i;
+                    }
+                }
+                potLuck.setPlayerTo(currentPlayer, new_position);
                 current_pos = gameBoard.getCurrentPlayerPosition();
                 if (currentPlayer == playerOne) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
@@ -1045,7 +1052,14 @@ public class GameController {
             case 12:
             case 13:
             case 14:
-                opportunityKnocks.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
+                String name = info.get(1);
+                int new_position = 0;
+                for(int i = 0; i < gameBoard.getBoardSpaces().size(); i++) {
+                    if(gameBoard.getBoardSpaces().get(i).getName() == name) {
+                        new_position = i;
+                    }
+                }
+                opportunityKnocks.setPlayerTo(currentPlayer, new_position);
                 current_pos = gameBoard.getCurrentPlayerPosition();
                 if (currentPlayer == playerOne) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
@@ -1110,6 +1124,9 @@ public class GameController {
         canEndTurn = true;
     }
 
+    /**
+     * Begins the auction process (Disabled)
+     */
     public void startAuction() {
         playerList_Auction = gameBoard.getPlayers();
         bids = new int[playerList_Auction.size()];
@@ -1119,6 +1136,9 @@ public class GameController {
         bid_pos = 0;
     }
 
+    /**
+     * Ends the auction process (Disabled)
+     */
     public void endAuction() {
         auctionPane.setVisible(false);
         canEndTurn = true;
@@ -1130,6 +1150,9 @@ public class GameController {
 
     }
 
+    /**
+     * On click function for the button submitting a players bid during the auction process (Disabled)
+     */
     public void submitBid() {
         int desired_bid = Integer.parseInt(bidInput.getText());
         System.out.println(bid_pos);
@@ -1166,6 +1189,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Skips the current players turn when bidding (Disabled)
+     */
     public void skipBid() {
         String listText = bidList.getText();
         listText += playerList_Auction.get(bid_pos).getName() + " has skipped. \n" + bids[bid_pos];
