@@ -342,7 +342,7 @@ public class GameController {
      * @param i The integer value that represents the roll number.
      * @return The image of the corresponding dice roll.
      */
-    private Image getDiceImage(Integer i) {
+    public Image getDiceImage(Integer i) {
         switch (i) {
             case 1:
                 return diceimg1;
@@ -995,7 +995,14 @@ public class GameController {
             case 3:
             case 8:
             case 14:
-                potLuck.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
+                String name = info.get(1);
+                int new_position = 0;
+                for(int i = 0; i < gameBoard.getBoardSpaces().size(); i++) {
+                    if(gameBoard.getBoardSpaces().get(i).getName() == name) {
+                        new_position = i;
+                    }
+                }
+                potLuck.setPlayerTo(currentPlayer, new_position);
                 current_pos = gameBoard.getCurrentPlayerPosition();
                 if (currentPlayer == playerOne) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
@@ -1028,9 +1035,9 @@ public class GameController {
         OKPane.setVisible(true);
         ArrayList<String> info = opportunityKnocks.getNextCard();
         int okcardno = Integer.parseInt(info.get(0));
-        String desc = fileIO.PotLuckCardData.get(okcardno - 1).get(0);
+        String desc = fileIO.OpKnocksCardData.get(okcardno - 1).get(0);
         OKDescription.setText(desc.substring(3, desc.length() - 3));
-        OKAction.setText(fileIO.PotLuckCardData.get(okcardno - 1).get(3));
+        OKAction.setText(fileIO.OpKnocksCardData.get(okcardno - 1).get(3));
         switch (okcardno) {
             case 1:
             case 2:
@@ -1044,7 +1051,14 @@ public class GameController {
             case 12:
             case 13:
             case 14:
-                opportunityKnocks.setPlayerTo(currentPlayer, Integer.parseInt(info.get(1)));
+                String name = info.get(1);
+                int new_position = 0;
+                for(int i = 0; i < gameBoard.getBoardSpaces().size(); i++) {
+                    if(gameBoard.getBoardSpaces().get(i).getName() == name) {
+                        new_position = i;
+                    }
+                }
+                opportunityKnocks.setPlayerTo(currentPlayer, new_position);
                 current_pos = gameBoard.getCurrentPlayerPosition();
                 if (currentPlayer == playerOne) {
                     currentPlayer.getBoardToken().setLayoutX(pos_array.get(current_pos).getLayoutX());
@@ -1109,6 +1123,9 @@ public class GameController {
         canEndTurn = true;
     }
 
+    /**
+     * Begins the auction process (Disabled)
+     */
     public void startAuction() {
         playerList_Auction = gameBoard.getPlayers();
         bids = new int[playerList_Auction.size()];
@@ -1118,6 +1135,9 @@ public class GameController {
         bid_pos = 0;
     }
 
+    /**
+     * Ends the auction process (Disabled)
+     */
     public void endAuction() {
         auctionPane.setVisible(false);
         canEndTurn = true;
@@ -1129,6 +1149,9 @@ public class GameController {
 
     }
 
+    /**
+     * On click function for the button submitting a players bid during the auction process (Disabled)
+     */
     public void submitBid() {
         int desired_bid = Integer.parseInt(bidInput.getText());
         System.out.println(bid_pos);
@@ -1165,6 +1188,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Skips the current players turn when bidding (Disabled)
+     */
     public void skipBid() {
         String listText = bidList.getText();
         listText += playerList_Auction.get(bid_pos).getName() + " has skipped. \n" + bids[bid_pos];

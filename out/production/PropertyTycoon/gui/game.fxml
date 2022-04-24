@@ -969,7 +969,7 @@
                   <Font size="36.0" />
                </font>
             </Text>
-            <Text layoutX="186.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent paid" wrappingWidth="149.9999982254867">
+            <Text layoutX="173.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent paid" wrappingWidth="251.9999996907809">
                <font>
                   <Font size="36.0" />
                </font>

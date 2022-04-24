@@ -225,6 +225,7 @@ public class OpportunityKnock extends BoardSpace {
                 info.add(OK16);
                 break;
         }
+        System.out.println(info);
         return info;
     }
 
