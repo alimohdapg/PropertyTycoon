@@ -343,7 +343,7 @@ public class GameController {
      * @param i The integer value that represents the roll number.
      * @return The image of the corresponding dice roll.
      */
-    private Image getDiceImage(Integer i) {
+    public Image getDiceImage(Integer i) {
         switch (i) {
             case 1:
                 return diceimg1;
