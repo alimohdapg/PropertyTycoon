@@ -1,7 +1,7 @@
 /**
  * A class representing stations and utilities on the board.
  *
- * @author Ali Ahmed & Hanzhen Gong
+ * @author Ali Ahmed {@literal &} Hanzhen Gong
  */
 public class StationAndUtility extends BoardSpace {
 
@@ -13,8 +13,9 @@ public class StationAndUtility extends BoardSpace {
     /**
      * Constructs a new station and utility object.
      *
-     * @param name The station or utility's name.
-     * @param cost The cost of buying the station or utility.
+     * @param name  The station or utility's name.
+     * @param cost  The cost of buying the station or utility.
+     * @param color The ColorOfSet of this station or utility.
      */
     public StationAndUtility(String name, int cost, ColorOfSet color) {
         super(name);
@@ -43,79 +44,71 @@ public class StationAndUtility extends BoardSpace {
     }
 
     /**
-     * get the owner
+     * Get the owner.
      *
-     * @return player
+     * @return The owner of the station or utility.
      */
     public Player getOwner() {
         return owner;
     }
 
     /**
-     * set the owner
+     * Set the owner.
      *
-     * @param owner player
+     * @param owner The new owner of the station or utility.
      */
     public void setOwner(Player owner) {
         this.owner = owner;
     }
 
     /**
-     * Get rent of station
+     * Get rent of station.
      *
-     * @param num sta owned (the return of GameBoard.checkNumStaUti)
-     * @return rent
+     * @param num Number of stations owned (the return of GameBoard.checkNumStaUti).
+     * @return Rent value for the station.
      */
     public int getStationRent(int num) {
-
         if (num == 2) {
             return 50;
-        }
-        else if (num == 3) {
+        } else if (num == 3) {
             return 100;
-        }
-        else if (num == 4) {
+        } else if (num == 4) {
             return 200;
         }
-
-
         return 25;
     }
 
     /**
-     * Get rent of utility
+     * Get rent of utility.
      *
-     * @param num  uti owned (the return of GameBoard.checkNumStaUti)
-     * @param dice dice num rolled
-     * @return rent
+     * @param num  Number of utilities owned (the return of GameBoard.checkNumStaUti).
+     * @param dice Dice number rolled.
+     * @return Rent value for the utility.
      */
     public int getUtilityRent(int num, int dice) {
-
         switch (num) {
             case 1:
                 return dice * 4;
-
             case 2:
                 return dice * 10;
-
             default:
                 return -999999;
         }
     }
 
-
     /**
+     * Returns whether the station or utility is under mortgage.
      *
-     * @return if this station&utinity is under mortgage
+     * @return True if this station or utility is under mortgage, false otherwise.
      */
     public boolean isUnderMortgage() {
         return underMortgage;
     }
 
     /**
-     * change under mortgage state
+     * Sets the underMortgage field to the boolean value given.
      *
-     * @param underMortgage
+     * @param underMortgage The new underMortgage boolean value.
      */
     public void setUnderMortgage(boolean underMortgage) {
         this.underMortgage = underMortgage;

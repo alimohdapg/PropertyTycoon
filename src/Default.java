@@ -10,8 +10,7 @@ public class Default extends BoardSpace {
      *
      * @param name The default board-space's name.
      */
-    public Default(String name){
+    public Default(String name) {
         super(name);
     }
-
 }

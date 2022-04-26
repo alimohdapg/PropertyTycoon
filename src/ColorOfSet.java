@@ -18,6 +18,11 @@ public enum ColorOfSet {
 
     private final String representation;
 
+    /**
+     * Constructs a new ColorOfSet object.
+     *
+     * @param representation The string representation of the ColorOfSet object.
+     */
     ColorOfSet(String representation) {
         this.representation = representation;
     }
@@ -28,7 +33,7 @@ public enum ColorOfSet {
      * @param color String color name to match.
      * @return A Color enum matching the input string.
      */
-    public static ColorOfSet findAndCreateColor(String color){
+    public static ColorOfSet findAndCreateColor(String color) {
         color = color.toLowerCase();
         ColorOfSet[] colors = new ColorOfSet[]{BROWN, BLUE, PURPLE, ORANGE, RED, YELLOW, GREEN, DEEPBLUE, STATION, UTILITIES};
         for (ColorOfSet c : colors) {
@@ -39,6 +44,11 @@ public enum ColorOfSet {
         return null;
     }
 
+    /**
+     * Returns the string representation of the ColorOfSet object.
+     *
+     * @return The string representation of the ColorOfSet object.
+     */
     @Override
     public String toString() {
         return representation;
