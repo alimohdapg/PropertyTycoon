@@ -7,7 +7,7 @@
 The game is in the form of a Java application, running at a resolution of 1280x720 (minimum required to display). It works on both Windows and OSX and can be ran using Main.java under the source directory. Compilation requires JavaFX and JUnit and is compiled using Java 1.8.
 
 ## Backend (Java)
-The framework for the backend was written in Java, combined with the JavaFX library for the GUI. We took an object-oriented approach by translating the components of the original physical version into their own classes.
+The framework for the backend was written in Java. We took an object-oriented approach by translating the components of the original physical version into their own classes.
 
 ## Frontend (JavaFX)
 The GUI was designed using SceneBuilder, which produces an FXML format that was directly compatible with JavaFX code. We utilised multiple different objects such as: Panes, Text, Images and Buttons. This was limiting in some aspects but had all the functionality we required to carry out the project. This library is relatively well optimised and allows the game to perform quickly regardless of platform, and had zero loading time which made it very effective for quick testing and development.
